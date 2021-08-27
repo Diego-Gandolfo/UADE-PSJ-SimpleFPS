@@ -6,25 +6,23 @@ namespace Assets._Main.Scripts.Entities.Character
     {
         #region Serialize Fields
 
-        [SerializeField] private float _moveSpeed;
-        [SerializeField] private float _runSpeed;
+        [SerializeField] private float _moveSpeed = 7f;
+        [SerializeField] private float _runSpeed = 14f;
 
         #endregion
 
-        #region Unity Methods
+        #region Propertys
 
-        private void Update()
+        public float MoveSpeed => _moveSpeed;
+        public float RunSpeed => _runSpeed;
+
+        #endregion
+
+        #region Public Methods
+
+        public void Move(Vector3 direction, float speed)
         {
-            if (Input.GetKey(KeyCode.LeftShift))
-            {
-                transform.position += (transform.right * (Input.GetAxisRaw("Horizontal") * _runSpeed * Time.deltaTime));
-                transform.position += (transform.forward * (Input.GetAxisRaw("Vertical") * _runSpeed * Time.deltaTime));
-            }
-            else
-            {
-                transform.position += (transform.right * (Input.GetAxisRaw("Horizontal") * _moveSpeed * Time.deltaTime));
-                transform.position += (transform.forward * (Input.GetAxisRaw("Vertical") * _moveSpeed * Time.deltaTime));
-            }
+            transform.position += (direction * (speed * Time.deltaTime));
         }
 
         #endregion
