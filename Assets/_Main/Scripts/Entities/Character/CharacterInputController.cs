@@ -56,10 +56,10 @@ namespace Assets._Main.Scripts.Entities.Character
         {
             var currentSpeed = Input.GetKey(_runKey) ? _moveController.RunSpeed : _moveController.MoveSpeed;
 
-            var xInput = transform.right * Input.GetAxisRaw(_horizontalAxis);
-            var yInput = transform.forward * Input.GetAxisRaw(_verticalAxis);
+            var xMove = transform.right * Input.GetAxisRaw(_horizontalAxis);
+            var yMove = transform.forward * Input.GetAxisRaw(_verticalAxis);
 
-            var direction = xInput + yInput;
+            var direction = xMove + yMove;
             direction.Normalize();
 
             _moveController.Move(direction, currentSpeed);
