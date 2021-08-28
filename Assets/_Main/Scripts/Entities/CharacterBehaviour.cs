@@ -24,7 +24,7 @@ namespace Assets._Main.Scripts.Entities
         [SerializeField] private KeyCode _jumpKey = KeyCode.Space;
 
         [Header("Weapons")]
-        [SerializeField] private string _aimAxis = "Fire3";
+        [SerializeField] private string _aimAxis = "Fire2";
         [SerializeField] private KeyCode _inspectKey = KeyCode.T;
         [SerializeField] private KeyCode _holsterKey = KeyCode.F;
         [SerializeField] private KeyCode _knifeAttack1Key = KeyCode.Q;
@@ -112,15 +112,20 @@ namespace Assets._Main.Scripts.Entities
             if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeWeapon(0);
             if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeWeapon(1);
 
-            _animator.SetBool("Aim", (Input.GetAxisRaw(_aimAxis) != 0 && !_animator.GetBool("Run")));
+            if (!_animator.GetBool("Run"))
+            {
+                _animator.SetBool("Aim", Input.GetAxisRaw(_aimAxis) != 0);
+            }
+            
+            if (!_weaponController.IsOutOfAmmo())
+            {
+                if (Input.GetKeyDown(KeyCode.R)) Reload();
+                if (Input.GetAxisRaw("Fire1") != 0) Shoot();
+            }
 
             if (Input.GetKeyDown(_inspectKey)) _animator.SetTrigger("Inspect");
 
-            if (Input.GetKeyDown(KeyCode.R) && !_weaponController.IsOutOfAmmo()) Reload();
-
-            if (Input.GetKeyDown(_holsterKey)) Holster();
-
-            if (Input.GetAxisRaw("Fire1") != 0) Shoot();
+            if (Input.GetKeyDown(_holsterKey)) _animator.SetBool("Holster", !_animator.GetBool("Holster"));
 
             if (Input.GetKeyDown(_knifeAttack1Key)) KnifeAttack1();
             if (Input.GetKeyDown(_knifeAttack2Key)) KnifeAttack2();
@@ -154,11 +159,6 @@ namespace Assets._Main.Scripts.Entities
             else _animator.Play("Fire", 0, 0f);
 
             _weaponController.Attack();
-        }
-
-        private void Holster()
-        {
-            _animator.SetBool("Holster", !_animator.GetBool("Holster"));
         }
 
         private void KnifeAttack1()
