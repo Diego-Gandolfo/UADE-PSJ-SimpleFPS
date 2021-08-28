@@ -1,9 +1,9 @@
 using UnityEngine;
 
-namespace Assets._Main.Scripts.Entities.Character
+namespace Assets._Main.Scripts.Controllers
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class CharacterJumpController : MonoBehaviour
+    public class JumpController : MonoBehaviour
     {
         #region Serialize Fields
 

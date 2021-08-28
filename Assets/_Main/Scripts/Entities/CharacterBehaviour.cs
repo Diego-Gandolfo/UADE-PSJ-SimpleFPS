@@ -1,11 +1,13 @@
+using Assets._Main.Scripts.Controllers;
 using UnityEngine;
 
-namespace Assets._Main.Scripts.Entities.Character
+namespace Assets._Main.Scripts.Entities
 {
-    [RequireComponent(typeof(CharacterMoveController))]
-    [RequireComponent(typeof(CharacterRotationController))]
-    [RequireComponent(typeof(CharacterJumpController))]
-    public class CharacterInputController : MonoBehaviour
+    [RequireComponent(typeof(MoveController))]
+    [RequireComponent(typeof(RotationController))]
+    [RequireComponent(typeof(JumpController))]
+    [RequireComponent(typeof(AnimationController))]
+    public class CharacterBehaviour : MonoBehaviour
     {
         #region Serialize Fields
 
@@ -26,9 +28,10 @@ namespace Assets._Main.Scripts.Entities.Character
         #region Private Fields
 
         // Components
-        private CharacterMoveController _moveController;
-        private CharacterRotationController _rotationController;
-        private CharacterJumpController _jumpController;
+        private MoveController _moveController;
+        private RotationController _rotationController;
+        private JumpController _jumpController;
+        private AnimationController _animatorController;
 
         #endregion
 
@@ -36,9 +39,10 @@ namespace Assets._Main.Scripts.Entities.Character
 
         private void Start()
         {
-            _moveController = GetComponent<CharacterMoveController>();
-            _rotationController = GetComponent<CharacterRotationController>();
-            _jumpController = GetComponent<CharacterJumpController>();
+            _moveController = GetComponent<MoveController>();
+            _rotationController = GetComponent<RotationController>();
+            _jumpController = GetComponent<JumpController>();
+            _animatorController = GetComponent<AnimationController>();
         }
 
         private void Update()
@@ -46,6 +50,7 @@ namespace Assets._Main.Scripts.Entities.Character
             CheckMovementInput();
             CheckRotationInput();
             CheckJumpInput();
+            CheckChangeWeaponInput();
         }
 
         #endregion
@@ -54,7 +59,7 @@ namespace Assets._Main.Scripts.Entities.Character
 
         private void CheckMovementInput()
         {
-            var currentSpeed = Input.GetKey(_runKey) ? _moveController.RunSpeed : _moveController.MoveSpeed;
+            var currentSpeed = Input.GetKey(_runKey) ? _moveController.RunSpeed : _moveController.WalkSpeed;
 
             var xMove = transform.right * Input.GetAxisRaw(_horizontalAxis);
             var yMove = transform.forward * Input.GetAxisRaw(_verticalAxis);
@@ -63,6 +68,9 @@ namespace Assets._Main.Scripts.Entities.Character
             direction.Normalize();
 
             _moveController.Move(direction, currentSpeed);
+
+            _animatorController.SetBool("Walk", direction != Vector3.zero && currentSpeed == _moveController.WalkSpeed);
+            _animatorController.SetBool("Run", direction != Vector3.zero && currentSpeed == _moveController.RunSpeed);
         }
 
         private void CheckRotationInput()
@@ -77,6 +85,12 @@ namespace Assets._Main.Scripts.Entities.Character
             {
                 _jumpController.Jump();
             }
+        }
+
+        private void CheckChangeWeaponInput()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1)) _animatorController.ChangeWeapon(0);
+            if (Input.GetKeyDown(KeyCode.Alpha2)) _animatorController.ChangeWeapon(1);
         }
 
         #endregion

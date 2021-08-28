@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Assets._Main.Scripts.Entities.Character
+namespace Assets._Main.Scripts.Controllers
 {
-    public class CharacterRotationController : MonoBehaviour
+    public class RotationController : MonoBehaviour
     {
         #region Private Fields
 
