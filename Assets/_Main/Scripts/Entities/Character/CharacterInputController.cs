@@ -16,7 +16,7 @@ namespace Assets._Main.Scripts.Entities.Character
 
         [Header("Rotation")]
         [SerializeField] private string _rotationAxis = "Mouse X";
-        [SerializeField, Range(0, 1)] private float _mouseSencibility = 0.5f;
+        [SerializeField, Range(0, 1)] private float _mouseSensibility = 0.5f;
 
         [Header("Jump")]
         [SerializeField] private KeyCode _jumpKey = KeyCode.Space;
@@ -67,7 +67,7 @@ namespace Assets._Main.Scripts.Entities.Character
 
         private void CheckRotationInput()
         {
-            var mouseInput = _mouseSencibility * Input.GetAxisRaw(_rotationAxis) * 1000;
+            var mouseInput = _mouseSensibility * Input.GetAxisRaw(_rotationAxis) * 1000;
             _rotationController.Rotate(mouseInput);
         }
 
