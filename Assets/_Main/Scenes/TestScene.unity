@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 5336727d7be32404c9ac396789142e1c, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.6542549, g: 0.68079215, b: 0.71878207, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -42522,7 +42522,7 @@ GameObject:
   - component: {fileID: 1989690389}
   - component: {fileID: 1989690388}
   - component: {fileID: 1989690387}
-  - component: {fileID: 1989690384}
+  - component: {fileID: 1989690390}
   - component: {fileID: 1989690383}
   m_Layer: 0
   m_Name: Character
@@ -42564,19 +42564,6 @@ MonoBehaviour:
   _rotationAxis: Mouse X
   _mouseSensibility: 0.5
   _jumpKey: 32
---- !u!114 &1989690384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1989690381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 769eee145ac80a04c942aeb3254be9ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gos: []
 --- !u!54 &1989690385
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -42619,7 +42606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58db647ad1821c499493c653051a745, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _jumpForce: 7
+  _jumpForce: 25
 --- !u!114 &1989690388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42646,6 +42633,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _walkSpeed: 7
   _runSpeed: 14
+--- !u!114 &1989690390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989690381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8872d3786fe76e4490025cfc91a5505, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weapons:
+  - {fileID: 7754542380299958913}
+  - {fileID: 2098857208}
 --- !u!1 &1992571565
 GameObject:
   m_ObjectHideFlags: 0
@@ -45391,13 +45393,14 @@ GameObject:
   - component: {fileID: 2098857207}
   - component: {fileID: 2098857206}
   - component: {fileID: 2098857205}
+  - component: {fileID: 2098857208}
   m_Layer: 8
   m_Name: arms_assault_rifle_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2098857204
 Transform:
   m_ObjectHideFlags: 0
@@ -45626,6 +45629,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2098857208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2098857203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1de59fd0a46274a4cb68707da2689d9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseWeaponStats: {fileID: 11400000, guid: 2c1f920c4abecbf468536e5f0f6d4890, type: 2}
+  _baseGunStats: {fileID: 11400000, guid: 6a70bd4708f3cb0499494858cba28aa4, type: 2}
 --- !u!1 &2105198506
 GameObject:
   m_ObjectHideFlags: 0
@@ -58618,13 +58635,28 @@ GameObject:
   - component: {fileID: 7696316014003757906}
   - component: {fileID: 7691936262385969690}
   - component: {fileID: 7690265022923316014}
+  - component: {fileID: 7754542380299958913}
   m_Layer: 8
   m_Name: arms_handgun_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
+--- !u!114 &7754542380299958913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7754542380299958912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 039aba2c66bfad645aea87db3f2019c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseWeaponStats: {fileID: 11400000, guid: 0c49ce5da4be73e498e3cc8ac8824f48, type: 2}
+  _baseGunStats: {fileID: 11400000, guid: 6e280368bf7dda642a137b18dbc493a7, type: 2}
 --- !u!1 &7754551847785123108
 GameObject:
   m_ObjectHideFlags: 0
@@ -58958,7 +58990,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7752285983560244756}
   m_Layer: 0
-  m_Name: Handgun_01_Arms
+  m_Name: Arms
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

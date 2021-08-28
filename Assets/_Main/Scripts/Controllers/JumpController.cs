@@ -1,13 +1,14 @@
+using Assets._Main.Scripts.Strategy;
 using UnityEngine;
 
 namespace Assets._Main.Scripts.Controllers
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class JumpController : MonoBehaviour
+    public class JumpController : MonoBehaviour, IJump
     {
         #region Serialize Fields
 
-        [SerializeField] private float _jumpForce = 7f;
+        [SerializeField] private float _jumpForce = 25f;
 
         #endregion
 

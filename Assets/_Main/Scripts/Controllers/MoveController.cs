@@ -1,8 +1,9 @@
+using Assets._Main.Scripts.Strategy;
 using UnityEngine;
 
 namespace Assets._Main.Scripts.Controllers
 {
-    public class MoveController : MonoBehaviour
+    public class MoveController : MonoBehaviour, IMove
     {
         #region Serialize Fields
 

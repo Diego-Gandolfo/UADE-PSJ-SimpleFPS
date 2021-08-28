@@ -1,8 +1,9 @@
+using Assets._Main.Scripts.Strategy;
 using UnityEngine;
 
 namespace Assets._Main.Scripts.Controllers
 {
-    public class RotationController : MonoBehaviour
+    public class RotationController : MonoBehaviour, IRotate
     {
         #region Private Fields
 
