@@ -1,6 +1,13 @@
 using Assets._Main.Scripts.Controllers;
 using UnityEngine;
 
+public enum MouseButton
+{
+    Left,
+    Right,
+    Middle
+}
+
 namespace Assets._Main.Scripts.Entities
 {
     [RequireComponent(typeof(MoveController))]
@@ -24,7 +31,8 @@ namespace Assets._Main.Scripts.Entities
         [SerializeField] private KeyCode _jumpKey = KeyCode.Space;
 
         [Header("Weapons")]
-        [SerializeField] private string _aimAxis = "Fire2";
+        [SerializeField] private MouseButton _shootMouseButton = MouseButton.Left;
+        [SerializeField] private MouseButton _aimMouseButton = MouseButton.Right;
         [SerializeField] private KeyCode _inspectKey = KeyCode.T;
         [SerializeField] private KeyCode _holsterKey = KeyCode.F;
         [SerializeField] private KeyCode _knifeAttack1Key = KeyCode.Q;
@@ -114,13 +122,13 @@ namespace Assets._Main.Scripts.Entities
 
             if (!_animator.GetBool("Run"))
             {
-                _animator.SetBool("Aim", Input.GetAxisRaw(_aimAxis) != 0);
+                _animator.SetBool("Aim", Input.GetMouseButton((int)_aimMouseButton));
             }
             
             if (!_weaponController.IsOutOfAmmo())
             {
                 if (Input.GetKeyDown(KeyCode.R)) Reload();
-                if (Input.GetAxisRaw("Fire1") != 0) Shoot();
+                if (Input.GetMouseButtonDown((int)_shootMouseButton)) Shoot();
             }
 
             if (Input.GetKeyDown(_inspectKey)) _animator.SetTrigger("Inspect");
