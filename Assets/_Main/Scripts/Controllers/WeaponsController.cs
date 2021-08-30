@@ -70,6 +70,24 @@ namespace Assets._Main.Scripts.Controllers
             return (((BaseGunController)CurrentWeapon).CurrentMagazineAmmo <= 0);
         }
 
+        public void ThrowGrenade()
+        {
+            // TODO: Throw Grenade
+        }
+
+        public void KnifeAttack(int version)
+        {
+            if (version == 1)
+            {
+                // TODO: KnifeAttack1
+            }
+
+            if (version == 2)
+            {
+                // TODO: KnifeAttack2
+            }
+        }
+
         #endregion
     }
 }
