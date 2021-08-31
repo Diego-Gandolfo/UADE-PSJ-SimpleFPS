@@ -10,7 +10,7 @@ namespace Assets._Main.Scripts.Controllers
     {
         #region Serialize Fields
 
-        [SerializeField] private List<BaseWeaponController> _weapons = new List<BaseWeaponController>();
+        [SerializeField] private List<BaseWeaponController> _weaponsList = new List<BaseWeaponController>();
 
         #endregion
 
@@ -26,12 +26,18 @@ namespace Assets._Main.Scripts.Controllers
 
         #region Propertys
 
-        public Animator Animator => _animator;
-        public BaseWeaponController CurrentWeapon => _weapons[_currentWeaponIndex];
+        //public Animator Animator => _animator;
+        public BaseWeaponController CurrentWeapon => _weaponsList[_currentWeaponIndex];
+        public List<BaseWeaponController> WeaponList => _weaponsList;
 
         #endregion
 
         #region Unity Methods
+
+        private void Awake()
+        {
+            
+        }
 
         private void Update()
         {
@@ -61,13 +67,27 @@ namespace Assets._Main.Scripts.Controllers
             return (((BaseGunController)CurrentWeapon).CurrentMagazineAmmo <= 0);
         }
 
+        private void OnChangeWeaponHandler(BaseWeaponController currtenWeapon)
+        {
+            for (int i = 0; i < _weaponsList.Count; i++)
+            {
+                if (_weaponsList[i] == currtenWeapon)
+                {
+                    _currentWeaponIndex = i;
+                    _weaponsList[i].gameObject.SetActive(true);
+                    _animator = _weaponsList[i].gameObject.GetComponent<Animator>();
+                }
+                else
+                {
+                    _weaponsList[i].gameObject.SetActive(false);
+                }
+            }
+        }
+
         private void OnAttackHandler()
         {
             if (CurrentWeapon is BaseGunController && !IsMagazineEmpty())
             {
-                if (_animator.GetBool("Aim")) _animator.Play("Aim Fire", 0, 0f);
-                else _animator.Play("Fire", 0, 0f);
-
                 CurrentWeapon.Attack();
             }
         }
@@ -92,71 +112,31 @@ namespace Assets._Main.Scripts.Controllers
 
         private void OnThrowGrenadeHandler()
         {
-            _animator.Play("GrenadeThrow", 0, 0.0f);
             // TODO: Throw Grenade
         }
 
         private void OnKnifeAttack1Handler()
         {
-            _animator.Play("Knife Attack 1", 0, 0f);
             // TODO: KnifeAttack1
         }
 
         private void OnKnifeAttack2Handler()
         {
-            _animator.Play("Knife Attack 2", 0, 0f);
             // TODO: KnifeAttack2
-        }
-
-        private void OnInspectHander()
-        {
-            _animator.SetTrigger("Inspect");
-        }
-
-        private void OnHolsterHandler()
-        {
-            _animator.SetBool("Holster", !_animator.GetBool("Holster"));
-        }
-
-        private void OnAimHandler(bool value)
-        {
-            if (!_animator.GetBool("Run"))
-            {
-                _animator.SetBool("Aim", value);
-            }
         }
 
         #endregion
 
         #region Public Methods
 
-        public void ChangeWeapon(int index)
-        {
-            for (int i = 0; i < _weapons.Count; i++)
-            {
-                if (i == index)
-                {
-                    _currentWeaponIndex = i;
-                    _weapons[i].gameObject.SetActive(true);
-                    _animator = _weapons[i].gameObject.GetComponent<Animator>();
-                }
-                else
-                {
-                    _weapons[i].gameObject.SetActive(false);
-                }
-            }
-        }
-
         public void SuscribeEvents(ICharacterBehaviour characterBehaviour)
         {
             characterBehaviour.OnReload += OnReloadHandler;
             characterBehaviour.OnAttack += OnAttackHandler;
-            characterBehaviour.OnInspect += OnInspectHander;
-            characterBehaviour.OnHolster += OnHolsterHandler;
             characterBehaviour.OnThrowGrenade += OnThrowGrenadeHandler;
             characterBehaviour.OnKnifeAttack1 += OnKnifeAttack1Handler;
             characterBehaviour.OnKnifeAttack2 += OnKnifeAttack2Handler;
-            characterBehaviour.OnAim += OnAimHandler;
+            characterBehaviour.OnChangeWeapon += OnChangeWeaponHandler;
         }
 
         #endregion

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets._Main.Scripts.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,9 @@ namespace Assets._Main.Scripts.Strategy
         event Action OnKnifeAttack2;
         event Action OnThrowGrenade;
         event Action<bool> OnAim;
+        event Action<BaseWeaponController> OnChangeWeapon;
+        event Action<bool> OnWalk;
+        event Action<bool> OnRun;
 
         #endregion
     }

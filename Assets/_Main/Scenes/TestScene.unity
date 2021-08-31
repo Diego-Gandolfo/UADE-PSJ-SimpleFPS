@@ -31712,6 +31712,7 @@ GameObject:
   - component: {fileID: 1989690387}
   - component: {fileID: 1989690390}
   - component: {fileID: 1989690383}
+  - component: {fileID: 1989690384}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -31759,6 +31760,18 @@ MonoBehaviour:
   _knifeAttack1Key: 113
   _knifeAttack2Key: 101
   _granadeKey: 103
+--- !u!114 &1989690384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1989690381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be00793517f97bf439b5479fff16b10d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &1989690385
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31840,7 +31853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8872d3786fe76e4490025cfc91a5505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weapons:
+  _weaponsList:
   - {fileID: 7754542380299958913}
   - {fileID: 2098857208}
 --- !u!1 &1996478291
