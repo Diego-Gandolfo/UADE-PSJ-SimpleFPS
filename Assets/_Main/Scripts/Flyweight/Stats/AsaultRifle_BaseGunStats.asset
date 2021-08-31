@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392059ac5fd02b047a61a8edc3966da8, type: 3}
   m_Name: AsaultRifle_BaseGunStats
   m_EditorClassIdentifier: 
-  _maxExtraAmmo: 31
-  _maxMagazineAmmo: 930
+  _maxExtraAmmo: 930
+  _maxMagazineAmmo: 31
+  _isAutomatic: 1
+  _fireCooldown: 0.1

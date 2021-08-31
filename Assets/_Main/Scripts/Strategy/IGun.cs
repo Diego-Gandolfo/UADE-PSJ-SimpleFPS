@@ -8,10 +8,15 @@ namespace Assets._Main.Scripts.Strategy
     {
         #region Propertys
 
+        // Ammo
         int MaxExtraAmmo { get; }
         int CurrentExtraAmmo { get; }
         int MaxMagazineAmmo { get; }
         int CurrentMagazineAmmo { get; }
+
+        // Fire
+        bool IsAutomatic { get; }
+        float FireCooldown { get; }
 
         #endregion
 

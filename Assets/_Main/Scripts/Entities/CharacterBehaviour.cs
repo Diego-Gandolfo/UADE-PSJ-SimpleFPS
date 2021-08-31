@@ -1,4 +1,6 @@
 using Assets._Main.Scripts.Controllers;
+using Assets._Main.Scripts.Strategy;
+using System;
 using UnityEngine;
 
 public enum MouseButton
@@ -14,7 +16,7 @@ namespace Assets._Main.Scripts.Entities
     [RequireComponent(typeof(RotationController))]
     [RequireComponent(typeof(JumpController))]
     [RequireComponent(typeof(WeaponsController))]
-    public class CharacterBehaviour : MonoBehaviour
+    public class CharacterBehaviour : MonoBehaviour, ICharacterBehaviour
     {
         #region Serialize Fields
 
@@ -31,7 +33,7 @@ namespace Assets._Main.Scripts.Entities
         [SerializeField] private KeyCode _jumpKey = KeyCode.Space;
 
         [Header("Weapons")]
-        [SerializeField] private MouseButton _shootMouseButton = MouseButton.Left;
+        [SerializeField] private MouseButton _attackMouseButton = MouseButton.Left;
         [SerializeField] private MouseButton _aimMouseButton = MouseButton.Right;
         [SerializeField] private KeyCode _inspectKey = KeyCode.T;
         [SerializeField] private KeyCode _holsterKey = KeyCode.F;
@@ -52,6 +54,19 @@ namespace Assets._Main.Scripts.Entities
 
         #endregion
 
+        #region Events
+
+        public event Action OnReload;
+        public event Action OnAttack;
+        public event Action OnInspect;
+        public event Action OnHolster;
+        public event Action OnKnifeAttack1;
+        public event Action OnKnifeAttack2;
+        public event Action OnThrowGrenade;
+        public event Action<bool> OnAim;
+
+        #endregion
+
         #region Unity Methods
 
         private void Start()
@@ -69,8 +84,6 @@ namespace Assets._Main.Scripts.Entities
             CheckRotationInput();
             CheckJumpInput();
             CheckWeaponInput();
-
-            CheckCurrentAmmo();
         }
 
         #endregion
@@ -83,6 +96,7 @@ namespace Assets._Main.Scripts.Entities
             _rotationController = GetComponent<RotationController>();
             _jumpController = GetComponent<JumpController>();
             _weaponController = GetComponent<WeaponsController>();
+            _weaponController.SuscribeEvents(this);
         }
 
         private void CheckMovementInput()
@@ -120,68 +134,25 @@ namespace Assets._Main.Scripts.Entities
             if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeWeapon(0);
             if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeWeapon(1);
 
-            if (!_animator.GetBool("Run"))
-            {
-                _animator.SetBool("Aim", Input.GetMouseButton((int)_aimMouseButton));
-            }
+            OnAim?.Invoke(Input.GetMouseButton((int)_aimMouseButton));
             
-            if (!_weaponController.IsOutOfAmmo())
-            {
-                if (Input.GetKeyDown(KeyCode.R)) Reload();
-                if (Input.GetMouseButtonDown((int)_shootMouseButton)) Shoot();
-            }
+            if (Input.GetKeyDown(KeyCode.R)) OnReload?.Invoke();
+            if (Input.GetMouseButtonDown((int)_attackMouseButton)) OnAttack?.Invoke();
 
-            if (Input.GetKeyDown(_inspectKey)) _animator.SetTrigger("Inspect");
+            if (Input.GetKeyDown(_inspectKey)) OnInspect?.Invoke();
 
-            if (Input.GetKeyDown(_holsterKey)) _animator.SetBool("Holster", !_animator.GetBool("Holster"));
+            if (Input.GetKeyDown(_holsterKey)) OnHolster?.Invoke();
 
-            if (Input.GetKeyDown(_knifeAttack1Key)) KnifeAttack1();
-            if (Input.GetKeyDown(_knifeAttack2Key)) KnifeAttack2();
+            if (Input.GetKeyDown(_knifeAttack1Key)) OnKnifeAttack1?.Invoke();
+            if (Input.GetKeyDown(_knifeAttack2Key)) OnKnifeAttack2?.Invoke();
 
-            if (Input.GetKeyDown(_granadeKey)) GrenadeThrow();
+            if (Input.GetKeyDown(_granadeKey)) OnThrowGrenade?.Invoke();
         }
 
         private void ChangeWeapon(int index)
         {
             _weaponController.ChangeWeapon(index);
             _animator = _weaponController.Animator;
-        }
-
-        private void CheckCurrentAmmo()
-        {
-            if (_weaponController.CurrentWeapon is HandgunController)
-                _animator.SetBool("Out Of Ammo Slider", _weaponController.IsMagazineEmpty());
-        }
-
-        private void Reload()
-        {
-            if (_weaponController.IsMagazineEmpty()) _animator.Play("Reload Out Of Ammo", 0, 0f);
-            else _animator.Play("Reload Ammo Left", 0, 0f);
-
-            _weaponController.Reload();
-        }
-
-        private void Shoot()
-        {
-            if (_animator.GetBool("Aim")) _animator.Play("Aim Fire", 0, 0f);
-            else _animator.Play("Fire", 0, 0f);
-
-            _weaponController.Attack();
-        }
-
-        private void KnifeAttack1()
-        {
-            _animator.Play("Knife Attack 1", 0, 0f);
-        }
-
-        private void KnifeAttack2()
-        {
-            _animator.Play("Knife Attack 2", 0, 0f);
-        }
-
-        private void GrenadeThrow()
-        {
-            _animator.Play("GrenadeThrow", 0, 0.0f);
         }
 
         #endregion

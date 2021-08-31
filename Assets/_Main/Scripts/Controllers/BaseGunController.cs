@@ -3,6 +3,7 @@ using Assets._Main.Scripts.Strategy;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets._Main.Scripts.Controllers
 {
@@ -10,7 +11,16 @@ namespace Assets._Main.Scripts.Controllers
     {
         #region Serialize Fields
 
+        [Header("Stats")]
         [SerializeField] protected BaseGunStats _baseGunStats;
+
+        [Header("UI")]
+        [SerializeField] protected Text _extraAmmoText;
+        [SerializeField] protected Text _magazineAmmoText;
+        [SerializeField] private string _weaponName = "WeaponName";
+        [SerializeField] protected Text _weaponNameText;
+        [SerializeField] private Sprite _weaponIcon;
+        [SerializeField] private Image _weaponImage;
 
         #endregion
 
@@ -23,46 +33,86 @@ namespace Assets._Main.Scripts.Controllers
 
         #region Propertys
 
+        // Ammo
         public int MaxExtraAmmo => _baseGunStats.MaxExtraAmmo;
         public int CurrentExtraAmmo => _currentExtraAmmo;
         public int MaxMagazineAmmo => _baseGunStats.MaxMagazineAmmo;
         public int CurrentMagazineAmmo => _currentMagazineAmmo;
 
+        // Fire
+        public bool IsAutomatic => _baseGunStats.IsAutomatic;
+        public float FireCooldown => _baseGunStats.FireCooldown;
+
         #endregion
 
         #region Unity Methods
 
+        private void OnEnable()
+        {
+            _extraAmmoText.text = _currentExtraAmmo.ToString();
+            _magazineAmmoText.text = _currentMagazineAmmo.ToString();
+            _weaponNameText.text = _weaponName;
+            _weaponImage.sprite = _weaponIcon;
+        }
+
         private void Start()
         {
-            _currentExtraAmmo = _baseGunStats.MaxExtraAmmo;
-            _currentMagazineAmmo = _baseGunStats.MaxMagazineAmmo;
+            _currentExtraAmmo = MaxExtraAmmo;
+            _currentMagazineAmmo = MaxMagazineAmmo;
+            _extraAmmoText.text = _currentExtraAmmo.ToString();
+            _magazineAmmoText.text = _currentMagazineAmmo.ToString();
         }
 
         #endregion
 
         #region Public Methods
 
-        public virtual void Reload() { }
-
-        #endregion
-
-        /// -------------------------------------------------------------------
-        /// ----------------------------- TESTEOS -----------------------------
-        /// -------------------------------------------------------------------
-
-        private void Update()
+        public virtual void Reload()
         {
-            if (Input.GetKeyDown(KeyCode.Alpha0))
+            if (_currentExtraAmmo > 0)
             {
-                _currentExtraAmmo = 0;
-                _currentMagazineAmmo = 0;
-            }
+                if (_currentExtraAmmo > MaxMagazineAmmo)
+                {
+                    _currentExtraAmmo -= (MaxMagazineAmmo - _currentMagazineAmmo);
+                    _extraAmmoText.text = _currentExtraAmmo.ToString();
+                    _currentMagazineAmmo = MaxMagazineAmmo;
+                    _magazineAmmoText.text = _currentMagazineAmmo.ToString();
+                }
+                else
+                {
+                    _currentMagazineAmmo = _currentExtraAmmo;
+                    _magazineAmmoText.text = _currentMagazineAmmo.ToString();
+                    _currentExtraAmmo = 0;
+                    _extraAmmoText.text = _currentExtraAmmo.ToString();
+                }
 
-            if (Input.GetKeyDown(KeyCode.Alpha9))
+                //AudioManager._instance.PlaySound(AudioManager._instance.Reload, 1f);
+                //print($"{name} is reloaded! You have {_currentExtraAmmo} extra ammo left!");
+            }
+            else
             {
-                _currentExtraAmmo = _baseGunStats.MaxExtraAmmo;
-                _currentMagazineAmmo = _baseGunStats.MaxMagazineAmmo;
+                //print($"{name} has no Extra Ammo!");
             }
         }
+
+        public override void Attack()
+        {
+            //base.Attack();
+
+            if (_currentMagazineAmmo > 0)
+            {
+                //BaseBullet bullet = Instantiate(_baseGunStats.BulletPrefab, _bulletSpawnpoint.position, _bulletSpawnpoint.rotation);
+                //bullet.SetDamage(_currentDamage);
+                _currentMagazineAmmo--;
+                _magazineAmmoText.text = _currentMagazineAmmo.ToString();
+                //AudioManager._instance.PlaySound(AudioManager._instance.Shoot, 1f);
+            }
+            else
+            {
+                //print($"{name} has no ammo... TRY TO RELOAD!");
+            }
+        }
+
+        #endregion
     }
 }

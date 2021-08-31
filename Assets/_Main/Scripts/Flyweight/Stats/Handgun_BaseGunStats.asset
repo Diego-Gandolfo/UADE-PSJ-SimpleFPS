@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 392059ac5fd02b047a61a8edc3966da8, type: 3}
   m_Name: Handgun_BaseGunStats
   m_EditorClassIdentifier: 
-  _maxExtraAmmo: 9
-  _maxMagazineAmmo: 180
+  _maxExtraAmmo: 180
+  _maxMagazineAmmo: 9
+  _isAutomatic: 0
+  _fireCooldown: 0

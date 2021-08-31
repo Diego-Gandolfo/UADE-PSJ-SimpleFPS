@@ -10,15 +10,25 @@ namespace Assets._Main.Scripts.Flyweight.ScriptableObjects
     {
         #region Serialize Fields
 
+        [Header("Ammo")]
         [SerializeField] private int _maxExtraAmmo;
         [SerializeField] private int _maxMagazineAmmo;
+
+        [Header("Fire")]
+        [SerializeField] private bool _isAutomatic;
+        [SerializeField] private float _fireCooldown;
 
         #endregion
 
         #region Propertys
 
+        // Ammo
         public int MaxExtraAmmo => _maxExtraAmmo;
         public int MaxMagazineAmmo => _maxMagazineAmmo;
+
+        // Fire
+        public bool IsAutomatic => _isAutomatic;
+        public float FireCooldown => _fireCooldown;
 
         #endregion
     }
