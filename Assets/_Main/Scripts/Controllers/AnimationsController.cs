@@ -81,19 +81,19 @@ namespace Assets._Main.Scripts.Controllers
 
         #region Public Methods
 
-        public void SuscribeEvents(IInputController characterBehaviour)
+        public void SuscribeEvents(IInputController inputController)
         {
-            characterBehaviour.OnReload += OnReloadHandler;
-            characterBehaviour.OnAttack += OnAttackHandler;
-            characterBehaviour.OnInspect += OnInspectHander;
-            characterBehaviour.OnHolster += OnHolsterHandler;
-            characterBehaviour.OnThrowGrenade += OnThrowGrenadeHandler;
-            characterBehaviour.OnKnifeAttack1 += OnKnifeAttack1Handler;
-            characterBehaviour.OnKnifeAttack2 += OnKnifeAttack2Handler;
-            characterBehaviour.OnAim += OnAimHandler;
-            characterBehaviour.OnChangeWeapon += OnChangeWeaponHandler;
-            characterBehaviour.OnWalk += OnWalkHandler;
-            characterBehaviour.OnRun += OnRunHandler;
+            inputController.OnReload += OnReloadHandler;
+            inputController.OnAttack += OnAttackHandler;
+            inputController.OnInspect += OnInspectHander;
+            inputController.OnHolster += OnHolsterHandler;
+            inputController.OnThrowGrenade += OnThrowGrenadeHandler;
+            inputController.OnKnifeAttack1 += OnKnifeAttack1Handler;
+            inputController.OnKnifeAttack2 += OnKnifeAttack2Handler;
+            inputController.OnAim += OnAimHandler;
+            inputController.OnChangeWeapon += OnChangeWeaponHandler;
+            inputController.OnWalk += OnWalkHandler;
+            inputController.OnRun += OnRunHandler;
         }
 
         #endregion
