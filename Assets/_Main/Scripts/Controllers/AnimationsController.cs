@@ -58,12 +58,13 @@ namespace Assets._Main.Scripts.Controllers
 
         private void OnReloadHandler()
         {
-            throw new NotImplementedException();
+            // TODO: Pasar animaciones de Reload
         }
 
-        private void OnChangeWeaponHandler(BaseWeaponController baseWeaponController)
+        private void OnChangeWeaponHandler(IWeapon baseWeaponController)
         {
-            _animator = baseWeaponController.gameObject.GetComponent<Animator>();
+            if (baseWeaponController is BaseWeaponController)
+                _animator = ((BaseWeaponController)baseWeaponController).gameObject.GetComponent<Animator>();
         }
 
         private void OnRunHandler(bool value)
@@ -80,7 +81,7 @@ namespace Assets._Main.Scripts.Controllers
 
         #region Public Methods
 
-        public void SuscribeEvents(ICharacterBehaviour characterBehaviour)
+        public void SuscribeEvents(IInputController characterBehaviour)
         {
             characterBehaviour.OnReload += OnReloadHandler;
             characterBehaviour.OnAttack += OnAttackHandler;

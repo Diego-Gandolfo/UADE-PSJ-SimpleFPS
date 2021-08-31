@@ -10,14 +10,14 @@ public enum MouseButton
     Middle
 }
 
-namespace Assets._Main.Scripts.Entities
+namespace Assets._Main.Scripts.Controllers
 {
     [RequireComponent(typeof(MoveController))]
     [RequireComponent(typeof(RotationController))]
     [RequireComponent(typeof(JumpController))]
     [RequireComponent(typeof(WeaponsController))]
     [RequireComponent(typeof(AnimationsController))]
-    public class CharacterBehaviour : MonoBehaviour, ICharacterBehaviour
+    public class InputController : MonoBehaviour, IInputController
     {
         #region Serialize Fields
 
@@ -66,10 +66,9 @@ namespace Assets._Main.Scripts.Entities
         public event Action OnKnifeAttack2;
         public event Action OnThrowGrenade;
         public event Action<bool> OnAim;
-        public event Action<BaseWeaponController> OnChangeWeapon;
+        public event Action<IWeapon> OnChangeWeapon;
         public event Action<bool> OnWalk;
         public event Action<bool> OnRun;
-
 
         #endregion
 
@@ -80,8 +79,6 @@ namespace Assets._Main.Scripts.Entities
             Cursor.lockState = CursorLockMode.Locked;
 
             GetRequiredComponent();
-
-            //ChangeWeapon(0);
             
         }
 
@@ -105,7 +102,7 @@ namespace Assets._Main.Scripts.Entities
             _animationsController = GetComponent<AnimationsController>();
             _animationsController.SuscribeEvents(this);
 
-            OnChangeWeapon(_weaponController.WeaponList[0]);
+            OnChangeWeapon?.Invoke(_weaponController.WeaponList[0]);
 
             _moveController = GetComponent<MoveController>();
             _rotationController = GetComponent<RotationController>();
@@ -124,8 +121,6 @@ namespace Assets._Main.Scripts.Entities
 
             _moveController.Move(direction, currentSpeed);
 
-            //_animator.SetBool("Walk", direction != Vector3.zero && currentSpeed == _moveController.WalkSpeed);
-            //_animator.SetBool("Run", direction != Vector3.zero && currentSpeed == _moveController.RunSpeed);
             OnWalk?.Invoke(direction != Vector3.zero && currentSpeed == _moveController.WalkSpeed);
             OnRun?.Invoke(direction != Vector3.zero && currentSpeed == _moveController.RunSpeed);
         }
@@ -146,10 +141,8 @@ namespace Assets._Main.Scripts.Entities
 
         private void CheckWeaponInput()
         {
-            //if (Input.GetKeyDown(KeyCode.Alpha1)) ChangeWeapon(0);
-            //if (Input.GetKeyDown(KeyCode.Alpha2)) ChangeWeapon(1);
-            if (Input.GetKeyDown(KeyCode.Alpha1)) OnChangeWeapon(_weaponController.WeaponList[0]);
-            if (Input.GetKeyDown(KeyCode.Alpha2)) OnChangeWeapon(_weaponController.WeaponList[1]);
+            if (Input.GetKeyDown(KeyCode.Alpha1)) OnChangeWeapon?.Invoke(_weaponController.WeaponList[0]);
+            if (Input.GetKeyDown(KeyCode.Alpha2)) OnChangeWeapon?.Invoke(_weaponController.WeaponList[1]);
 
             OnAim?.Invoke(Input.GetMouseButton((int)_aimMouseButton));
             
@@ -164,12 +157,6 @@ namespace Assets._Main.Scripts.Entities
             if (Input.GetKeyDown(_knifeAttack2Key)) OnKnifeAttack2?.Invoke();
 
             if (Input.GetKeyDown(_granadeKey)) OnThrowGrenade?.Invoke();
-        }
-
-        private void ChangeWeapon(int index)
-        {
-            //_weaponController.ChangeWeapon(index);
-            //_animationsController.SetAnimator(_weaponController.CurrentWeapon.GetComponent<Animator>());
         }
 
         #endregion

@@ -1,4 +1,3 @@
-using Assets._Main.Scripts.Entities;
 using Assets._Main.Scripts.Strategy;
 using System;
 using System.Collections.Generic;
@@ -26,18 +25,12 @@ namespace Assets._Main.Scripts.Controllers
 
         #region Propertys
 
-        //public Animator Animator => _animator;
-        public BaseWeaponController CurrentWeapon => _weaponsList[_currentWeaponIndex];
+        public IWeapon CurrentWeapon => _weaponsList[_currentWeaponIndex];
         public List<BaseWeaponController> WeaponList => _weaponsList;
 
         #endregion
 
         #region Unity Methods
-
-        private void Awake()
-        {
-            
-        }
 
         private void Update()
         {
@@ -51,27 +44,27 @@ namespace Assets._Main.Scripts.Controllers
         private void CheckCurrentAmmo()
         {
             if (CurrentWeapon is HandgunController)
-                _animator.SetBool("Out Of Ammo Slider", IsMagazineEmpty());
+                _animator.SetBool("Out Of Ammo Slider", IsMagazineEmpty()); //TODO: ver como llevar esto al AnimationsController
         }
 
         private bool IsOutOfAmmo()
         {
-            var currentExtraAmmo = ((BaseGunController)CurrentWeapon).CurrentExtraAmmo;
-            var currentMagazineAmmo = ((BaseGunController)CurrentWeapon).CurrentMagazineAmmo;
+            var currentExtraAmmo = ((IGun)CurrentWeapon).CurrentExtraAmmo;
+            var currentMagazineAmmo = ((IGun)CurrentWeapon).CurrentMagazineAmmo;
             var currentTotalAmmo = currentExtraAmmo + currentMagazineAmmo;
             return (currentTotalAmmo <= 0);
         }
 
         private bool IsMagazineEmpty()
         {
-            return (((BaseGunController)CurrentWeapon).CurrentMagazineAmmo <= 0);
+            return (((IGun)CurrentWeapon).CurrentMagazineAmmo <= 0);
         }
 
-        private void OnChangeWeaponHandler(BaseWeaponController currtenWeapon)
+        private void OnChangeWeaponHandler(IWeapon currtenWeapon)
         {
             for (int i = 0; i < _weaponsList.Count; i++)
             {
-                if (_weaponsList[i] == currtenWeapon)
+                if (_weaponsList[i] == (BaseWeaponController)currtenWeapon)
                 {
                     _currentWeaponIndex = i;
                     _weaponsList[i].gameObject.SetActive(true);
@@ -94,11 +87,10 @@ namespace Assets._Main.Scripts.Controllers
 
         private void OnReloadHandler()
         {
-            if (CurrentWeapon is BaseGunController && !IsOutOfAmmo())
+            if (CurrentWeapon is IGun && !IsOutOfAmmo())
             {
                 if (IsMagazineEmpty())
                 {
-                    //_animator.SetBool("Out Of Ammo Slider", _weaponController.IsMagazineEmpty());
                     _animator.Play("Reload Out Of Ammo", 0, 0f);
                 }
                 else
@@ -129,7 +121,7 @@ namespace Assets._Main.Scripts.Controllers
 
         #region Public Methods
 
-        public void SuscribeEvents(ICharacterBehaviour characterBehaviour)
+        public void SuscribeEvents(IInputController characterBehaviour)
         {
             characterBehaviour.OnReload += OnReloadHandler;
             characterBehaviour.OnAttack += OnAttackHandler;

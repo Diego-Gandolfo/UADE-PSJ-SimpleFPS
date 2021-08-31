@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Assets._Main.Scripts.Strategy
 {
-    public interface ICharacterBehaviour
+    public interface IInputController
     {
         #region Events
 
@@ -20,7 +20,7 @@ namespace Assets._Main.Scripts.Strategy
         event Action OnKnifeAttack2;
         event Action OnThrowGrenade;
         event Action<bool> OnAim;
-        event Action<BaseWeaponController> OnChangeWeapon;
+        event Action<IWeapon> OnChangeWeapon;
         event Action<bool> OnWalk;
         event Action<bool> OnRun;
 
