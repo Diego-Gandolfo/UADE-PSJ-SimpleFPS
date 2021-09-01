@@ -52,7 +52,7 @@ namespace Assets._Main.Scripts.Controllers
         private JumpController _jumpController;
         private WeaponsController _weaponController;
         private AnimationsController _animationsController;
-        private Animator _animator;
+        //private Animator _animator;
 
         #endregion
 

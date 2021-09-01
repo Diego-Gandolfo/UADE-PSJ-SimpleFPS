@@ -79,9 +79,9 @@ namespace Assets._Main.Scripts.Controllers
 
         private void OnAttackHandler()
         {
-            if (CurrentWeapon is BaseGunController && !IsMagazineEmpty())
+            if (CurrentWeapon is BaseGunController)
             {
-                CurrentWeapon.Attack();
+                if (!IsMagazineEmpty()) CurrentWeapon.Attack();
             }
         }
 

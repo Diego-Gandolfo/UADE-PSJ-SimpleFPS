@@ -1,7 +1,4 @@
 using Assets._Main.Scripts.Strategy;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets._Main.Scripts.Controllers
@@ -52,8 +49,16 @@ namespace Assets._Main.Scripts.Controllers
 
         private void OnAttackHandler()
         {
-            if (_animator.GetBool("Aim")) _animator.Play("Aim Fire", 0, 0f);
-            else _animator.Play("Fire", 0, 0f);
+            var w =_animator.gameObject.GetComponentInParent<WeaponsController>().CurrentWeapon;
+
+            if (w is BaseGunController)
+            {
+                if (((BaseGunController)w).CurrentMagazineAmmo > 0)
+                {
+                    if (_animator.GetBool("Aim")) _animator.Play("Aim Fire", 0, 0f);
+                    else _animator.Play("Fire", 0, 0f);
+                }
+            }
         }
 
         private void OnReloadHandler()
