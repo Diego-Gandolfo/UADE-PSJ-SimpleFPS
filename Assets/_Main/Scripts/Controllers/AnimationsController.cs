@@ -47,29 +47,40 @@ namespace Assets._Main.Scripts.Controllers
             _animator.SetTrigger("Inspect");
         }
 
-        private void OnAttackHandler()
+        private void OnAttackHandler(IWeapon currentWeapon)
         {
-            var w =_animator.gameObject.GetComponentInParent<WeaponsController>().CurrentWeapon;
-
-            if (w is BaseGunController)
+            if (currentWeapon is BaseGunController)
             {
-                if (((BaseGunController)w).CurrentMagazineAmmo > 0)
+                if (((BaseGunController)currentWeapon).CurrentMagazineAmmo > 0)
                 {
                     if (_animator.GetBool("Aim")) _animator.Play("Aim Fire", 0, 0f);
                     else _animator.Play("Fire", 0, 0f);
+
+                    if (currentWeapon is HandgunController && ((BaseGunController)currentWeapon).CurrentMagazineAmmo == 1)
+                        Invoke("SetSliderAnimation", 0f);
                 }
             }
         }
 
-        private void OnReloadHandler()
+        private void OnReloadHandler(IWeapon currentWeapon)
         {
-            // TODO: Pasar animaciones de Reload
+            if (((BaseGunController)currentWeapon).IsMagazineEmpty)
+            {
+                _animator.Play("Reload Out Of Ammo", 0, 0f);
+
+                if (currentWeapon is HandgunController)
+                    Invoke("SetSliderAnimation", 1.5f);
+            }
+            else
+            {
+                _animator.Play("Reload Ammo Left", 0, 0f);
+            }
         }
 
-        private void OnChangeWeaponHandler(IWeapon baseWeaponController)
+        private void OnChangeWeaponHandler(IWeapon currentWeapon)
         {
-            if (baseWeaponController is BaseWeaponController)
-                _animator = ((BaseWeaponController)baseWeaponController).gameObject.GetComponent<Animator>();
+            if (currentWeapon is IGun)
+                _animator = ((BaseWeaponController)currentWeapon).gameObject.GetComponent<Animator>();
         }
 
         private void OnRunHandler(bool value)
@@ -80,6 +91,11 @@ namespace Assets._Main.Scripts.Controllers
         private void OnWalkHandler(bool value)
         {
             _animator.SetBool("Walk", value);
+        }
+
+        private void SetSliderAnimation()
+        {
+            _animator.SetBool("Out Of Ammo Slider", !_animator.GetBool("Out Of Ammo Slider"));
         }
 
         #endregion

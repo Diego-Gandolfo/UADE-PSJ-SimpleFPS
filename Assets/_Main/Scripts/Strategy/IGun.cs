@@ -13,6 +13,8 @@ namespace Assets._Main.Scripts.Strategy
         int CurrentExtraAmmo { get; }
         int MaxMagazineAmmo { get; }
         int CurrentMagazineAmmo { get; }
+        bool IsMagazineEmpty { get; }
+        bool IsOutOfAmmo { get; }
 
         // Fire
         bool IsAutomatic { get; }

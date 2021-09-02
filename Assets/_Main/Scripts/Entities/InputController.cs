@@ -52,14 +52,13 @@ namespace Assets._Main.Scripts.Controllers
         private JumpController _jumpController;
         private WeaponsController _weaponController;
         private AnimationsController _animationsController;
-        //private Animator _animator;
 
         #endregion
 
         #region Events
 
-        public event Action OnReload;
-        public event Action OnAttack;
+        public event Action<IWeapon> OnReload;
+        public event Action<IWeapon> OnAttack;
         public event Action OnInspect;
         public event Action OnHolster;
         public event Action OnKnifeAttack1;
@@ -146,8 +145,16 @@ namespace Assets._Main.Scripts.Controllers
 
             OnAim?.Invoke(Input.GetMouseButton((int)_aimMouseButton));
             
-            if (Input.GetKeyDown(KeyCode.R)) OnReload?.Invoke();
-            if (Input.GetMouseButtonDown((int)_attackMouseButton)) OnAttack?.Invoke();
+            if (Input.GetKeyDown(KeyCode.R)) OnReload?.Invoke(_weaponController.CurrentWeapon);
+
+            if (((IGun)_weaponController.CurrentWeapon).IsAutomatic)
+            {
+                if (Input.GetMouseButton((int)_attackMouseButton)) OnAttack?.Invoke(_weaponController.CurrentWeapon);
+            }
+            else
+            {
+                if (Input.GetMouseButtonDown((int)_attackMouseButton)) OnAttack?.Invoke(_weaponController.CurrentWeapon);
+            }
 
             if (Input.GetKeyDown(_inspectKey)) OnInspect?.Invoke();
 

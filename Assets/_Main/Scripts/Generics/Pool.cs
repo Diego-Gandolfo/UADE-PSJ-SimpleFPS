@@ -9,6 +9,9 @@ namespace Assets._Main.Scripts.Generics
         private List<T> inUse = new List<T>();
         private List<T> available = new List<T>();
 
+        public bool IsEmpty => (available.Count <= 0);
+
+        public Pool() { }
 
         public Pool(List<T> values)
         {
@@ -18,9 +21,15 @@ namespace Assets._Main.Scripts.Generics
             }
         }
 
+        public T CreateInstance()
+        {
+            // TODO: Agregar creacion de Instance en Pool
+            return default(T);
+        }
+
         public T GetInstance()
         {
-            if(IsAvailable() > 0)
+            if(!IsEmpty)
             {
                 T temp = available[0];
                 available.Remove(temp);
@@ -28,12 +37,10 @@ namespace Assets._Main.Scripts.Generics
                 temp.gameObject.SetActive(true);
                 return temp;
             }
-            return default(T);
-        }
-
-        public int IsAvailable()
-        {
-            return available.Count;
+            else
+            {
+                return CreateInstance();
+            }
         }
 
         public void Store(T item)

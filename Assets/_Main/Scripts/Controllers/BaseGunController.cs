@@ -38,6 +38,8 @@ namespace Assets._Main.Scripts.Controllers
         public int CurrentExtraAmmo => _currentExtraAmmo;
         public int MaxMagazineAmmo => _baseGunStats.MaxMagazineAmmo;
         public int CurrentMagazineAmmo => _currentMagazineAmmo;
+        public bool IsMagazineEmpty => (CurrentMagazineAmmo <= 0);
+        public bool IsOutOfAmmo => ((CurrentExtraAmmo + CurrentMagazineAmmo) <= 0);
 
         // Fire
         public bool IsAutomatic => _baseGunStats.IsAutomatic;

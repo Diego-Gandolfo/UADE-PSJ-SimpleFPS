@@ -12,8 +12,8 @@ namespace Assets._Main.Scripts.Strategy
         #region Events
 
         // Weapon
-        event Action OnReload;
-        event Action OnAttack;
+        event Action<IWeapon> OnReload;
+        event Action<IWeapon> OnAttack;
         event Action OnInspect;
         event Action OnHolster;
         event Action OnKnifeAttack1;
