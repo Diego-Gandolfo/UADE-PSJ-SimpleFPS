@@ -50,9 +50,14 @@ namespace Assets._Main.Scripts.Controllers
 
         #region Private Methods
 
-        private void OnAimHandler(bool value)
+        private void OnAimOnHandler()
         {
-            _isAiming = value;
+            _isAiming = true;
+        }
+
+        private void OnAimOffHandler()
+        {
+            _isAiming = false;
         }
 
         #endregion
@@ -69,7 +74,8 @@ namespace Assets._Main.Scripts.Controllers
 
         public void SuscribeEvents(IInputController inputController)
         {
-            inputController.OnAim += OnAimHandler;
+            inputController.OnAimOn += OnAimOnHandler;
+            inputController.OnAimOff += OnAimOffHandler;
         }
         #endregion
     }

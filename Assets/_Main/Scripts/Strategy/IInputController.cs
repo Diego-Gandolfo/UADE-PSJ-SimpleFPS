@@ -19,7 +19,8 @@ namespace Assets._Main.Scripts.Strategy
         event Action OnKnifeAttack1;
         event Action OnKnifeAttack2;
         event Action OnThrowGrenade;
-        event Action<bool> OnAim;
+        event Action OnAimOn;
+        event Action OnAimOff;
         event Action<IWeapon> OnChangeWeapon;
         event Action<bool> OnWalk;
         event Action<bool> OnRun;

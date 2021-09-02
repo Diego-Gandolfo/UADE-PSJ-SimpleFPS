@@ -18,6 +18,7 @@ namespace Assets._Main.Scripts.Controllers
     [RequireComponent(typeof(WeaponsController))]
     [RequireComponent(typeof(AnimationsController))]
     [RequireComponent(typeof(CameraController))]
+    [RequireComponent(typeof(AudioController))]
     public class InputController : MonoBehaviour, IInputController
     {
         #region Serialize Fields
@@ -58,6 +59,7 @@ namespace Assets._Main.Scripts.Controllers
         private WeaponsController _weaponController;
         private AnimationsController _animationsController;
         private CameraController _cameraController;
+        private AudioController _audioController;
 
         #endregion
 
@@ -70,7 +72,8 @@ namespace Assets._Main.Scripts.Controllers
         public event Action OnKnifeAttack1;
         public event Action OnKnifeAttack2;
         public event Action OnThrowGrenade;
-        public event Action<bool> OnAim;
+        public event Action OnAimOn;
+        public event Action OnAimOff;
         public event Action<IWeapon> OnChangeWeapon;
         public event Action<bool> OnWalk;
         public event Action<bool> OnRun;
@@ -116,6 +119,9 @@ namespace Assets._Main.Scripts.Controllers
 
             _cameraController = GetComponent<CameraController>();
             _cameraController.SuscribeEvents(this);
+
+            _audioController = GetComponent<AudioController>();
+            _audioController.SuscribeEvents(this);
         }
 
         private void CheckMovementInput()
@@ -153,7 +159,8 @@ namespace Assets._Main.Scripts.Controllers
             if (Input.GetKeyDown(KeyCode.Alpha1)) OnChangeWeapon?.Invoke(_weaponController.WeaponList[0]);
             if (Input.GetKeyDown(KeyCode.Alpha2)) OnChangeWeapon?.Invoke(_weaponController.WeaponList[1]);
 
-            OnAim?.Invoke(Input.GetMouseButton((int)_aimMouseButton));
+            if (Input.GetMouseButtonDown((int)_aimMouseButton)) OnAimOn?.Invoke();
+            if (Input.GetMouseButtonUp((int)_aimMouseButton)) OnAimOff?.Invoke();
             
             if (Input.GetKeyDown(KeyCode.R)) OnReload?.Invoke(_weaponController.CurrentWeapon);
 

@@ -14,12 +14,17 @@ namespace Assets._Main.Scripts.Controllers
 
         #region Private Methods
 
-        private void OnAimHandler(bool value)
+        private void OnAimOnHandler()
         {
             if (!_animator.GetBool("Run"))
             {
-                _animator.SetBool("Aim", value);
+                _animator.SetBool("Aim", true);
             }
+        }
+
+        private void OnAimOffHandler()
+        {
+            _animator.SetBool("Aim", false);
         }
 
         private void OnKnifeAttack2Handler()
@@ -111,7 +116,8 @@ namespace Assets._Main.Scripts.Controllers
             inputController.OnThrowGrenade += OnThrowGrenadeHandler;
             inputController.OnKnifeAttack1 += OnKnifeAttack1Handler;
             inputController.OnKnifeAttack2 += OnKnifeAttack2Handler;
-            inputController.OnAim += OnAimHandler;
+            inputController.OnAimOn += OnAimOnHandler;
+            inputController.OnAimOff += OnAimOffHandler;
             inputController.OnChangeWeapon += OnChangeWeaponHandler;
             inputController.OnWalk += OnWalkHandler;
             inputController.OnRun += OnRunHandler;
