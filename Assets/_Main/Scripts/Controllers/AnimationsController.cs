@@ -67,9 +67,6 @@ namespace Assets._Main.Scripts.Controllers
                 {
                     if (_animator.GetBool("Aim")) _animator.Play("Aim Fire", 0, 0f);
                     else _animator.Play("Fire", 0, 0f);
-
-                    if (currentWeapon is HandgunController && ((BaseGunController)currentWeapon).CurrentMagazineAmmo == 1)
-                        Invoke("SetSliderAnimation", 0f);
                 }
             }
         }
@@ -79,9 +76,6 @@ namespace Assets._Main.Scripts.Controllers
             if (((BaseGunController)currentWeapon).IsMagazineEmpty && !((BaseGunController)currentWeapon).IsOutOfAmmo)
             {
                 _animator.Play("Reload Out Of Ammo", 0, 0f);
-
-                if (currentWeapon is HandgunController)
-                    Invoke("SetSliderAnimation", 1.5f);
             }
             else
             {
@@ -103,11 +97,6 @@ namespace Assets._Main.Scripts.Controllers
         private void OnWalkHandler(bool value)
         {
             _animator.SetBool("Walk", value);
-        }
-
-        private void SetSliderAnimation()
-        {
-            _animator.SetBool("Out Of Ammo Slider", !_animator.GetBool("Out Of Ammo Slider"));
         }
 
         private void OnSliderOutOfAmmoHandler()

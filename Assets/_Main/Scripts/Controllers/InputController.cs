@@ -107,9 +107,9 @@ namespace Assets._Main.Scripts.Controllers
 
         private void CheckAmmo()
         {
-            if (!((IGun)_weaponController.CurrentWeapon).IsMagazineEmpty && !_animationsController.Animator.GetBool("Out Of Ammo Slider"))
+            if (!((IGun)_weaponController.CurrentWeapon).IsMagazineEmpty && _animationsController.Animator.GetBool("Out Of Ammo Slider"))
                 OnSliderAmmoLeft?.Invoke();
-            if (((IGun)_weaponController.CurrentWeapon).IsMagazineEmpty && _animationsController.Animator.GetBool("Out Of Ammo Slider"))
+            if (((IGun)_weaponController.CurrentWeapon).IsMagazineEmpty && !_animationsController.Animator.GetBool("Out Of Ammo Slider"))
                 OnSliderOutOfAmmo?.Invoke();
         }
 
