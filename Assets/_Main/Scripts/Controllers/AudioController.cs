@@ -24,6 +24,8 @@ namespace Assets._Main.Scripts.Controllers
         [SerializeField] private AudioClip _runSound;
         [SerializeField] private AudioClip _holsterWeaponSound;
         [SerializeField] private AudioClip _takeOutGunSound;
+        [SerializeField] private AudioClip _knifeAttackSound;
+        [SerializeField] private AudioClip _throwGrenadeSound;
 
         #endregion
 
@@ -86,9 +88,14 @@ namespace Assets._Main.Scripts.Controllers
 
         private void OnChangeWeaponHandler(IWeapon currentWeapon)
         {
-            if (currentWeapon is IGun)
+            if (currentWeapon is HandgunController)
             {
                 _mainWeaponAudioSource.clip = _takeOutGunSound;
+                _mainWeaponAudioSource.Play();
+            }
+            else if (currentWeapon is AsaultRifleController)
+            {
+                _mainWeaponAudioSource.clip = _reloadAmmoLeftSound;
                 _mainWeaponAudioSource.Play();
             }
         }
@@ -111,6 +118,33 @@ namespace Assets._Main.Scripts.Controllers
             //}
         }
 
+        private void OnThrowGrenadeHandler()
+        {
+            //if (currentWeapon is IGun)
+            //{
+            _mainWeaponAudioSource.clip = _throwGrenadeSound;
+            _mainWeaponAudioSource.Play();
+            //}
+        }
+
+        private void OnKnifeAttack2Handler()
+        {
+            //if (currentWeapon is IGun)
+            //{
+            _mainWeaponAudioSource.clip = _knifeAttackSound;
+            _mainWeaponAudioSource.Play();
+            //}
+        }
+
+        private void OnKnifeAttack1Handler()
+        {
+            //if (currentWeapon is IGun)
+            //{
+            _mainWeaponAudioSource.clip = _knifeAttackSound;
+            _mainWeaponAudioSource.Play();
+            //}
+        }
+
         #endregion
 
         #region Public Methods
@@ -124,6 +158,9 @@ namespace Assets._Main.Scripts.Controllers
             inputController.OnHolster += OnHolsterHandler;
             inputController.OnRun += OnRunHandler;
             inputController.OnWalk += OnWalkHandler;
+            inputController.OnKnifeAttack1 += OnKnifeAttack1Handler;
+            inputController.OnKnifeAttack2 += OnKnifeAttack2Handler;
+            inputController.OnThrowGrenade += OnThrowGrenadeHandler;
         }
 
         #endregion
