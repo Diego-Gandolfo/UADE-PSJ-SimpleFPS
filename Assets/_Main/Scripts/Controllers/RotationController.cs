@@ -16,7 +16,9 @@ namespace Assets._Main.Scripts.Controllers
         public void Rotate(float value)
         {
             _mouseMove += value * Time.deltaTime;
-            transform.eulerAngles = new Vector3(0.0f, _mouseMove, 0.0f);
+            var angles = transform.eulerAngles;
+            transform.eulerAngles = new Vector3(angles.x, _mouseMove, angles.z);
+            //transform.eulerAngles = new Vector3(0.0f, _mouseMove, 0.0f);
         }
 
         #endregion

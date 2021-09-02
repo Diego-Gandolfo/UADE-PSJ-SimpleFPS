@@ -17,6 +17,7 @@ namespace Assets._Main.Scripts.Controllers
     [RequireComponent(typeof(JumpController))]
     [RequireComponent(typeof(WeaponsController))]
     [RequireComponent(typeof(AnimationsController))]
+    [RequireComponent(typeof(CameraController))]
     public class InputController : MonoBehaviour, IInputController
     {
         #region Serialize Fields
@@ -28,7 +29,7 @@ namespace Assets._Main.Scripts.Controllers
 
         [Header("Rotation")]
         [SerializeField] private string _rotationAxis = "Mouse X";
-        [SerializeField, Range(0, 1)] private float _mouseSensibility = 0.5f;
+        [SerializeField, Range(0, 1)] private float _xMouseSensibility = 0.5f;
 
         [Header("Jump")]
         [SerializeField] private KeyCode _jumpKey = KeyCode.Space;
@@ -41,6 +42,10 @@ namespace Assets._Main.Scripts.Controllers
         [SerializeField] private KeyCode _knifeAttack1Key = KeyCode.Q;
         [SerializeField] private KeyCode _knifeAttack2Key = KeyCode.E;
         [SerializeField] private KeyCode _granadeKey = KeyCode.G;
+        
+        [Header("Look Up-Down")]
+        [SerializeField] private string _lookUpDownAxis = "Mouse Y";
+        [SerializeField, Range(0, 1)] private float _yMouseSensibility = 0.5f;
 
         #endregion
 
@@ -52,6 +57,7 @@ namespace Assets._Main.Scripts.Controllers
         private JumpController _jumpController;
         private WeaponsController _weaponController;
         private AnimationsController _animationsController;
+        private CameraController _cameraController;
 
         #endregion
 
@@ -87,6 +93,7 @@ namespace Assets._Main.Scripts.Controllers
             CheckRotationInput();
             CheckJumpInput();
             CheckWeaponInput();
+            CheckLookUpDown();
         }
 
         #endregion
@@ -106,6 +113,9 @@ namespace Assets._Main.Scripts.Controllers
             _moveController = GetComponent<MoveController>();
             _rotationController = GetComponent<RotationController>();
             _jumpController = GetComponent<JumpController>();
+
+            _cameraController = GetComponent<CameraController>();
+            _cameraController.SuscribeEvents(this);
         }
 
         private void CheckMovementInput()
@@ -126,7 +136,7 @@ namespace Assets._Main.Scripts.Controllers
 
         private void CheckRotationInput()
         {
-            var mouseInput = Input.GetAxisRaw(_rotationAxis) * (_mouseSensibility * 1000);
+            var mouseInput = Input.GetAxisRaw(_rotationAxis) * (_xMouseSensibility * 1000);
             _rotationController.Rotate(mouseInput);
         }
 
@@ -164,6 +174,12 @@ namespace Assets._Main.Scripts.Controllers
             if (Input.GetKeyDown(_knifeAttack2Key)) OnKnifeAttack2?.Invoke();
 
             if (Input.GetKeyDown(_granadeKey)) OnThrowGrenade?.Invoke();
+        }
+
+        private void CheckLookUpDown()
+        {
+            var mouseInput = Input.GetAxisRaw(_lookUpDownAxis) * (_yMouseSensibility * 1000);
+            _cameraController.LookUpDown(mouseInput);
         }
 
         #endregion
