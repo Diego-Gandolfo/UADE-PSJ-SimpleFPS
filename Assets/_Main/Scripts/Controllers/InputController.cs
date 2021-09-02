@@ -161,13 +161,10 @@ namespace Assets._Main.Scripts.Controllers
             if (Input.GetKeyDown(KeyCode.Alpha2) && !_weaponController.CurrentWeapon.Equals(_weaponController.WeaponList[1]))
                 OnChangeWeapon?.Invoke(_weaponController.WeaponList[1]);
 
-            if (Input.GetMouseButtonDown((int)_aimMouseButton))
-                OnAimOn?.Invoke();
-            if (Input.GetMouseButtonUp((int)_aimMouseButton))
-                OnAimOff?.Invoke();
+            if (Input.GetMouseButtonDown((int)_aimMouseButton)) OnAimOn?.Invoke();
+            if (Input.GetMouseButtonUp((int)_aimMouseButton)) OnAimOff?.Invoke();
             
-            if (Input.GetKeyDown(KeyCode.R))
-                OnReload?.Invoke(_weaponController.CurrentWeapon);
+            if (Input.GetKeyDown(KeyCode.R)) OnReload?.Invoke(_weaponController.CurrentWeapon);
 
             if (((IGun)_weaponController.CurrentWeapon).IsAutomatic)
             {
@@ -178,19 +175,14 @@ namespace Assets._Main.Scripts.Controllers
                 if (Input.GetMouseButtonDown((int)_attackMouseButton)) OnAttack?.Invoke(_weaponController.CurrentWeapon);
             }
 
-            if (Input.GetKeyDown(_inspectKey))
-                OnInspect?.Invoke();
+            if (Input.GetKeyDown(_inspectKey)) OnInspect?.Invoke();
 
-            if (Input.GetKeyDown(_holsterKey))
-                OnHolster?.Invoke();
+            if (Input.GetKeyDown(_holsterKey)) OnHolster?.Invoke();
 
-            if (Input.GetKeyDown(_knifeAttack1Key))
-                OnKnifeAttack1?.Invoke();
-            if (Input.GetKeyDown(_knifeAttack2Key))
-                OnKnifeAttack2?.Invoke();
+            if (Input.GetKeyDown(_knifeAttack1Key)) OnKnifeAttack1?.Invoke();
+            if (Input.GetKeyDown(_knifeAttack2Key)) OnKnifeAttack2?.Invoke();
 
-            if (Input.GetKeyDown(_granadeKey))
-                OnThrowGrenade?.Invoke();
+            if (Input.GetKeyDown(_granadeKey)) OnThrowGrenade?.Invoke();
         }
 
         private void CheckLookUpDown()
