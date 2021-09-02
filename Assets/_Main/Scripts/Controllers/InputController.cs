@@ -65,20 +65,10 @@ namespace Assets._Main.Scripts.Controllers
 
         #region Events
 
-        public event Action<IWeapon> OnReload;
-        public event Action<IWeapon> OnAttack;
-        public event Action OnInspect;
-        public event Action OnHolster;
-        public event Action OnKnifeAttack1;
-        public event Action OnKnifeAttack2;
-        public event Action OnThrowGrenade;
-        public event Action OnAimOn;
-        public event Action OnAimOff;
-        public event Action<IWeapon> OnChangeWeapon;
-        public event Action<bool> OnWalk;
-        public event Action<bool> OnRun;
-        public event Action OnSliderOutOfAmmo;
-        public event Action OnSliderAmmoLeft;
+        public event Action<bool> OnWalk, OnRun;
+        public event Action<IWeapon> OnReload, OnAttack, OnChangeWeapon;
+        public event Action OnInspect, OnHolster, OnKnifeAttack1, OnKnifeAttack2, OnThrowGrenade;
+        public event Action OnAimOn, OnAimOff, OnSliderOutOfAmmo, OnSliderAmmoLeft;
 
         #endregion
 
