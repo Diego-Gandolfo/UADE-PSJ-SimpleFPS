@@ -10,6 +10,9 @@ namespace Assets._Main.Scripts.Flyweight.ScriptableObjects
     {
         #region Serialize Fields
 
+        [Header("Prefab")]
+        [SerializeField] private BulletController _bulletPrefab;
+
         [Header("Ammo")]
         [SerializeField] private int _maxExtraAmmo;
         [SerializeField] private int _maxMagazineAmmo;
@@ -21,6 +24,9 @@ namespace Assets._Main.Scripts.Flyweight.ScriptableObjects
         #endregion
 
         #region Propertys
+
+        // Prefab
+        public BulletController BulletPrefab => _bulletPrefab;
 
         // Ammo
         public int MaxExtraAmmo => _maxExtraAmmo;

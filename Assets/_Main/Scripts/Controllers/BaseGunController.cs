@@ -87,32 +87,12 @@ namespace Assets._Main.Scripts.Controllers
                     _currentExtraAmmo = 0;
                     _extraAmmoText.text = _currentExtraAmmo.ToString();
                 }
-
-                //AudioManager._instance.PlaySound(AudioManager._instance.Reload, 1f);
-                //print($"{name} is reloaded! You have {_currentExtraAmmo} extra ammo left!");
-            }
-            else
-            {
-                //print($"{name} has no Extra Ammo!");
             }
         }
 
         public override void Attack()
         {
             //base.Attack();
-
-            if (_currentMagazineAmmo > 0)
-            {
-                //BaseBullet bullet = Instantiate(_baseGunStats.BulletPrefab, _bulletSpawnpoint.position, _bulletSpawnpoint.rotation);
-                //bullet.SetDamage(_currentDamage);
-                _currentMagazineAmmo--;
-                _magazineAmmoText.text = _currentMagazineAmmo.ToString();
-                //AudioManager._instance.PlaySound(AudioManager._instance.Shoot, 1f);
-            }
-            else
-            {
-                //print($"{name} has no ammo... TRY TO RELOAD!");
-            }
         }
 
         #endregion
