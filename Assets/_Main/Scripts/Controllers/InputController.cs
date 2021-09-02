@@ -98,14 +98,14 @@ namespace Assets._Main.Scripts.Controllers
             CheckJumpInput();
             CheckWeaponInput();
             CheckLookUpDown();
-            CheckAmmo();
+            CheckAmmoSlider();
         }
 
         #endregion
 
         #region Private Methods
 
-        private void CheckAmmo()
+        private void CheckAmmoSlider()
         {
             if (!((IGun)_weaponController.CurrentWeapon).IsMagazineEmpty && _animationsController.Animator.GetBool("Out Of Ammo Slider"))
                 OnSliderAmmoLeft?.Invoke();
