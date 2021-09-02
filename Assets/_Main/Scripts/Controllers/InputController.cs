@@ -77,6 +77,8 @@ namespace Assets._Main.Scripts.Controllers
         public event Action<IWeapon> OnChangeWeapon;
         public event Action<bool> OnWalk;
         public event Action<bool> OnRun;
+        public event Action OnSliderOutOfAmmo;
+        public event Action OnSliderAmmoLeft;
 
         #endregion
 
@@ -87,7 +89,6 @@ namespace Assets._Main.Scripts.Controllers
             Cursor.lockState = CursorLockMode.Locked;
 
             GetRequiredComponent();
-            
         }
 
         private void Update()
@@ -97,11 +98,20 @@ namespace Assets._Main.Scripts.Controllers
             CheckJumpInput();
             CheckWeaponInput();
             CheckLookUpDown();
+            CheckAmmo();
         }
 
         #endregion
 
         #region Private Methods
+
+        private void CheckAmmo()
+        {
+            if (!((IGun)_weaponController.CurrentWeapon).IsMagazineEmpty && !_animationsController.Animator.GetBool("Out Of Ammo Slider"))
+                OnSliderAmmoLeft?.Invoke();
+            if (((IGun)_weaponController.CurrentWeapon).IsMagazineEmpty && _animationsController.Animator.GetBool("Out Of Ammo Slider"))
+                OnSliderOutOfAmmo?.Invoke();
+        }
 
         private void GetRequiredComponent()
         {

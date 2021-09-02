@@ -61,8 +61,11 @@ namespace Assets._Main.Scripts.Controllers
         {
             if (currentWeapon is IGun)
             {
-                _attackWeaponAudioSource.clip = _shootSound;
-                _attackWeaponAudioSource.Play();
+                if (!((IGun)currentWeapon).IsMagazineEmpty)
+                {
+                    _attackWeaponAudioSource.clip = _shootSound;
+                    _attackWeaponAudioSource.Play();
+                }
             }
         }
 

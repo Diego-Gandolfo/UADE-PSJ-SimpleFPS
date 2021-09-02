@@ -73,7 +73,6 @@ namespace Assets._Main.Scripts.Controllers
         public override void Reload()
         {
             base.Reload();
-            //TODO: Handgun Reload
         }
 
         #endregion

@@ -24,6 +24,8 @@ namespace Assets._Main.Scripts.Strategy
         event Action<IWeapon> OnChangeWeapon;
         event Action<bool> OnWalk;
         event Action<bool> OnRun;
+        event Action OnSliderOutOfAmmo;
+        event Action OnSliderAmmoLeft;
 
         #endregion
     }

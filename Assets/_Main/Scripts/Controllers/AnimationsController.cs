@@ -1,4 +1,5 @@
 using Assets._Main.Scripts.Strategy;
+using System;
 using UnityEngine;
 
 namespace Assets._Main.Scripts.Controllers
@@ -9,6 +10,12 @@ namespace Assets._Main.Scripts.Controllers
 
         // Components
         private Animator _animator;
+
+        #endregion
+
+        #region Propertys
+
+        public Animator Animator => _animator;
 
         #endregion
 
@@ -69,7 +76,7 @@ namespace Assets._Main.Scripts.Controllers
 
         private void OnReloadHandler(IWeapon currentWeapon)
         {
-            if (((BaseGunController)currentWeapon).IsMagazineEmpty)
+            if (((BaseGunController)currentWeapon).IsMagazineEmpty && !((BaseGunController)currentWeapon).IsOutOfAmmo)
             {
                 _animator.Play("Reload Out Of Ammo", 0, 0f);
 
@@ -103,6 +110,16 @@ namespace Assets._Main.Scripts.Controllers
             _animator.SetBool("Out Of Ammo Slider", !_animator.GetBool("Out Of Ammo Slider"));
         }
 
+        private void OnSliderOutOfAmmoHandler()
+        {
+            _animator.SetBool("Out Of Ammo Slider", true);
+        }
+
+        private void OnSliderAmmoLeftHandler()
+        {
+            _animator.SetBool("Out Of Ammo Slider", false);
+        }
+
         #endregion
 
         #region Public Methods
@@ -121,6 +138,8 @@ namespace Assets._Main.Scripts.Controllers
             inputController.OnChangeWeapon += OnChangeWeaponHandler;
             inputController.OnWalk += OnWalkHandler;
             inputController.OnRun += OnRunHandler;
+            inputController.OnSliderAmmoLeft += OnSliderAmmoLeftHandler;
+            inputController.OnSliderOutOfAmmo += OnSliderOutOfAmmoHandler;
         }
 
         #endregion
