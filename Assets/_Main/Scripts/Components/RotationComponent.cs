@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets._Main.Scripts.Component
 {
-    public class Rotation : MonoBehaviour, IRotate
+    public class RotationComponent : MonoBehaviour, IRotate
     {
         #region Private Fields
 

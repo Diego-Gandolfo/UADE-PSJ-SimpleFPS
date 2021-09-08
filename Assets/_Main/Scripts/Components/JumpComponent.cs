@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Assets._Main.Scripts.Component
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class Jump : MonoBehaviour, IJump
+    public class JumpComponent : MonoBehaviour, IJump
     {
         #region Serialize Fields
 

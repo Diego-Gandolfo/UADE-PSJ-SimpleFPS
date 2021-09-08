@@ -3,7 +3,7 @@ using Assets._Main.Scripts.Strategy;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets._Main.Scripts.Component
+namespace Assets._Main.Scripts.Entities
 {
     public class BaseGun : BaseWeapon, IGun
     {

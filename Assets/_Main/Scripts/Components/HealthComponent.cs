@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Assets._Main.Scripts.Component
 {
-    public class Health : MonoBehaviour, IDamageable
+    public class HealthComponent : MonoBehaviour, IDamageable
     {
         #region Serialize Fields
 

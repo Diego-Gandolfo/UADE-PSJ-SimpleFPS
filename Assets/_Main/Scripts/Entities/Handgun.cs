@@ -1,6 +1,7 @@
+using Assets._Main.Scripts.Component;
 using UnityEngine;
 
-namespace Assets._Main.Scripts.Component
+namespace Assets._Main.Scripts.Entities
 {
     public class Handgun : BaseGun
     {

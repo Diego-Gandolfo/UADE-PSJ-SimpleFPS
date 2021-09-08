@@ -12,9 +12,9 @@ public enum MouseButton
 
 namespace Assets._Main.Scripts.Controllers
 {
-    [RequireComponent(typeof(Move))]
-    [RequireComponent(typeof(Rotation))]
-    [RequireComponent(typeof(Jump))]
+    [RequireComponent(typeof(MoveComponent))]
+    [RequireComponent(typeof(RotationComponent))]
+    [RequireComponent(typeof(JumpComponent))]
     [RequireComponent(typeof(WeaponsController))]
     [RequireComponent(typeof(AnimationsController))]
     [RequireComponent(typeof(CameraController))]
@@ -53,9 +53,9 @@ namespace Assets._Main.Scripts.Controllers
         #region Private Fields
 
         // Components
-        private Move _moveController;
-        private Rotation _rotationController;
-        private Jump _jumpController;
+        private MoveComponent _moveComponent;
+        private RotationComponent _rotationComponent;
+        private JumpComponent _jumpComponent;
         private WeaponsController _weaponController;
         private AnimationsController _animationsController;
         private CameraController _cameraController;
@@ -113,9 +113,9 @@ namespace Assets._Main.Scripts.Controllers
 
             OnChangeWeapon?.Invoke(_weaponController.WeaponList[0]);
 
-            _moveController = GetComponent<Move>();
-            _rotationController = GetComponent<Rotation>();
-            _jumpController = GetComponent<Jump>();
+            _moveComponent = GetComponent<MoveComponent>();
+            _rotationComponent = GetComponent<RotationComponent>();
+            _jumpComponent = GetComponent<JumpComponent>();
 
             _cameraController = GetComponent<CameraController>();
             _cameraController.SuscribeEvents(this);
@@ -126,7 +126,7 @@ namespace Assets._Main.Scripts.Controllers
 
         private void CheckMovementInput()
         {
-            var currentSpeed = Input.GetKey(_runKey) ? _moveController.RunSpeed : _moveController.WalkSpeed;
+            var currentSpeed = Input.GetKey(_runKey) ? _moveComponent.RunSpeed : _moveComponent.WalkSpeed;
 
             var xMove = transform.right * Input.GetAxisRaw(_horizontalAxis);
             var yMove = transform.forward * Input.GetAxisRaw(_verticalAxis);
@@ -134,23 +134,23 @@ namespace Assets._Main.Scripts.Controllers
             var direction = xMove + yMove;
             direction.Normalize();
 
-            _moveController.DoMove(direction, currentSpeed);
+            _moveComponent.DoMove(direction, currentSpeed);
 
-            OnWalk?.Invoke(direction != Vector3.zero && currentSpeed == _moveController.WalkSpeed);
-            OnRun?.Invoke(direction != Vector3.zero && currentSpeed == _moveController.RunSpeed);
+            OnWalk?.Invoke(direction != Vector3.zero && currentSpeed == _moveComponent.WalkSpeed);
+            OnRun?.Invoke(direction != Vector3.zero && currentSpeed == _moveComponent.RunSpeed);
         }
 
         private void CheckRotationInput()
         {
             var mouseInput = Input.GetAxisRaw(_rotationAxis) * (_xMouseSensibility * 1000);
-            _rotationController.Rotate(mouseInput);
+            _rotationComponent.Rotate(mouseInput);
         }
 
         private void CheckJumpInput()
         {
-            if (_jumpController.CheckIsGrounded() && Input.GetKeyDown(_jumpKey))
+            if (_jumpComponent.CheckIsGrounded() && Input.GetKeyDown(_jumpKey))
             {
-                _jumpController.DoJump();
+                _jumpComponent.DoJump();
             }
         }
 

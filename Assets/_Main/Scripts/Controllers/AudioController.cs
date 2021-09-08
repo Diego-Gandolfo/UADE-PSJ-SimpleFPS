@@ -1,4 +1,4 @@
-using Assets._Main.Scripts.Component;
+using Assets._Main.Scripts.Entities;
 using Assets._Main.Scripts.Strategy;
 using UnityEngine;
 

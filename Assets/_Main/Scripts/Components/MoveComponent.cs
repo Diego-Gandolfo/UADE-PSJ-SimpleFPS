@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets._Main.Scripts.Component
 {
-    public class Move : MonoBehaviour, IMove
+    public class MoveComponent : MonoBehaviour, IMove
     {
         #region Serialize Fields
 
