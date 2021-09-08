@@ -1,12 +1,10 @@
 using Assets._Main.Scripts.Flyweight.ScriptableObjects;
 using Assets._Main.Scripts.Strategy;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets._Main.Scripts.Controllers
+namespace Assets._Main.Scripts.Component
 {
-    public class BaseWeaponController : MonoBehaviour, IWeapon
+    public class BaseWeapon : MonoBehaviour, IWeapon
     {
         #region Serialize Fields
 

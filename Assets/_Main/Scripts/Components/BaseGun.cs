@@ -1,13 +1,11 @@
 using Assets._Main.Scripts.Flyweight.ScriptableObjects;
 using Assets._Main.Scripts.Strategy;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets._Main.Scripts.Controllers
+namespace Assets._Main.Scripts.Component
 {
-    public class BaseGunController : BaseWeaponController, IGun
+    public class BaseGun : BaseWeapon, IGun
     {
         #region Serialize Fields
 

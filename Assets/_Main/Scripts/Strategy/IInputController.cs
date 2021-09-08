@@ -1,9 +1,4 @@
-﻿using Assets._Main.Scripts.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace Assets._Main.Scripts.Strategy
 {
@@ -12,8 +7,6 @@ namespace Assets._Main.Scripts.Strategy
         #region Events
 
         // Weapon
-        event Action<IWeapon> OnReload;
-        event Action<IWeapon> OnAttack;
         event Action OnInspect;
         event Action OnHolster;
         event Action OnKnifeAttack1;
@@ -21,11 +14,13 @@ namespace Assets._Main.Scripts.Strategy
         event Action OnThrowGrenade;
         event Action OnAimOn;
         event Action OnAimOff;
-        event Action<IWeapon> OnChangeWeapon;
-        event Action<bool> OnWalk;
-        event Action<bool> OnRun;
         event Action OnSliderOutOfAmmo;
         event Action OnSliderAmmoLeft;
+        event Action<bool> OnWalk;
+        event Action<bool> OnRun;
+        event Action<IWeapon> OnReload;
+        event Action<IWeapon> OnAttack;
+        event Action<IWeapon> OnChangeWeapon;
 
         #endregion
     }

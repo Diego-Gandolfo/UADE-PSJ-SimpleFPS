@@ -1,5 +1,5 @@
+using Assets._Main.Scripts.Component;
 using Assets._Main.Scripts.Strategy;
-using System;
 using UnityEngine;
 
 namespace Assets._Main.Scripts.Controllers
@@ -61,9 +61,9 @@ namespace Assets._Main.Scripts.Controllers
 
         private void OnAttackHandler(IWeapon currentWeapon)
         {
-            if (currentWeapon is BaseGunController)
+            if (currentWeapon is BaseGun)
             {
-                if (((BaseGunController)currentWeapon).CurrentMagazineAmmo > 0)
+                if (((BaseGun)currentWeapon).CurrentMagazineAmmo > 0)
                 {
                     if (_animator.GetBool("Aim")) _animator.Play("Aim Fire", 0, 0f);
                     else _animator.Play("Fire", 0, 0f);
@@ -73,7 +73,7 @@ namespace Assets._Main.Scripts.Controllers
 
         private void OnReloadHandler(IWeapon currentWeapon)
         {
-            if (((BaseGunController)currentWeapon).IsMagazineEmpty && !((BaseGunController)currentWeapon).IsOutOfAmmo)
+            if (((BaseGun)currentWeapon).IsMagazineEmpty && !((BaseGun)currentWeapon).IsOutOfAmmo)
             {
                 _animator.Play("Reload Out Of Ammo", 0, 0f);
             }
@@ -86,7 +86,7 @@ namespace Assets._Main.Scripts.Controllers
         private void OnChangeWeaponHandler(IWeapon currentWeapon)
         {
             if (currentWeapon is IGun)
-                _animator = ((BaseWeaponController)currentWeapon).gameObject.GetComponent<Animator>();
+                _animator = ((BaseWeapon)currentWeapon).gameObject.GetComponent<Animator>();
         }
 
         private void OnRunHandler(bool value)

@@ -1,10 +1,10 @@
 using Assets._Main.Scripts.Strategy;
 using UnityEngine;
 
-namespace Assets._Main.Scripts.Controllers
+namespace Assets._Main.Scripts.Component
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class JumpController : MonoBehaviour, IJump
+    public class Jump : MonoBehaviour, IJump
     {
         #region Serialize Fields
 
@@ -30,7 +30,7 @@ namespace Assets._Main.Scripts.Controllers
 
         #region Public Methods
 
-        public void Jump()
+        public void DoJump()
         {
             var jumpForce = transform.up * _jumpForce;
             _rigidbody.AddForce(jumpForce, ForceMode.Impulse);

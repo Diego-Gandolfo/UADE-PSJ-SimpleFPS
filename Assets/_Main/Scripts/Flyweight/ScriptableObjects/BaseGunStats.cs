@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Assets._Main.Scripts.Component;
 using UnityEngine;
 
 
@@ -11,7 +10,7 @@ namespace Assets._Main.Scripts.Flyweight.ScriptableObjects
         #region Serialize Fields
 
         [Header("Prefab")]
-        [SerializeField] private BulletController _bulletPrefab;
+        [SerializeField] private Bullet _bulletPrefab;
 
         [Header("Ammo")]
         [SerializeField] private int _maxExtraAmmo;
@@ -26,7 +25,7 @@ namespace Assets._Main.Scripts.Flyweight.ScriptableObjects
         #region Propertys
 
         // Prefab
-        public BulletController BulletPrefab => _bulletPrefab;
+        public Bullet BulletPrefab => _bulletPrefab;
 
         // Ammo
         public int MaxExtraAmmo => _maxExtraAmmo;

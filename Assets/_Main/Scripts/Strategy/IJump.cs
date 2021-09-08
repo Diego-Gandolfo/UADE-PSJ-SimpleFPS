@@ -10,7 +10,7 @@ namespace Assets._Main.Scripts.Strategy
     {
         #region Public Methods
 
-        void Jump();
+        void DoJump();
         bool CheckIsGrounded();
 
         #endregion

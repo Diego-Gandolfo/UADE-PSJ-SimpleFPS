@@ -1,12 +1,8 @@
-using Assets._Main.Scripts.Strategy;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using UnityEngine;
 
-namespace Assets._Main.Scripts.Controllers
+namespace Assets._Main.Scripts.Component
 {
-    public class HandgunController : BaseGunController
+    public class Handgun : BaseGun
     {
         #region Serialize Fields
 
@@ -57,7 +53,7 @@ namespace Assets._Main.Scripts.Controllers
 
             if (_currentMagazineAmmo > 0)
             {
-                BulletController bullet = Instantiate(_baseGunStats.BulletPrefab, _bulletSpawnpoint.position, _bulletSpawnpoint.rotation);
+                Bullet bullet = Instantiate(_baseGunStats.BulletPrefab, _bulletSpawnpoint.position, _bulletSpawnpoint.rotation);
                 bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * BULLET_FORCE;
 
                 _currentMagazineAmmo--;

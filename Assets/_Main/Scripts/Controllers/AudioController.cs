@@ -1,7 +1,5 @@
+using Assets._Main.Scripts.Component;
 using Assets._Main.Scripts.Strategy;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets._Main.Scripts.Controllers
@@ -73,9 +71,9 @@ namespace Assets._Main.Scripts.Controllers
         {
             if (currentWeapon is IGun)
             {
-                if (currentWeapon is BaseGunController)
+                if (currentWeapon is BaseGun)
                 {
-                    if (((BaseGunController)currentWeapon).IsMagazineEmpty)
+                    if (((BaseGun)currentWeapon).IsMagazineEmpty)
                     {
                         _mainWeaponAudioSource.clip = _reloadOutOfAmmoSound;
                         _mainWeaponAudioSource.Play();
@@ -91,12 +89,12 @@ namespace Assets._Main.Scripts.Controllers
 
         private void OnChangeWeaponHandler(IWeapon currentWeapon)
         {
-            if (currentWeapon is HandgunController)
+            if (currentWeapon is Handgun)
             {
                 _mainWeaponAudioSource.clip = _takeOutGunSound;
                 _mainWeaponAudioSource.Play();
             }
-            else if (currentWeapon is AsaultRifleController)
+            else if (currentWeapon is AsaultRifle)
             {
                 _mainWeaponAudioSource.clip = _reloadAmmoLeftSound;
                 _mainWeaponAudioSource.Play();

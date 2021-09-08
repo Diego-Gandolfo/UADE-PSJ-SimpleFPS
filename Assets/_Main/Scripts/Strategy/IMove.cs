@@ -6,7 +6,7 @@ namespace Assets._Main.Scripts.Strategy
     {
         #region Public Methods
 
-        void Move(Vector3 direction, float speed);
+        void DoMove(Vector3 direction, float speed);
 
         #endregion
     }

@@ -1,5 +1,5 @@
+using Assets._Main.Scripts.Component;
 using Assets._Main.Scripts.Strategy;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ namespace Assets._Main.Scripts.Controllers
     {
         #region Serialize Fields
 
-        [SerializeField] private List<BaseWeaponController> _weaponsList = new List<BaseWeaponController>();
+        [SerializeField] private List<BaseWeapon> _weaponsList = new List<BaseWeapon>();
 
         #endregion
 
@@ -23,7 +23,7 @@ namespace Assets._Main.Scripts.Controllers
         #region Propertys
 
         public IWeapon CurrentWeapon => _weaponsList[_currentWeaponIndex];
-        public List<BaseWeaponController> WeaponList => _weaponsList;
+        public List<BaseWeapon> WeaponList => _weaponsList;
 
 
         #endregion
@@ -34,7 +34,7 @@ namespace Assets._Main.Scripts.Controllers
         {
             for (int i = 0; i < _weaponsList.Count; i++)
             {
-                if (_weaponsList[i] == (BaseWeaponController)currtenWeapon)
+                if (_weaponsList[i] == (BaseWeapon)currtenWeapon)
                 {
                     _currentWeaponIndex = i;
                     _weaponsList[i].gameObject.SetActive(true);
@@ -48,7 +48,7 @@ namespace Assets._Main.Scripts.Controllers
 
         private void OnAttackHandler(IWeapon currtenWeapon)
         {
-            if (currtenWeapon is BaseGunController)
+            if (currtenWeapon is BaseGun)
             {
                 if (!((IGun)currtenWeapon).IsMagazineEmpty) currtenWeapon.Attack();
             }
@@ -58,7 +58,7 @@ namespace Assets._Main.Scripts.Controllers
         {
             if (currtenWeapon is IGun && !((IGun)currtenWeapon).IsOutOfAmmo)
             {
-                ((BaseGunController)currtenWeapon).Invoke("Reload", 1.5f);
+                ((BaseGun)currtenWeapon).Invoke("Reload", 1.5f);
             }
         }
 

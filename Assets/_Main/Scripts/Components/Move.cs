@@ -1,9 +1,9 @@
 using Assets._Main.Scripts.Strategy;
 using UnityEngine;
 
-namespace Assets._Main.Scripts.Controllers
+namespace Assets._Main.Scripts.Component
 {
-    public class MoveController : MonoBehaviour, IMove
+    public class Move : MonoBehaviour, IMove
     {
         #region Serialize Fields
 
@@ -21,7 +21,7 @@ namespace Assets._Main.Scripts.Controllers
 
         #region Public Methods
 
-        public void Move(Vector3 direction, float speed)
+        public void DoMove(Vector3 direction, float speed)
         {
             transform.position += (direction * (speed * Time.deltaTime));
         }

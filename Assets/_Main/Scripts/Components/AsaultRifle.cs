@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets._Main.Scripts.Controllers
+namespace Assets._Main.Scripts.Component
 {
-    public class AsaultRifleController : BaseGunController
+    public class AsaultRifle : BaseGun
     {
         public override void Attack()
         {

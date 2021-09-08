@@ -1,4 +1,4 @@
-using Assets._Main.Scripts.Controllers;
+using Assets._Main.Scripts.Component;
 using Assets._Main.Scripts.Strategy;
 using System;
 using UnityEngine;
@@ -12,9 +12,9 @@ public enum MouseButton
 
 namespace Assets._Main.Scripts.Controllers
 {
-    [RequireComponent(typeof(MoveController))]
-    [RequireComponent(typeof(RotationController))]
-    [RequireComponent(typeof(JumpController))]
+    [RequireComponent(typeof(Move))]
+    [RequireComponent(typeof(Rotation))]
+    [RequireComponent(typeof(Jump))]
     [RequireComponent(typeof(WeaponsController))]
     [RequireComponent(typeof(AnimationsController))]
     [RequireComponent(typeof(CameraController))]
@@ -53,9 +53,9 @@ namespace Assets._Main.Scripts.Controllers
         #region Private Fields
 
         // Components
-        private MoveController _moveController;
-        private RotationController _rotationController;
-        private JumpController _jumpController;
+        private Move _moveController;
+        private Rotation _rotationController;
+        private Jump _jumpController;
         private WeaponsController _weaponController;
         private AnimationsController _animationsController;
         private CameraController _cameraController;
@@ -113,9 +113,9 @@ namespace Assets._Main.Scripts.Controllers
 
             OnChangeWeapon?.Invoke(_weaponController.WeaponList[0]);
 
-            _moveController = GetComponent<MoveController>();
-            _rotationController = GetComponent<RotationController>();
-            _jumpController = GetComponent<JumpController>();
+            _moveController = GetComponent<Move>();
+            _rotationController = GetComponent<Rotation>();
+            _jumpController = GetComponent<Jump>();
 
             _cameraController = GetComponent<CameraController>();
             _cameraController.SuscribeEvents(this);
@@ -134,7 +134,7 @@ namespace Assets._Main.Scripts.Controllers
             var direction = xMove + yMove;
             direction.Normalize();
 
-            _moveController.Move(direction, currentSpeed);
+            _moveController.DoMove(direction, currentSpeed);
 
             OnWalk?.Invoke(direction != Vector3.zero && currentSpeed == _moveController.WalkSpeed);
             OnRun?.Invoke(direction != Vector3.zero && currentSpeed == _moveController.RunSpeed);
@@ -150,7 +150,7 @@ namespace Assets._Main.Scripts.Controllers
         {
             if (_jumpController.CheckIsGrounded() && Input.GetKeyDown(_jumpKey))
             {
-                _jumpController.Jump();
+                _jumpController.DoJump();
             }
         }
 
