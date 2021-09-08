@@ -31977,7 +31977,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1989690381}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b58db647ad1821c499493c653051a745, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b4480114681d1944a1ee164ab383a1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _jumpForce: 25
@@ -31990,7 +31990,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1989690381}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c2b529e7141fd745b4aa8fdb48ba7b8, type: 3}
+  m_Script: {fileID: 11500000, guid: 2bc9f1065181a794999746887ad0194f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1989690389
@@ -32002,7 +32002,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1989690381}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd5119ee6dcc1d04790737209df46027, type: 3}
+  m_Script: {fileID: 11500000, guid: 5794a9a4a358ef5489d5c06f5ec0527e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _walkSpeed: 7
