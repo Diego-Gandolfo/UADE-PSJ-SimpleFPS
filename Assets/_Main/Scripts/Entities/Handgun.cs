@@ -9,42 +9,42 @@ namespace Assets._Main.Scripts.Entities
     {
         #region Serialize Fields
 
-        [Header("Spawnpoints")]
-        [SerializeField] private Transform _bulletSpawnpoint;
+        //[Header("Spawnpoints")]
+        //[SerializeField] private Transform _bulletSpawnpoint;
 
-        [Header("Sparks")]
-        [SerializeField] private ParticleSystem _sparkParticles;
-        [SerializeField] private int _minSparks = 1;
-        [SerializeField] private int _maxSparks = 7;
+        //[Header("Sparks")]
+        //[SerializeField] private ParticleSystem _sparkParticles;
+        //[SerializeField] private int _minSparks = 1;
+        //[SerializeField] private int _maxSparks = 7;
 
-        [Header("Muzzle Flash")]
-        [SerializeField] private ParticleSystem _muzzleFlashParticles;
-        [SerializeField] private Light _muzzleFlashLight;
+        //[Header("Muzzle Flash")]
+        //[SerializeField] private ParticleSystem _muzzleFlashParticles;
+        //[SerializeField] private Light _muzzleFlashLight;
 
         #endregion
 
         #region Private Fields
 
-        private const float BULLET_FORCE = 400f;
+        //private const float BULLET_FORCE = 400f;
 
         #endregion
 
         #region Private Methods
 
-        private void TurnMuzzleFlashLightOff()
-        {
-            _muzzleFlashLight.enabled = false;
-        }
+        //private void TurnMuzzleFlashLightOff()
+        //{
+        //    _muzzleFlashLight.enabled = false;
+        //}
 
-        private void PlayMuzzleFlashParticles()
-        {
-            _muzzleFlashParticles.Emit(3);
-        }
+        //private void PlayMuzzleFlashParticles()
+        //{
+        //    _muzzleFlashParticles.Emit(3);
+        //}
 
-        private void PlaySparkParticles()
-        {
-            _sparkParticles.Emit(Random.Range(_minSparks, _maxSparks));
-        }
+        //private void PlaySparkParticles()
+        //{
+        //    _sparkParticles.Emit(Random.Range(_minSparks, _maxSparks));
+        //}
 
         #endregion
 

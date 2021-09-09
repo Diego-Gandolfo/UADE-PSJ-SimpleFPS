@@ -33824,6 +33824,12 @@ MonoBehaviour:
   _weaponNameText: {fileID: 7641682886432733152}
   _weaponIcon: {fileID: 21300000, guid: 364206cb355dcf7479b2cdec20b8ec68, type: 3}
   _weaponImage: {fileID: 7641894839101828134}
+  _bulletSpawnpoint: {fileID: 700267291}
+  _sparkParticles: {fileID: 1298839507}
+  _minSparks: 1
+  _maxSparks: 7
+  _muzzleFlashParticles: {fileID: 177574243}
+  _muzzleFlashLight: {fileID: 1621765986}
 --- !u!1 &2105198506
 GameObject:
   m_ObjectHideFlags: 0

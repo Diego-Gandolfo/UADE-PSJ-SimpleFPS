@@ -21,12 +21,25 @@ namespace Assets._Main.Scripts.Entities
         [SerializeField] private Sprite _weaponIcon;
         [SerializeField] private Image _weaponImage;
 
+        [Header("Spawnpoints")]
+        [SerializeField] protected Transform _bulletSpawnpoint;
+
+        [Header("Sparks")]
+        [SerializeField] private ParticleSystem _sparkParticles;
+        [SerializeField] private int _minSparks = 1;
+        [SerializeField] private int _maxSparks = 7;
+
+        [Header("Muzzle Flash")]
+        [SerializeField] private ParticleSystem _muzzleFlashParticles;
+        [SerializeField] protected Light _muzzleFlashLight;
+
         #endregion
 
         #region Protected Fields
 
         protected int _currentExtraAmmo;
         protected int _currentMagazineAmmo;
+        protected const float BULLET_FORCE = 400f;
 
         #endregion
 
@@ -66,7 +79,28 @@ namespace Assets._Main.Scripts.Entities
 
         #endregion
 
+        #region Protected Methods
+
+        protected void TurnMuzzleFlashLightOff()
+        {
+            _muzzleFlashLight.enabled = false;
+        }
+
+        protected void PlayMuzzleFlashParticles()
+        {
+            _muzzleFlashParticles.Emit(3);
+        }
+
+        protected void PlaySparkParticles()
+        {
+            _sparkParticles.Emit(Random.Range(_minSparks, _maxSparks));
+        }
+
+        #endregion
+
         #region Public Methods
+
+        public override void Attack(IWeaponController weaponController) { }
 
         public virtual void Reload()
         {
@@ -87,11 +121,6 @@ namespace Assets._Main.Scripts.Entities
                     _extraAmmoText.text = _currentExtraAmmo.ToString();
                 }
             }
-        }
-
-        public override void Attack(IWeaponController weaponController)
-        {
-            //base.Attack();
         }
 
         #endregion

@@ -1,4 +1,5 @@
 using Assets._Main.Scripts.Component;
+using Assets._Main.Scripts.Entities;
 using Assets._Main.Scripts.Strategy;
 using System;
 using UnityEngine;
@@ -99,10 +100,13 @@ namespace Assets._Main.Scripts.Controllers
 
         private void CheckAmmoSlider()
         {
-            if (!((IGun)_weaponController.CurrentWeapon).IsMagazineEmpty && _animationsController.Animator.GetBool("Out Of Ammo Slider"))
-                OnSliderAmmoLeft?.Invoke();
-            if (((IGun)_weaponController.CurrentWeapon).IsMagazineEmpty && !_animationsController.Animator.GetBool("Out Of Ammo Slider"))
-                OnSliderOutOfAmmo?.Invoke();
+            if (_weaponController.CurrentWeapon is Handgun)
+            {
+                if (!((IGun)_weaponController.CurrentWeapon).IsMagazineEmpty && _animationsController.Animator.GetBool("Out Of Ammo Slider"))
+                    OnSliderAmmoLeft?.Invoke();
+                if (((IGun)_weaponController.CurrentWeapon).IsMagazineEmpty && !_animationsController.Animator.GetBool("Out Of Ammo Slider"))
+                    OnSliderOutOfAmmo?.Invoke();
+            }
         }
 
         private void GetRequiredComponent()
