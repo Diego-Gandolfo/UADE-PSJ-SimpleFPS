@@ -46158,7 +46158,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7752085219593923500}
   m_Layer: 8
-  m_Name: Grenade_Spawn_Point
+  m_Name: Grenade Spawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
