@@ -15,6 +15,7 @@ namespace Assets._Main.Scripts.Strategy
         // Fire
         bool IsAutomatic { get; }
         float FireCooldown { get; }
+        bool CanAttack { get; }
 
         #endregion
 

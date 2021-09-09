@@ -188,7 +188,8 @@ namespace Assets._Main.Scripts.Controllers
 
             if (((IGun)_weaponController.CurrentWeapon).IsAutomatic)
             {
-                if (Input.GetMouseButton((int)_attackMouseButton)) OnAttack?.Invoke(_weaponController.CurrentWeapon);
+                if (Input.GetMouseButton((int)_attackMouseButton) && ((IGun)_weaponController.CurrentWeapon).CanAttack)
+                    OnAttack?.Invoke(_weaponController.CurrentWeapon);
             }
             else
             {

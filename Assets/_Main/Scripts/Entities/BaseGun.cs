@@ -40,6 +40,7 @@ namespace Assets._Main.Scripts.Entities
         protected int _currentExtraAmmo;
         protected int _currentMagazineAmmo;
         protected const float BULLET_FORCE = 400f;
+        protected bool _canAttack = true;
 
         #endregion
 
@@ -56,6 +57,7 @@ namespace Assets._Main.Scripts.Entities
         // Fire
         public bool IsAutomatic => _baseGunStats.IsAutomatic;
         public float FireCooldown => _baseGunStats.FireCooldown;
+        public bool CanAttack => _canAttack;
 
         #endregion
 
