@@ -23,7 +23,8 @@ namespace Assets._Main.Scripts.Controllers
         [SerializeField] private AudioClip _sneakSound;
         [SerializeField] private AudioClip _holsterWeaponSound;
         [SerializeField] private AudioClip _takeOutGunSound;
-        [SerializeField] private AudioClip _knifeAttackSound;
+        [SerializeField] private AudioClip _knifeCutAttackSound;
+        [SerializeField] private AudioClip _knifeSlabAttackSound;
         [SerializeField] private AudioClip _throwGrenadeSound;
 
         #endregion
@@ -153,29 +154,22 @@ namespace Assets._Main.Scripts.Controllers
 
         private void OnThrowGrenadeHandler()
         {
-            //if (currentWeapon is IGun)
-            //{
             _mainWeaponAudioSource.clip = _throwGrenadeSound;
             _mainWeaponAudioSource.Play();
-            //}
         }
 
         private void OnKnifeAttack2Handler()
         {
-            //if (currentWeapon is IGun)
-            //{
-            _mainWeaponAudioSource.clip = _knifeAttackSound;
-            _mainWeaponAudioSource.Play();
-            //}
+            _attackWeaponAudioSource.clip = _knifeCutAttackSound;
+            _attackWeaponAudioSource.Play();
         }
 
         private void OnKnifeAttack1Handler()
         {
-            //if (currentWeapon is IGun)
-            //{
-            _mainWeaponAudioSource.clip = _knifeAttackSound;
-            _mainWeaponAudioSource.Play();
-            //}
+            _attackWeaponAudioSource.clip = _knifeCutAttackSound;
+            _attackWeaponAudioSource.Play();
+            _mainWeaponAudioSource.clip = _knifeSlabAttackSound;
+            _mainWeaponAudioSource.PlayDelayed(0.472f);
         }
 
         #endregion
