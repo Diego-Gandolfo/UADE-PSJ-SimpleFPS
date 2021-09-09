@@ -9,13 +9,13 @@ namespace Assets._Main.Scripts.Flyweight.ScriptableObjects
     {
         #region Serialize Fields
 
-        [SerializeField] private int _damage;
+        [SerializeField] private float _damage;
 
         #endregion
 
         #region Propertys
 
-        public int Damage => _damage;
+        public float Damage => _damage;
 
         #endregion
     }

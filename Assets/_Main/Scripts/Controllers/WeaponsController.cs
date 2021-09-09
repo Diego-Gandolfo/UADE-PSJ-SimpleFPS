@@ -87,16 +87,11 @@ namespace Assets._Main.Scripts.Controllers
 
         private void OnKnifeAttack1Handler()
         {
-            DoCutAttack();
+            _cutAttack.gameObject.SetActive(true);
             Invoke("DoStabAttack", _cutAttack.AutoDisabler.TimeToDisable);
         }
 
         private void OnKnifeAttack2Handler()
-        {
-            DoCutAttack();
-        }
-
-        private void DoCutAttack()
         {
             _cutAttack.gameObject.SetActive(true);
         }
