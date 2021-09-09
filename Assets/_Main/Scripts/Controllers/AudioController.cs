@@ -36,6 +36,7 @@ namespace Assets._Main.Scripts.Controllers
             if (value)
             {
                 _movementAudioSource.clip = _walkSound;
+                _movementAudioSource.volume = 0.075f;
 
                 if (_movementAudioSource.clip != _walkSound) _movementAudioSource.Stop();
 
@@ -55,6 +56,7 @@ namespace Assets._Main.Scripts.Controllers
             if (value)
             {
                 _movementAudioSource.clip = _runSound;
+                _movementAudioSource.volume = 1f;
 
                 if (_movementAudioSource.clip != _runSound) _movementAudioSource.Stop();
 
@@ -74,6 +76,7 @@ namespace Assets._Main.Scripts.Controllers
             if (value)
             {
                 _movementAudioSource.clip = _sneakSound;
+                _movementAudioSource.volume = 0.05f;
 
                 if (_movementAudioSource.clip != _sneakSound) _movementAudioSource.Stop();
 
