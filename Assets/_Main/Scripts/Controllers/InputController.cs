@@ -152,7 +152,7 @@ namespace Assets._Main.Scripts.Controllers
 
             var direction = xMove + yMove;
             direction.Normalize();
-
+            
             _moveComponent.DoMove(direction, currentSpeed);
 
             OnWalk?.Invoke(direction != Vector3.zero && currentSpeed == _moveComponent.WalkSpeed);
