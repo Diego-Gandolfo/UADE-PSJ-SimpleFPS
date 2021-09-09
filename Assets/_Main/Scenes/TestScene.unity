@@ -13963,7 +13963,7 @@ Transform:
   - {fileID: 2097459340}
   - {fileID: 196075812}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &811181557
 GameObject:
@@ -17103,7 +17103,7 @@ GameObject:
   - component: {fileID: 1133819560}
   - component: {fileID: 1133819559}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: HealthCube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32153,7 +32153,7 @@ Transform:
   - {fileID: 7532102347232095616}
   - {fileID: 2139922207}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1989690383
 MonoBehaviour:
