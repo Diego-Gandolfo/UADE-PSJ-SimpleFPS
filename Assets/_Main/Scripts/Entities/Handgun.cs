@@ -61,6 +61,7 @@ namespace Assets._Main.Scripts.Entities
                 bullet.SetWeaponControlller(weaponController);
                 bullet.transform.position = _bulletSpawnpoint.position;
                 bullet.transform.rotation = _bulletSpawnpoint.rotation;
+                bullet.SetDamage(Damage);
                 bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * BULLET_FORCE;
 
                 _currentMagazineAmmo--;

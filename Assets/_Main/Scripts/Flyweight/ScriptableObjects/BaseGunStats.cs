@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets._Main.Scripts.Flyweight.ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "BaseGunStats", menuName = "Flyweight/Stats/BaseGun", order = 1)]
+    [CreateAssetMenu(fileName = "BaseGunStats", menuName = "Flyweight/Stats/Weapons/BaseGun", order = 1)]
     public class BaseGunStats : ScriptableObject
     {
         #region Serialize Fields

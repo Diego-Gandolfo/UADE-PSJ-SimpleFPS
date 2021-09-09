@@ -1,3 +1,4 @@
+using Assets._Main.Scripts.Component;
 using Assets._Main.Scripts.Strategy;
 using UnityEngine;
 
@@ -40,6 +41,12 @@ namespace Assets._Main.Scripts.Entities
             {
                 _weaponController.BulletPool.StoreInstance(this);
             }
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            var heatlhComponent = collision.gameObject.GetComponent<HealthComponent>();
+            if (heatlhComponent != null) heatlhComponent.ReceiveDamage(Damage);
         }
 
         #endregion
