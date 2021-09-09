@@ -1,3 +1,4 @@
+using Assets._Main.Scripts.Components;
 using Assets._Main.Scripts.Entities;
 using Assets._Main.Scripts.Generics;
 using Assets._Main.Scripts.Strategy;
@@ -12,6 +13,8 @@ namespace Assets._Main.Scripts.Controllers
 
         [SerializeField] private Bullet _bulletPrefab;
         [SerializeField] private List<BaseWeapon> _weaponsList = new List<BaseWeapon>();
+        [SerializeField] private MeleeAttack _cutAttack;
+        [SerializeField] private MeleeAttack _stabAttack;
 
         #endregion
 
@@ -84,12 +87,23 @@ namespace Assets._Main.Scripts.Controllers
 
         private void OnKnifeAttack1Handler()
         {
-            // TODO: KnifeAttack1
+            DoCutAttack();
+            Invoke("DoStabAttack", _cutAttack.AutoDisabler.TimeToDisable);
         }
 
         private void OnKnifeAttack2Handler()
         {
-            // TODO: KnifeAttack2
+            DoCutAttack();
+        }
+
+        private void DoCutAttack()
+        {
+            _cutAttack.gameObject.SetActive(true);
+        }
+
+        private void DoStabAttack()
+        {
+            _stabAttack.gameObject.SetActive(true);
         }
 
         #endregion
