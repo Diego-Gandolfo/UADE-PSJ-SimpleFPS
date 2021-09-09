@@ -32019,6 +32019,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8872d3786fe76e4490025cfc91a5505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletPrefab: {fileID: 7353995788016934702, guid: 1d74d5bf74ac3e048930521f3783450b, type: 3}
   _weaponsList:
   - {fileID: 7754542380299958913}
   - {fileID: 2098857208}

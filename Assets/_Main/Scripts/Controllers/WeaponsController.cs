@@ -1,14 +1,16 @@
 using Assets._Main.Scripts.Entities;
+using Assets._Main.Scripts.Generics;
 using Assets._Main.Scripts.Strategy;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets._Main.Scripts.Controllers
 {
-    public class WeaponsController : MonoBehaviour
+    public class WeaponsController : MonoBehaviour, IWeaponController
     {
         #region Serialize Fields
 
+        [SerializeField] private Bullet _bulletPrefab;
         [SerializeField] private List<BaseWeapon> _weaponsList = new List<BaseWeapon>();
 
         #endregion
@@ -18,13 +20,26 @@ namespace Assets._Main.Scripts.Controllers
         // Parameters
         private int _currentWeaponIndex;
 
+        // Pool
+        protected Pool<Bullet> _bulletPool;
+
         #endregion
 
         #region Propertys
 
+        public Pool<Bullet> BulletPool => _bulletPool;
         public IWeapon CurrentWeapon => _weaponsList[_currentWeaponIndex];
         public List<BaseWeapon> WeaponList => _weaponsList;
 
+
+        #endregion
+
+        #region Unity Methods
+
+        private void Start()
+        {
+            _bulletPool = new Pool<Bullet>(_bulletPrefab);
+        }
 
         #endregion
 
@@ -48,9 +63,9 @@ namespace Assets._Main.Scripts.Controllers
 
         private void OnAttackHandler(IWeapon currtenWeapon)
         {
-            if (currtenWeapon is BaseGun)
+            if (currtenWeapon is IGun)
             {
-                if (!((IGun)currtenWeapon).IsMagazineEmpty) currtenWeapon.Attack();
+                if (!((IGun)currtenWeapon).IsMagazineEmpty) currtenWeapon.Attack(this);
             }
         }
 

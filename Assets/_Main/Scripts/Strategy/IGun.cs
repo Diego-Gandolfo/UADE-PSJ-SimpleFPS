@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Assets._Main.Scripts.Strategy
 {
     public interface IGun : IWeapon

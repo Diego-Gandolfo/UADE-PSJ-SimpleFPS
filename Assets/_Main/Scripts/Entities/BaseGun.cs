@@ -1,4 +1,5 @@
 using Assets._Main.Scripts.Flyweight.ScriptableObjects;
+using Assets._Main.Scripts.Generics;
 using Assets._Main.Scripts.Strategy;
 using UnityEngine;
 using UnityEngine.UI;
@@ -88,7 +89,7 @@ namespace Assets._Main.Scripts.Entities
             }
         }
 
-        public override void Attack()
+        public override void Attack(IWeaponController weaponController)
         {
             //base.Attack();
         }

@@ -14,7 +14,7 @@ namespace Assets._Main.Scripts.Strategy
 
         #region Public Methods
 
-        void Attack();
+        void Attack(IWeaponController weaponController);
 
         #endregion
     }

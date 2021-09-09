@@ -9,9 +9,9 @@ namespace Assets._Main.Scripts.Entities
     {
         #region Public Methods
 
-        public override void Attack()
+        public override void Attack(IWeaponController weaponController)
         {
-            base.Attack();
+            base.Attack(weaponController);
             //TODO: AsaultRifle Attack
         }
 

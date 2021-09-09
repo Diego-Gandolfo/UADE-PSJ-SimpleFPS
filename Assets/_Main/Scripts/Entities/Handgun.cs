@@ -1,4 +1,6 @@
 using Assets._Main.Scripts.Component;
+using Assets._Main.Scripts.Generics;
+using Assets._Main.Scripts.Strategy;
 using UnityEngine;
 
 namespace Assets._Main.Scripts.Entities
@@ -48,13 +50,17 @@ namespace Assets._Main.Scripts.Entities
 
         #region Public Methods
 
-        public override void Attack()
+        public override void Attack(IWeaponController weaponController)
         {
             //base.Attack();
 
             if (_currentMagazineAmmo > 0)
             {
-                Bullet bullet = Instantiate(_baseGunStats.BulletPrefab, _bulletSpawnpoint.position, _bulletSpawnpoint.rotation);
+                //Bullet bullet = Instantiate(_baseGunStats.BulletPrefab, _bulletSpawnpoint.position, _bulletSpawnpoint.rotation);
+                Bullet bullet = weaponController.BulletPool.GetInstance();
+                bullet.SetWeaponControlller(weaponController);
+                bullet.transform.position = _bulletSpawnpoint.position;
+                bullet.transform.rotation = _bulletSpawnpoint.rotation;
                 bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * BULLET_FORCE;
 
                 _currentMagazineAmmo--;

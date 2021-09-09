@@ -20,7 +20,7 @@ namespace Assets._Main.Scripts.Entities
 
         #region Public Methods
 
-        public virtual void Attack() { }
+        public virtual void Attack(IWeaponController weaponController) { }
 
         #endregion
     }

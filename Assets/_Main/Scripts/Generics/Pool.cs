@@ -6,12 +6,19 @@ namespace Assets._Main.Scripts.Generics
 {
     public class Pool<T> : IPool<T> where T : MonoBehaviour
     {
-        private List<T> inUse = new List<T>();
-        private List<T> available = new List<T>();
+        private T _prefab;
 
-        public bool IsEmpty => (available.Count <= 0);
+        private List<T> _inUse = new List<T>();
+        private List<T> _available = new List<T>();
+
+        public bool IsEmpty => (_available.Count <= 0);
 
         public Pool() { }
+
+        public Pool(T prefab)
+        {
+            _prefab = prefab;
+        }
 
         public Pool(List<T> values)
         {
@@ -23,17 +30,18 @@ namespace Assets._Main.Scripts.Generics
 
         public T CreateInstance()
         {
-            // TODO: Agregar creacion de Instance en Pool
-            return default(T);
+            var instance = GameObject.Instantiate(_prefab);
+            _inUse.Add(instance);
+            return instance;
         }
 
         public T GetInstance()
         {
             if(!IsEmpty)
             {
-                T temp = available[0];
-                available.Remove(temp);
-                inUse.Add(temp);
+                T temp = _available[0];
+                _available.Remove(temp);
+                _inUse.Add(temp);
                 temp.gameObject.SetActive(true);
                 return temp;
             }
@@ -45,15 +53,15 @@ namespace Assets._Main.Scripts.Generics
 
         public void Store(T item)
         {
-            available.Add(item);
+            _available.Add(item);
             item.gameObject.SetActive(false);
-            if (inUse.Contains(item)) //Si esta en la lista...
-                inUse.Remove(item); //Removelo
+            if (_inUse.Contains(item))
+                _inUse.Remove(item);
         }
         public List<T> GetInUseItems()
         {
             List<T> list = new List<T>();
-            list.AddRange(inUse);
+            list.AddRange(_inUse);
             return list;
         }
     }
