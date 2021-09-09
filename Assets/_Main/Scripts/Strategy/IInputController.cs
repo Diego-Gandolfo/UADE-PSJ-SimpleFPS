@@ -7,20 +7,11 @@ namespace Assets._Main.Scripts.Strategy
         #region Events
 
         // Weapon
-        event Action OnInspect;
-        event Action OnHolster;
-        event Action OnKnifeAttack1;
-        event Action OnKnifeAttack2;
-        event Action OnThrowGrenade;
-        event Action OnAimOn;
-        event Action OnAimOff;
-        event Action OnSliderOutOfAmmo;
-        event Action OnSliderAmmoLeft;
-        event Action<bool> OnWalk;
-        event Action<bool> OnRun;
-        event Action<IWeapon> OnReload;
-        event Action<IWeapon> OnAttack;
-        event Action<IWeapon> OnChangeWeapon;
+        event Action OnKnifeAttack1, OnKnifeAttack2, OnThrowGrenade;
+        event Action OnAimOn, OnAimOff, OnSliderOutOfAmmo, OnSliderAmmoLeft, OnInspect, OnHolster;
+        event Action<bool> OnWalk, OnRun, OnSneak;
+        event Action<bool, float> OnMove;
+        event Action<IWeapon> OnReload, OnAttack, OnChangeWeapon;
 
         #endregion
     }

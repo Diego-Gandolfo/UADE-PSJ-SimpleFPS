@@ -31914,6 +31914,7 @@ MonoBehaviour:
   _horizontalAxis: Horizontal
   _verticalAxis: Vertical
   _runKey: 304
+  _sneakKey: 306
   _rotationAxis: Mouse X
   _xMouseSensibility: 0.5
   _jumpKey: 32
@@ -32007,6 +32008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _walkSpeed: 7
   _runSpeed: 14
+  _sneakSpeed: 2.5
 --- !u!114 &1989690390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32062,7 +32064,8 @@ MonoBehaviour:
   _reloadAmmoLeftSound: {fileID: 8300000, guid: b0d51244fd32fc647960320540b32f66, type: 3}
   _reloadOutOfAmmoSound: {fileID: 8300000, guid: fee3a21f251a4914cabce25b13e7d2a8, type: 3}
   _walkSound: {fileID: 8300000, guid: 6597a368cd74a924eaedb0171d5b28d3, type: 3}
-  _runSound: {fileID: 8300000, guid: 0c58744c3b6fdd844b8348066c3f703e, type: 3}
+  _runSound: {fileID: 8300000, guid: 01ce1965955492c469d924495b566c28, type: 3}
+  _sneakSound: {fileID: 8300000, guid: 5a079fc0249c0a5419bf6ffd2d244c9b, type: 3}
   _holsterWeaponSound: {fileID: 8300000, guid: 33a4a9bf1a1dbca4cb379a1118c6b20d, type: 3}
   _takeOutGunSound: {fileID: 8300000, guid: 2ae41e984ff1f3e4a840a1a46b6a8816, type: 3}
   _knifeAttackSound: {fileID: 8300000, guid: b235f52c649a5334d990a4a67be691c0, type: 3}

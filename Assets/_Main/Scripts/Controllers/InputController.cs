@@ -27,6 +27,7 @@ namespace Assets._Main.Scripts.Controllers
         [SerializeField] private string _horizontalAxis = "Horizontal";
         [SerializeField] private string _verticalAxis = "Vertical";
         [SerializeField] private KeyCode _runKey = KeyCode.LeftShift;
+        [SerializeField] private KeyCode _sneakKey = KeyCode.LeftControl;
 
         [Header("Rotation")]
         [SerializeField] private string _rotationAxis = "Mouse X";
@@ -65,7 +66,8 @@ namespace Assets._Main.Scripts.Controllers
 
         #region Events
 
-        public event Action<bool> OnWalk, OnRun;
+        public event Action<bool, float> OnMove;
+        public event Action<bool> OnWalk, OnRun, OnSneak;
         public event Action<IWeapon> OnReload, OnAttack, OnChangeWeapon;
         public event Action OnInspect, OnHolster, OnKnifeAttack1, OnKnifeAttack2, OnThrowGrenade;
         public event Action OnAimOn, OnAimOff, OnSliderOutOfAmmo, OnSliderAmmoLeft;
@@ -126,7 +128,20 @@ namespace Assets._Main.Scripts.Controllers
 
         private void CheckMovementInput()
         {
-            var currentSpeed = Input.GetKey(_runKey) ? _moveComponent.RunSpeed : _moveComponent.WalkSpeed;
+            float currentSpeed;
+
+            if (Input.GetKey(_runKey))
+            {
+                currentSpeed = _moveComponent.RunSpeed;
+            }
+            else if (Input.GetKey(_sneakKey))
+            {
+                currentSpeed = _moveComponent.SneakSpeed;
+            }
+            else
+            {
+                currentSpeed = _moveComponent.WalkSpeed;
+            }
 
             var xMove = transform.right * Input.GetAxisRaw(_horizontalAxis);
             var yMove = transform.forward * Input.GetAxisRaw(_verticalAxis);
@@ -138,6 +153,7 @@ namespace Assets._Main.Scripts.Controllers
 
             OnWalk?.Invoke(direction != Vector3.zero && currentSpeed == _moveComponent.WalkSpeed);
             OnRun?.Invoke(direction != Vector3.zero && currentSpeed == _moveComponent.RunSpeed);
+            OnSneak?.Invoke(direction != Vector3.zero && currentSpeed == _moveComponent.SneakSpeed);
         }
 
         private void CheckRotationInput()

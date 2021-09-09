@@ -5,12 +5,27 @@ namespace Assets._Main.Scripts.Entities
 {
     public class Bullet : MonoBehaviour, IBullet
     {
+        #region Serialize Fields
+
         [SerializeField] private float _timeToDestroy = 1f;
+
+        #endregion
+
+        #region Private Fields
 
         private IWeaponController _weaponController;
         private float _timer;
+        private float _damage;
 
-        public IWeaponController WeaponController => _weaponController;
+        #endregion
+
+        #region Propertys
+
+        public float Damage => _damage;
+
+        #endregion
+
+        #region Unity Methods
 
         private void OnEnable()
         {
@@ -23,13 +38,24 @@ namespace Assets._Main.Scripts.Entities
 
             if (_timer <= 0f)
             {
-                _weaponController.BulletPool.Store(this);
+                _weaponController.BulletPool.StoreInstance(this);
             }
         }
+
+        #endregion
+
+        #region Public Methods
 
         public void SetWeaponControlller(IWeaponController weaponController)
         {
             _weaponController = weaponController;
         }
+
+        public void SetDamage(float damage)
+        {
+            _damage = damage;
+        }
+
+        #endregion
     }
 }

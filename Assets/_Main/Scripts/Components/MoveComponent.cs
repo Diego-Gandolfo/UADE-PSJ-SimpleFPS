@@ -9,6 +9,7 @@ namespace Assets._Main.Scripts.Component
 
         [SerializeField] private float _walkSpeed = 7f;
         [SerializeField] private float _runSpeed = 14f;
+        [SerializeField] private float _sneakSpeed = 3.5f;
 
         #endregion
 
@@ -16,6 +17,7 @@ namespace Assets._Main.Scripts.Component
 
         public float WalkSpeed => _walkSpeed;
         public float RunSpeed => _runSpeed;
+        public float SneakSpeed => _sneakSpeed;
 
         #endregion
 

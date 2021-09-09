@@ -8,10 +8,18 @@ namespace Assets._Main.Scripts.Strategy
 {
     interface IPool<T>
     {
+        #region Propertys
+
         bool IsEmpty { get; }
 
+        #endregion
+
+        #region Public Methods
+
         T CreateInstance();
-        void Store(T item);
+        void StoreInstance(T instance);
         T GetInstance();
+
+        #endregion
     }
 }

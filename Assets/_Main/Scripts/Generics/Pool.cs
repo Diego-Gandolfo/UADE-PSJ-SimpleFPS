@@ -6,27 +6,33 @@ namespace Assets._Main.Scripts.Generics
 {
     public class Pool<T> : IPool<T> where T : MonoBehaviour
     {
+        #region Private Fields
+
+        // Prefab
         private T _prefab;
 
+        // Lists
         private List<T> _inUse = new List<T>();
         private List<T> _available = new List<T>();
 
+        #endregion
+
+        #region Propertys
+
         public bool IsEmpty => (_available.Count <= 0);
 
-        public Pool() { }
+        #endregion
+
+        #region Constructor
 
         public Pool(T prefab)
         {
             _prefab = prefab;
         }
 
-        public Pool(List<T> values)
-        {
-            foreach (var item in values)
-            {
-                Store(item);
-            }
-        }
+        #endregion
+
+        #region Public Methods
 
         public T CreateInstance()
         {
@@ -39,11 +45,11 @@ namespace Assets._Main.Scripts.Generics
         {
             if(!IsEmpty)
             {
-                T temp = _available[0];
-                _available.Remove(temp);
-                _inUse.Add(temp);
-                temp.gameObject.SetActive(true);
-                return temp;
+                T instance = _available[0];
+                _available.Remove(instance);
+                _inUse.Add(instance);
+                instance.gameObject.SetActive(true);
+                return instance;
             }
             else
             {
@@ -51,18 +57,14 @@ namespace Assets._Main.Scripts.Generics
             }
         }
 
-        public void Store(T item)
+        public void StoreInstance(T instance)
         {
-            _available.Add(item);
-            item.gameObject.SetActive(false);
-            if (_inUse.Contains(item))
-                _inUse.Remove(item);
+            _available.Add(instance);
+            instance.gameObject.SetActive(false);
+            if (_inUse.Contains(instance))
+                _inUse.Remove(instance);
         }
-        public List<T> GetInUseItems()
-        {
-            List<T> list = new List<T>();
-            list.AddRange(_inUse);
-            return list;
-        }
+
+        #endregion
     }
 }

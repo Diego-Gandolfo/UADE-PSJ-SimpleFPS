@@ -20,6 +20,7 @@ namespace Assets._Main.Scripts.Controllers
         [SerializeField] private AudioClip _reloadOutOfAmmoSound;
         [SerializeField] private AudioClip _walkSound;
         [SerializeField] private AudioClip _runSound;
+        [SerializeField] private AudioClip _sneakSound;
         [SerializeField] private AudioClip _holsterWeaponSound;
         [SerializeField] private AudioClip _takeOutGunSound;
         [SerializeField] private AudioClip _knifeAttackSound;
@@ -35,10 +36,16 @@ namespace Assets._Main.Scripts.Controllers
             {
                 _movementAudioSource.clip = _walkSound;
 
+                if (_movementAudioSource.clip != _walkSound) _movementAudioSource.Stop();
+
                 if (!_movementAudioSource.isPlaying)
                 {
                     _movementAudioSource.Play();
                 }
+            }
+            else
+            {
+                if (_movementAudioSource.clip == _walkSound) _movementAudioSource.Stop();
             }
         }
 
@@ -48,10 +55,35 @@ namespace Assets._Main.Scripts.Controllers
             {
                 _movementAudioSource.clip = _runSound;
 
+                if (_movementAudioSource.clip != _runSound) _movementAudioSource.Stop();
+
                 if (!_movementAudioSource.isPlaying)
                 {
                     _movementAudioSource.Play();
                 }
+            }
+            else
+            {
+                if (_movementAudioSource.clip == _runSound) _movementAudioSource.Stop();
+            }
+        }
+
+        private void OnSneakHandler(bool value)
+        {
+            if (value)
+            {
+                _movementAudioSource.clip = _sneakSound;
+
+                if (_movementAudioSource.clip != _sneakSound) _movementAudioSource.Stop();
+
+                if (!_movementAudioSource.isPlaying)
+                {
+                    _movementAudioSource.Play();
+                }
+            }
+            else
+            {
+                if (_movementAudioSource.clip == _sneakSound) _movementAudioSource.Stop();
             }
         }
 
@@ -157,6 +189,7 @@ namespace Assets._Main.Scripts.Controllers
             inputController.OnChangeWeapon += OnChangeWeaponHandler;
             inputController.OnAimOn += OnAimOnHandler;
             inputController.OnHolster += OnHolsterHandler;
+            inputController.OnSneak += OnSneakHandler;
             inputController.OnRun += OnRunHandler;
             inputController.OnWalk += OnWalkHandler;
             inputController.OnKnifeAttack1 += OnKnifeAttack1Handler;
