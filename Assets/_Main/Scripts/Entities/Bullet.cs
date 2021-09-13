@@ -47,6 +47,12 @@ namespace Assets._Main.Scripts.Entities
         {
             var heatlhComponent = collision.gameObject.GetComponent<HealthComponent>();
             if (heatlhComponent != null) heatlhComponent.ReceiveDamage(Damage);
+            //print($"Bullet: {_weaponController}");
+            BulletImpact bulletImpact = _weaponController.BulletImpactPool.GetInstance();
+            bulletImpact.SetWeaponControlller(_weaponController);
+            bulletImpact.transform.position = transform.position;
+            bulletImpact.transform.rotation = transform.rotation;
+            _weaponController.BulletPool.StoreInstance(this);
         }
 
         #endregion

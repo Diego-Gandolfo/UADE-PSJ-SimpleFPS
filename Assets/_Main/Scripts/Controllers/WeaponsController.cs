@@ -12,6 +12,7 @@ namespace Assets._Main.Scripts.Controllers
         #region Serialize Fields
 
         [SerializeField] private Bullet _bulletPrefab;
+        [SerializeField] private BulletImpact _bulletImpactPrefab;
         [SerializeField] private List<BaseWeapon> _weaponsList = new List<BaseWeapon>();
         [SerializeField] private MeleeAttack _cutAttack;
         [SerializeField] private MeleeAttack _stabAttack;
@@ -25,12 +26,14 @@ namespace Assets._Main.Scripts.Controllers
 
         // Pool
         protected Pool<Bullet> _bulletPool;
+        protected Pool<BulletImpact> _bulletImpactPool;
 
         #endregion
 
         #region Propertys
 
         public Pool<Bullet> BulletPool => _bulletPool;
+        public Pool<BulletImpact> BulletImpactPool => _bulletImpactPool;
         public IWeapon CurrentWeapon => _weaponsList[_currentWeaponIndex];
         public List<BaseWeapon> WeaponList => _weaponsList;
 
@@ -42,6 +45,7 @@ namespace Assets._Main.Scripts.Controllers
         private void Start()
         {
             _bulletPool = new Pool<Bullet>(_bulletPrefab);
+            _bulletImpactPool = new Pool<BulletImpact>(_bulletImpactPrefab);
         }
 
         #endregion
