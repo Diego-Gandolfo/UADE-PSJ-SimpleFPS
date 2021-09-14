@@ -1,7 +1,7 @@
-﻿using Assets._Main.Scripts.Flyweight.ScriptableObjects;
+﻿using SimpleFPS.Flyweight.Life;
 using System;
 
-namespace Assets._Main.Scripts.Strategy
+namespace SimpleFPS.Strategy.Life
 {
     public interface IDamageable
     {

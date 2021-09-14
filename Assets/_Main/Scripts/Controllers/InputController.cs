@@ -1,6 +1,11 @@
 using Assets._Main.Scripts.Component;
-using Assets._Main.Scripts.Entities;
-using Assets._Main.Scripts.Strategy;
+using SimpleFPS.Controllers.Animations;
+using SimpleFPS.Controllers.Audios;
+using SimpleFPS.Controllers.Cameras;
+using SimpleFPS.Controllers.Weapons;
+using SimpleFPS.Entities.Weapons;
+using SimpleFPS.Strategy.Input;
+using SimpleFPS.Strategy.Weapons;
 using System;
 using UnityEngine;
 
@@ -11,7 +16,7 @@ public enum MouseButton
     Middle
 }
 
-namespace Assets._Main.Scripts.Controllers
+namespace SimpleFPS.Controllers.Inputs
 {
     [RequireComponent(typeof(MoveComponent))]
     [RequireComponent(typeof(RotationComponent))]

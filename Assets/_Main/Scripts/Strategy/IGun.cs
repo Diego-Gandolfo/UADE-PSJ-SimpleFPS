@@ -1,4 +1,4 @@
-namespace Assets._Main.Scripts.Strategy
+namespace SimpleFPS.Strategy.Weapons
 {
     public interface IGun : IWeapon
     {

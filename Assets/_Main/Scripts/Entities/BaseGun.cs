@@ -1,10 +1,9 @@
-using Assets._Main.Scripts.Flyweight.ScriptableObjects;
-using Assets._Main.Scripts.Generics;
-using Assets._Main.Scripts.Strategy;
+using SimpleFPS.Flyweight.Weapons;
+using SimpleFPS.Strategy.Weapons;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets._Main.Scripts.Entities
+namespace SimpleFPS.Entities.Weapons
 {
     public class BaseGun : BaseWeapon, IGun
     {

@@ -1,8 +1,8 @@
-using Assets._Main.Scripts.Entities;
+using SimpleFPS.Entities.Weapons;
 using UnityEngine;
 
 
-namespace Assets._Main.Scripts.Flyweight.ScriptableObjects
+namespace SimpleFPS.Flyweight.Weapons
 {
     [CreateAssetMenu(fileName = "BaseGunStats", menuName = "Flyweight/Stats/Weapons/BaseGun", order = 1)]
     public class BaseGunStats : ScriptableObject

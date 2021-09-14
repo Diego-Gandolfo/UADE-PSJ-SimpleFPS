@@ -1,11 +1,12 @@
 using Assets._Main.Scripts.Components;
-using Assets._Main.Scripts.Entities;
-using Assets._Main.Scripts.Generics;
-using Assets._Main.Scripts.Strategy;
+using SimpleFPS.Entities.Weapons;
+using SimpleFPS.Generics.Pool;
+using SimpleFPS.Strategy.Input;
+using SimpleFPS.Strategy.Weapons;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets._Main.Scripts.Controllers
+namespace SimpleFPS.Controllers.Weapons
 {
     public class WeaponsController : MonoBehaviour, IWeaponController
     {

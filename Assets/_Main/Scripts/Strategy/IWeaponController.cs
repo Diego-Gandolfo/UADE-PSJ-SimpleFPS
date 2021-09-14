@@ -1,8 +1,8 @@
-﻿using Assets._Main.Scripts.Entities;
-using Assets._Main.Scripts.Generics;
+﻿using SimpleFPS.Entities.Weapons;
+using SimpleFPS.Generics.Pool;
 using System.Collections.Generic;
 
-namespace Assets._Main.Scripts.Strategy
+namespace SimpleFPS.Strategy.Weapons
 {
     public interface IWeaponController
     {

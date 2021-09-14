@@ -1,6 +1,5 @@
 ﻿using Assets._Main.Scripts.Component;
-using Assets._Main.Scripts.Flyweight.ScriptableObjects;
-using Assets._Main.Scripts.Strategy;
+using SimpleFPS.Flyweight.Weapons;
 using UnityEngine;
 
 namespace Assets._Main.Scripts.Components

@@ -1,5 +1,5 @@
-using Assets._Main.Scripts.Flyweight.ScriptableObjects;
-using Assets._Main.Scripts.Strategy;
+using SimpleFPS.Flyweight.Life;
+using SimpleFPS.Strategy.Life;
 using System;
 using UnityEngine;
 

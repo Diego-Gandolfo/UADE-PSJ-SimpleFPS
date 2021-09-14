@@ -1,4 +1,4 @@
-using Assets._Main.Scripts.Strategy;
+using SimpleFPS.Strategy.Movement;
 using UnityEngine;
 
 namespace Assets._Main.Scripts.Component

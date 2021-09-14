@@ -1,6 +1,7 @@
-﻿using System;
+﻿using SimpleFPS.Strategy.Weapons;
+using System;
 
-namespace Assets._Main.Scripts.Strategy
+namespace SimpleFPS.Strategy.Input
 {
     public interface IInputController
     {

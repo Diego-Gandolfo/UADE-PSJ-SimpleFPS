@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets._Main.Scripts.Flyweight.ScriptableObjects
+namespace SimpleFPS.Flyweight.Life
 {
     [CreateAssetMenu(fileName = "LifeStats", menuName = "Flyweight/Stats/Life/Life", order = 0)]
     public class LifeStats : ScriptableObject

@@ -1,6 +1,4 @@
-using Assets._Main.Scripts.Strategy;
-using System.Collections;
-using System.Collections.Generic;
+using SimpleFPS.Strategy.Weapons;
 using UnityEngine;
 
 public class BulletImpact : MonoBehaviour
@@ -40,7 +38,6 @@ public class BulletImpact : MonoBehaviour
 
         if (_timer <= 0f)
         {
-            //print($"BulletImpact: {_weaponController}");
             _weaponController?.BulletImpactPool.StoreInstance(this);
         }
     }

@@ -1,8 +1,8 @@
-﻿using Assets._Main.Scripts.Strategy;
+﻿using SimpleFPS.Strategy.Pool;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets._Main.Scripts.Generics
+namespace SimpleFPS.Generics.Pool
 {
     public class Pool<T> : IPool<T> where T : MonoBehaviour
     {

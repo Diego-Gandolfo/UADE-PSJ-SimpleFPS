@@ -1,8 +1,9 @@
-using Assets._Main.Scripts.Entities;
-using Assets._Main.Scripts.Strategy;
+using SimpleFPS.Entities.Weapons;
+using SimpleFPS.Strategy.Input;
+using SimpleFPS.Strategy.Weapons;
 using UnityEngine;
 
-namespace Assets._Main.Scripts.Controllers
+namespace SimpleFPS.Controllers.Animations
 {
     public class AnimationsController : MonoBehaviour
     {

@@ -1,8 +1,8 @@
 using Assets._Main.Scripts.Component;
-using Assets._Main.Scripts.Strategy;
+using SimpleFPS.Strategy.Weapons;
 using UnityEngine;
 
-namespace Assets._Main.Scripts.Entities
+namespace SimpleFPS.Entities.Weapons
 {
     public class Bullet : MonoBehaviour, IBullet
     {
@@ -46,12 +46,19 @@ namespace Assets._Main.Scripts.Entities
         private void OnCollisionEnter(Collision collision)
         {
             var heatlhComponent = collision.gameObject.GetComponent<HealthComponent>();
-            if (heatlhComponent != null) heatlhComponent.ReceiveDamage(Damage);
-            //print($"Bullet: {_weaponController}");
-            BulletImpact bulletImpact = _weaponController.BulletImpactPool.GetInstance();
-            bulletImpact.SetWeaponControlller(_weaponController);
-            bulletImpact.transform.position = transform.position;
-            bulletImpact.transform.rotation = transform.rotation;
+
+            if (heatlhComponent != null)
+            {
+                heatlhComponent.ReceiveDamage(Damage);
+            }
+            else
+            {
+                BulletImpact bulletImpact = _weaponController.BulletImpactPool.GetInstance();
+                bulletImpact.SetWeaponControlller(_weaponController);
+                bulletImpact.transform.position = transform.position;
+                bulletImpact.transform.rotation = transform.rotation;
+            }
+
             _weaponController.BulletPool.StoreInstance(this);
         }
 

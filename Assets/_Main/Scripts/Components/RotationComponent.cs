@@ -1,4 +1,4 @@
-using Assets._Main.Scripts.Strategy;
+using SimpleFPS.Strategy.Movement;
 using UnityEngine;
 
 namespace Assets._Main.Scripts.Component
@@ -18,7 +18,6 @@ namespace Assets._Main.Scripts.Component
             _mouseMove += value * Time.deltaTime;
             var angles = transform.eulerAngles;
             transform.eulerAngles = new Vector3(angles.x, _mouseMove, angles.z);
-            //transform.eulerAngles = new Vector3(0.0f, _mouseMove, 0.0f);
         }
 
         #endregion
