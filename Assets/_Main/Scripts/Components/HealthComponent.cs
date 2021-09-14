@@ -1,4 +1,4 @@
-using SimpleFPS.Flyweight.Life;
+using SimpleFPS.Damageable;
 using SimpleFPS.Strategy.Life;
 using System;
 using UnityEngine;

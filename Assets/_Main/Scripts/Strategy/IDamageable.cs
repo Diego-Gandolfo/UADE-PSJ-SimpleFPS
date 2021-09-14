@@ -1,4 +1,4 @@
-﻿using SimpleFPS.Flyweight.Life;
+﻿using SimpleFPS.Damageable;
 using System;
 
 namespace SimpleFPS.Strategy.Life

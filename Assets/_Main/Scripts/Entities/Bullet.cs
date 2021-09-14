@@ -1,8 +1,8 @@
 using Assets._Main.Scripts.Component;
-using SimpleFPS.Strategy.Weapons;
+using SimpleFPS.LevelManagers;
 using UnityEngine;
 
-namespace SimpleFPS.Entities.Weapons
+namespace SimpleFPS.Projectiles.Bullets
 {
     public class Bullet : MonoBehaviour, IBullet
     {
@@ -14,7 +14,6 @@ namespace SimpleFPS.Entities.Weapons
 
         #region Private Fields
 
-        private IWeaponController _weaponController;
         private float _timer;
         private float _damage;
 
@@ -39,7 +38,7 @@ namespace SimpleFPS.Entities.Weapons
 
             if (_timer <= 0f)
             {
-                _weaponController.BulletPool.StoreInstance(this);
+                LevelManager.Instance.PlayerBulletPool.StoreInstance(this);
             }
         }
 
@@ -53,23 +52,17 @@ namespace SimpleFPS.Entities.Weapons
             }
             else
             {
-                BulletImpact bulletImpact = _weaponController.BulletImpactPool.GetInstance();
-                bulletImpact.SetWeaponControlller(_weaponController);
+                BulletImpact bulletImpact = LevelManager.Instance.BulletImpactPool.GetInstance();
                 bulletImpact.transform.position = transform.position;
                 bulletImpact.transform.rotation = transform.rotation;
             }
 
-            _weaponController.BulletPool.StoreInstance(this);
+            LevelManager.Instance.PlayerBulletPool.StoreInstance(this);
         }
 
         #endregion
 
         #region Public Methods
-
-        public void SetWeaponControlller(IWeaponController weaponController)
-        {
-            _weaponController = weaponController;
-        }
 
         public void SetDamage(float damage)
         {

@@ -1,5 +1,5 @@
 ﻿using Assets._Main.Scripts.Component;
-using SimpleFPS.Flyweight.Weapons;
+using SimpleFPS.Weapons;
 using UnityEngine;
 
 namespace Assets._Main.Scripts.Components

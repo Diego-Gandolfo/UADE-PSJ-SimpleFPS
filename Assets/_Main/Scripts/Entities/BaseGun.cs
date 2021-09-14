@@ -1,9 +1,7 @@
-using SimpleFPS.Flyweight.Weapons;
-using SimpleFPS.Strategy.Weapons;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SimpleFPS.Entities.Weapons
+namespace SimpleFPS.Weapons.Guns
 {
     public class BaseGun : BaseWeapon, IGun
     {
@@ -101,7 +99,7 @@ namespace SimpleFPS.Entities.Weapons
 
         #region Public Methods
 
-        public override void Attack(IWeaponController weaponController) { }
+        public override void Attack() { }
 
         public virtual void Reload()
         {

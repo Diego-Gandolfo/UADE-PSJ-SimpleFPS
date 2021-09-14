@@ -3,9 +3,9 @@ using SimpleFPS.Controllers.Animations;
 using SimpleFPS.Controllers.Audios;
 using SimpleFPS.Controllers.Cameras;
 using SimpleFPS.Controllers.Weapons;
-using SimpleFPS.Entities.Weapons;
 using SimpleFPS.Strategy.Input;
-using SimpleFPS.Strategy.Weapons;
+using SimpleFPS.Weapons;
+using SimpleFPS.Weapons.Guns;
 using System;
 using UnityEngine;
 

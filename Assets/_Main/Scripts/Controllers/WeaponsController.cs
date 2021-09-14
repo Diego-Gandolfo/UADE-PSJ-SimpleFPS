@@ -1,10 +1,9 @@
 using Assets._Main.Scripts.Components;
-using SimpleFPS.Entities.Weapons;
-using SimpleFPS.Generics.Pool;
 using SimpleFPS.Strategy.Input;
-using SimpleFPS.Strategy.Weapons;
 using System.Collections.Generic;
 using UnityEngine;
+using SimpleFPS.Weapons;
+using SimpleFPS.Weapons.Guns;
 
 namespace SimpleFPS.Controllers.Weapons
 {
@@ -12,8 +11,6 @@ namespace SimpleFPS.Controllers.Weapons
     {
         #region Serialize Fields
 
-        [SerializeField] private Bullet _bulletPrefab;
-        [SerializeField] private BulletImpact _bulletImpactPrefab;
         [SerializeField] private List<BaseWeapon> _weaponsList = new List<BaseWeapon>();
         [SerializeField] private MeleeAttack _cutAttack;
         [SerializeField] private MeleeAttack _stabAttack;
@@ -25,29 +22,13 @@ namespace SimpleFPS.Controllers.Weapons
         // Parameters
         private int _currentWeaponIndex;
 
-        // Pool
-        protected Pool<Bullet> _bulletPool;
-        protected Pool<BulletImpact> _bulletImpactPool;
-
         #endregion
 
         #region Propertys
 
-        public Pool<Bullet> BulletPool => _bulletPool;
-        public Pool<BulletImpact> BulletImpactPool => _bulletImpactPool;
         public IWeapon CurrentWeapon => _weaponsList[_currentWeaponIndex];
         public List<BaseWeapon> WeaponList => _weaponsList;
 
-
-        #endregion
-
-        #region Unity Methods
-
-        private void Start()
-        {
-            _bulletPool = new Pool<Bullet>(_bulletPrefab);
-            _bulletImpactPool = new Pool<BulletImpact>(_bulletImpactPrefab);
-        }
 
         #endregion
 
@@ -73,7 +54,7 @@ namespace SimpleFPS.Controllers.Weapons
         {
             if (currtenWeapon is IGun)
             {
-                if (!((IGun)currtenWeapon).IsMagazineEmpty) currtenWeapon.Attack(this);
+                if (!((IGun)currtenWeapon).IsMagazineEmpty) currtenWeapon.Attack();
             }
         }
 

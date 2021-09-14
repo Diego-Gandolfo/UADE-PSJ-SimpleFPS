@@ -1,6 +1,6 @@
-using SimpleFPS.Entities.Weapons;
 using SimpleFPS.Strategy.Input;
-using SimpleFPS.Strategy.Weapons;
+using SimpleFPS.Weapons;
+using SimpleFPS.Weapons.Guns;
 using UnityEngine;
 
 namespace SimpleFPS.Controllers.Audios

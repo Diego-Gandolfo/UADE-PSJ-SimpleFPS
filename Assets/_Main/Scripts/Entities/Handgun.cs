@@ -1,18 +1,18 @@
-using SimpleFPS.Strategy.Weapons;
+using SimpleFPS.LevelManagers;
+using SimpleFPS.Projectiles.Bullets;
 using UnityEngine;
 
-namespace SimpleFPS.Entities.Weapons
+namespace SimpleFPS.Weapons.Guns
 {
     public class Handgun : BaseGun
     {
         #region Public Methods
 
-        public override void Attack(IWeaponController weaponController)
+        public override void Attack()
         {
             if (_currentMagazineAmmo > 0)
             {
-                Bullet bullet = weaponController.BulletPool.GetInstance();
-                bullet.SetWeaponControlller(weaponController);
+                Bullet bullet = LevelManager.Instance.PlayerBulletPool.GetInstance();
                 bullet.transform.position = _bulletSpawnpoint.position;
                 bullet.transform.rotation = _bulletSpawnpoint.rotation;
                 bullet.SetDamage(Damage);

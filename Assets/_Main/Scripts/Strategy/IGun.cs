@@ -1,4 +1,4 @@
-namespace SimpleFPS.Strategy.Weapons
+namespace SimpleFPS.Weapons.Guns
 {
     public interface IGun : IWeapon
     {

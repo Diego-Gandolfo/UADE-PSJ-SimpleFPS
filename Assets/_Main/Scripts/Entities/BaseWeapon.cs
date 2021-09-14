@@ -1,8 +1,6 @@
-using SimpleFPS.Flyweight.Weapons;
-using SimpleFPS.Strategy.Weapons;
 using UnityEngine;
 
-namespace SimpleFPS.Entities.Weapons
+namespace SimpleFPS.Weapons
 {
     public class BaseWeapon : MonoBehaviour, IWeapon
     {
@@ -20,7 +18,7 @@ namespace SimpleFPS.Entities.Weapons
 
         #region Public Methods
 
-        public virtual void Attack(IWeaponController weaponController) { }
+        public virtual void Attack() { }
 
         #endregion
     }

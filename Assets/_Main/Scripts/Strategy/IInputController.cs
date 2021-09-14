@@ -1,4 +1,4 @@
-﻿using SimpleFPS.Strategy.Weapons;
+﻿using SimpleFPS.Weapons;
 using System;
 
 namespace SimpleFPS.Strategy.Input

@@ -1,4 +1,4 @@
-namespace SimpleFPS.Strategy.Weapons
+namespace SimpleFPS.Weapons
 {
     public interface IWeapon
     {
@@ -10,7 +10,7 @@ namespace SimpleFPS.Strategy.Weapons
 
         #region Public Methods
 
-        void Attack(IWeaponController weaponController);
+        void Attack();
 
         #endregion
     }

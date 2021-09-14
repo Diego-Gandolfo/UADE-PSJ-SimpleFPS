@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SimpleFPS.Flyweight.Weapons
+namespace SimpleFPS.Weapons
 {
     [CreateAssetMenu(fileName = "BaseWeaponStats", menuName = "Flyweight/Stats/Weapons/BaseWeapon", order = 0)]
     public class BaseWeaponStats : ScriptableObject

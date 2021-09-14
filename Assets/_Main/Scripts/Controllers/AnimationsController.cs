@@ -1,7 +1,7 @@
-using SimpleFPS.Entities.Weapons;
+using SimpleFPS.Weapons;
 using SimpleFPS.Strategy.Input;
-using SimpleFPS.Strategy.Weapons;
 using UnityEngine;
+using SimpleFPS.Weapons.Guns;
 
 namespace SimpleFPS.Controllers.Animations
 {
