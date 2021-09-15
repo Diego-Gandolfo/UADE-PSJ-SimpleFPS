@@ -1,4 +1,4 @@
-﻿namespace SimpleFPS.Strategy.Movement
+﻿namespace SimpleFPS.Movement
 {
     public interface IRotate
     {

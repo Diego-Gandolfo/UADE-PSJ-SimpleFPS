@@ -1,8 +1,9 @@
-using Assets._Main.Scripts.Component;
+using SimpleFPS.Damageable;
+using SimpleFPS.Generics.Pool;
 using SimpleFPS.LevelManagers;
 using UnityEngine;
 
-namespace SimpleFPS.Projectiles.Bullets
+namespace SimpleFPS.Projectiles
 {
     public class Bullet : MonoBehaviour, IBullet
     {
@@ -16,6 +17,8 @@ namespace SimpleFPS.Projectiles.Bullets
 
         private float _timer;
         private float _damage;
+        private Pool<Bullet> _bulletPool;
+        private Pool<BulletImpact> _bulletImpactPool;
 
         #endregion
 
@@ -32,13 +35,18 @@ namespace SimpleFPS.Projectiles.Bullets
             _timer = _timeToDestroy;
         }
 
+        private void Start()
+        {
+            _bulletImpactPool = LevelManager.Instance.BulletImpactPool;
+        }
+
         private void Update()
         {
             _timer -= Time.deltaTime;
 
             if (_timer <= 0f)
             {
-                LevelManager.Instance.PlayerBulletPool.StoreInstance(this);
+                _bulletPool.StoreInstance(this);
             }
         }
 
@@ -52,12 +60,12 @@ namespace SimpleFPS.Projectiles.Bullets
             }
             else
             {
-                BulletImpact bulletImpact = LevelManager.Instance.BulletImpactPool.GetInstance();
+                BulletImpact bulletImpact = _bulletImpactPool.GetInstance();
                 bulletImpact.transform.position = transform.position;
                 bulletImpact.transform.rotation = transform.rotation;
             }
 
-            LevelManager.Instance.PlayerBulletPool.StoreInstance(this);
+            _bulletPool.StoreInstance(this);
         }
 
         #endregion
@@ -67,6 +75,11 @@ namespace SimpleFPS.Projectiles.Bullets
         public void SetDamage(float damage)
         {
             _damage = damage;
+        }
+
+        public void SetBulletPool(Pool<Bullet> bulletPool)
+        {
+            _bulletPool = bulletPool;
         }
 
         #endregion

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets._Main.Scripts.Components
+namespace SimpleFPS.Components
 {
     public class AutoDisabler : MonoBehaviour
     {

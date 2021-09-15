@@ -1,7 +1,7 @@
 ﻿using SimpleFPS.Weapons;
 using System;
 
-namespace SimpleFPS.Strategy.Input
+namespace SimpleFPS.Player
 {
     public interface IInputController
     {

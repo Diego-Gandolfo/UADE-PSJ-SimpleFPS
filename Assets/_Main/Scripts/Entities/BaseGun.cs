@@ -1,7 +1,9 @@
+using SimpleFPS.Generics.Pool;
+using SimpleFPS.Projectiles;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SimpleFPS.Weapons.Guns
+namespace SimpleFPS.Weapons
 {
     public class BaseGun : BaseWeapon, IGun
     {
@@ -121,6 +123,8 @@ namespace SimpleFPS.Weapons.Guns
                 }
             }
         }
+
+        public virtual void SetBulletPool(Pool<Bullet> bulletPool) { }
 
         #endregion
     }

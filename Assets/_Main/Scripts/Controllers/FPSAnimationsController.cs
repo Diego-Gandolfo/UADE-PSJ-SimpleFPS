@@ -1,11 +1,10 @@
+using SimpleFPS.Player;
 using SimpleFPS.Weapons;
-using SimpleFPS.Strategy.Input;
 using UnityEngine;
-using SimpleFPS.Weapons.Guns;
 
-namespace SimpleFPS.Controllers.Animations
+namespace SimpleFPS.FPS
 {
-    public class AnimationsController : MonoBehaviour
+    public class FPSAnimationsController : MonoBehaviour
     {
         #region Private Fields
 

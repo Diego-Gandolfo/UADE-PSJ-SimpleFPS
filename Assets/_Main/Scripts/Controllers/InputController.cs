@@ -1,11 +1,7 @@
-using Assets._Main.Scripts.Component;
-using SimpleFPS.Controllers.Animations;
-using SimpleFPS.Controllers.Audios;
-using SimpleFPS.Controllers.Cameras;
-using SimpleFPS.Controllers.Weapons;
-using SimpleFPS.Strategy.Input;
+using SimpleFPS.Cameras;
+using SimpleFPS.FPS;
+using SimpleFPS.Movement;
 using SimpleFPS.Weapons;
-using SimpleFPS.Weapons.Guns;
 using System;
 using UnityEngine;
 
@@ -16,15 +12,15 @@ public enum MouseButton
     Middle
 }
 
-namespace SimpleFPS.Controllers.Inputs
+namespace SimpleFPS.Player
 {
     [RequireComponent(typeof(MoveComponent))]
     [RequireComponent(typeof(RotationComponent))]
     [RequireComponent(typeof(JumpComponent))]
-    [RequireComponent(typeof(WeaponsController))]
-    [RequireComponent(typeof(AnimationsController))]
+    [RequireComponent(typeof(FPSWeaponsController))]
+    [RequireComponent(typeof(FPSAnimationsController))]
+    [RequireComponent(typeof(FPSAudioController))]
     [RequireComponent(typeof(CameraController))]
-    [RequireComponent(typeof(AudioController))]
     public class InputController : MonoBehaviour, IInputController
     {
         #region Serialize Fields
@@ -63,10 +59,10 @@ namespace SimpleFPS.Controllers.Inputs
         private MoveComponent _moveComponent;
         private RotationComponent _rotationComponent;
         private JumpComponent _jumpComponent;
-        private WeaponsController _weaponController;
-        private AnimationsController _animationsController;
+        private FPSWeaponsController _weaponController;
+        private FPSAnimationsController _animationsController;
         private CameraController _cameraController;
-        private AudioController _audioController;
+        private FPSAudioController _audioController;
 
         #endregion
 
@@ -116,11 +112,14 @@ namespace SimpleFPS.Controllers.Inputs
 
         private void GetRequiredComponent()
         {
-            _weaponController = GetComponent<WeaponsController>();
+            _weaponController = GetComponent<FPSWeaponsController>();
             _weaponController.SuscribeEvents(this);
 
-            _animationsController = GetComponent<AnimationsController>();
+            _animationsController = GetComponent<FPSAnimationsController>();
             _animationsController.SuscribeEvents(this);
+
+            _audioController = GetComponent<FPSAudioController>();
+            _audioController.SuscribeEvents(this);
 
             OnChangeWeapon?.Invoke(_weaponController.WeaponList[0]);
 
@@ -130,9 +129,6 @@ namespace SimpleFPS.Controllers.Inputs
 
             _cameraController = GetComponent<CameraController>();
             _cameraController.SuscribeEvents(this);
-
-            _audioController = GetComponent<AudioController>();
-            _audioController.SuscribeEvents(this);
         }
 
         private void CheckMovementInput()

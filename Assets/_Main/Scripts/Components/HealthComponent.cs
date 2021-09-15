@@ -1,9 +1,7 @@
-using SimpleFPS.Damageable;
-using SimpleFPS.Strategy.Life;
 using System;
 using UnityEngine;
 
-namespace Assets._Main.Scripts.Component
+namespace SimpleFPS.Damageable
 {
     public class HealthComponent : MonoBehaviour, IDamageable
     {

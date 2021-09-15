@@ -1,7 +1,6 @@
-using SimpleFPS.Strategy.Movement;
 using UnityEngine;
 
-namespace Assets._Main.Scripts.Component
+namespace SimpleFPS.Movement
 {
     [RequireComponent(typeof(Rigidbody))]
     public class MoveComponent : MonoBehaviour, IMove

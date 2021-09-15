@@ -1,7 +1,6 @@
-﻿using SimpleFPS.Damageable;
-using System;
+﻿using System;
 
-namespace SimpleFPS.Strategy.Life
+namespace SimpleFPS.Damageable
 {
     public interface IDamageable
     {

@@ -1,18 +1,24 @@
-using SimpleFPS.LevelManagers;
-using SimpleFPS.Projectiles.Bullets;
+using SimpleFPS.Generics.Pool;
+using SimpleFPS.Projectiles;
 using UnityEngine;
 
-namespace SimpleFPS.Weapons.Guns
+namespace SimpleFPS.Weapons
 {
     public class Handgun : BaseGun
     {
+        #region Private Fields
+
+        private Pool<Bullet> _bulletPool;
+
+        #endregion
+
         #region Public Methods
 
         public override void Attack()
         {
             if (_currentMagazineAmmo > 0)
             {
-                Bullet bullet = LevelManager.Instance.PlayerBulletPool.GetInstance();
+                Bullet bullet = _bulletPool.GetInstance();
                 bullet.transform.position = _bulletSpawnpoint.position;
                 bullet.transform.rotation = _bulletSpawnpoint.rotation;
                 bullet.SetDamage(Damage);
@@ -31,6 +37,11 @@ namespace SimpleFPS.Weapons.Guns
         public override void Reload()
         {
             base.Reload();
+        }
+
+        public override void SetBulletPool(Pool<Bullet> bulletPool)
+        {
+            _bulletPool = bulletPool;
         }
 
         #endregion

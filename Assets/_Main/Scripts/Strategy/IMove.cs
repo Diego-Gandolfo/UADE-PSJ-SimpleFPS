@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SimpleFPS.Strategy.Movement
+namespace SimpleFPS.Movement
 {
     public interface IMove
     {

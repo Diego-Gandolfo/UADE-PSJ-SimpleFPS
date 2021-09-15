@@ -1,11 +1,10 @@
-using SimpleFPS.Strategy.Input;
+using SimpleFPS.Player;
 using SimpleFPS.Weapons;
-using SimpleFPS.Weapons.Guns;
 using UnityEngine;
 
-namespace SimpleFPS.Controllers.Audios
+namespace SimpleFPS.FPS
 {
-    public class AudioController : MonoBehaviour
+    public class FPSAudioController : MonoBehaviour
     {
         #region Serialize Fields
 

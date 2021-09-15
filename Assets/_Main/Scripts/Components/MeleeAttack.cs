@@ -1,8 +1,8 @@
-﻿using Assets._Main.Scripts.Component;
-using SimpleFPS.Weapons;
+﻿using SimpleFPS.Components;
+using SimpleFPS.Damageable;
 using UnityEngine;
 
-namespace Assets._Main.Scripts.Components
+namespace SimpleFPS.Weapons
 {
     [RequireComponent(typeof(Collider))]
     [RequireComponent(typeof(AutoDisabler))]

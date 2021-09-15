@@ -1,4 +1,4 @@
-﻿namespace SimpleFPS.Projectiles.Bullets
+﻿namespace SimpleFPS.Projectiles
 {
     public interface IBullet
     {

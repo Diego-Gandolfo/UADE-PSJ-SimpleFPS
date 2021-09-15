@@ -1,14 +1,15 @@
-using SimpleFPS.LevelManagers;
-using SimpleFPS.Projectiles.Bullets;
+using SimpleFPS.Generics.Pool;
+using SimpleFPS.Projectiles;
 using UnityEngine;
 
-namespace SimpleFPS.Weapons.Guns
+namespace SimpleFPS.Weapons
 {
     public class AsaultRifle : BaseGun
     {
         #region Private Fields
 
         private float _cooldownTimer;
+        private Pool<Bullet> _bulletPool;
 
         #endregion
 
@@ -41,7 +42,7 @@ namespace SimpleFPS.Weapons.Guns
             {
                 _canAttack = false;
                 
-                Bullet bullet = LevelManager.Instance.PlayerBulletPool.GetInstance();
+                Bullet bullet = _bulletPool.GetInstance();
                 bullet.transform.position = _bulletSpawnpoint.position;
                 bullet.transform.rotation = _bulletSpawnpoint.rotation;
                 bullet.SetDamage(Damage);
@@ -62,6 +63,11 @@ namespace SimpleFPS.Weapons.Guns
         public override void Reload()
         {
             base.Reload();
+        }
+
+        public override void SetBulletPool(Pool<Bullet> bulletPool)
+        {
+            _bulletPool = bulletPool;
         }
 
         #endregion

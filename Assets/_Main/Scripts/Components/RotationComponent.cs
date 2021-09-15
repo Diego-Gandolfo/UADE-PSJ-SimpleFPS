@@ -1,13 +1,12 @@
-using SimpleFPS.Strategy.Movement;
 using UnityEngine;
 
-namespace Assets._Main.Scripts.Component
+namespace SimpleFPS.Movement
 {
     public class RotationComponent : MonoBehaviour, IRotate
     {
         #region Private Fields
 
-        private float _mouseMove;
+        private float _rotation;
 
         #endregion
 
@@ -15,9 +14,9 @@ namespace Assets._Main.Scripts.Component
 
         public void Rotate(float value)
         {
-            _mouseMove += value * Time.deltaTime;
+            _rotation += value * Time.deltaTime;
             var angles = transform.eulerAngles;
-            transform.eulerAngles = new Vector3(angles.x, _mouseMove, angles.z);
+            transform.eulerAngles = new Vector3(angles.x, _rotation, angles.z);
         }
 
         #endregion

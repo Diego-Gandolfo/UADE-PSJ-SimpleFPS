@@ -1,8 +1,8 @@
-using SimpleFPS.Projectiles.Bullets;
+using SimpleFPS.Projectiles;
 using UnityEngine;
 
 
-namespace SimpleFPS.Weapons.Guns
+namespace SimpleFPS.Weapons
 {
     [CreateAssetMenu(fileName = "BaseGunStats", menuName = "Flyweight/Stats/Weapons/BaseGun", order = 1)]
     public class BaseGunStats : ScriptableObject

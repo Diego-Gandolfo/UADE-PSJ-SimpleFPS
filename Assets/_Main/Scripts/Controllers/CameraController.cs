@@ -1,9 +1,7 @@
-using SimpleFPS.Strategy.Input;
-using System.Collections;
-using System.Collections.Generic;
+using SimpleFPS.Player;
 using UnityEngine;
 
-namespace SimpleFPS.Controllers.Cameras
+namespace SimpleFPS.Cameras
 {
     public class CameraController : MonoBehaviour
     {

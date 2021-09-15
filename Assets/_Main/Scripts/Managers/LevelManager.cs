@@ -1,4 +1,4 @@
-using SimpleFPS.Projectiles.Bullets;
+using SimpleFPS.Projectiles;
 using SimpleFPS.Generics.Pool;
 using UnityEngine;
 

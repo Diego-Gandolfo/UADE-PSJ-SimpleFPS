@@ -1,9 +1,8 @@
 using SimpleFPS.LevelManagers;
-using SimpleFPS.Weapons;
 using UnityEngine;
 
 
-namespace SimpleFPS.Projectiles.Bullets
+namespace SimpleFPS.Projectiles
 {
     public class BulletImpact : MonoBehaviour
     {

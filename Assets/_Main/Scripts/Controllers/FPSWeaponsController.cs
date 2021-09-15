@@ -1,13 +1,12 @@
-using Assets._Main.Scripts.Components;
-using SimpleFPS.Strategy.Input;
 using System.Collections.Generic;
 using UnityEngine;
 using SimpleFPS.Weapons;
-using SimpleFPS.Weapons.Guns;
+using SimpleFPS.LevelManagers;
+using SimpleFPS.Player;
 
-namespace SimpleFPS.Controllers.Weapons
+namespace SimpleFPS.FPS
 {
-    public class WeaponsController : MonoBehaviour, IWeaponController
+    public class FPSWeaponsController : MonoBehaviour, IWeaponController
     {
         #region Serialize Fields
 
@@ -29,6 +28,21 @@ namespace SimpleFPS.Controllers.Weapons
         public IWeapon CurrentWeapon => _weaponsList[_currentWeaponIndex];
         public List<BaseWeapon> WeaponList => _weaponsList;
 
+
+        #endregion
+
+        #region Unity Methods
+
+        private void Start()
+        {
+            foreach (var weapon in _weaponsList)
+            {
+                if (weapon is IGun)
+                {
+                    ((IGun)weapon).SetBulletPool(LevelManager.Instance.PlayerBulletPool);
+                }
+            }
+        }
 
         #endregion
 
