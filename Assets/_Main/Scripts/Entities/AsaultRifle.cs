@@ -43,6 +43,7 @@ namespace SimpleFPS.Weapons
                 _canAttack = false;
                 
                 Bullet bullet = _bulletPool.GetInstance();
+                bullet.SetBulletPool(_bulletPool);
                 bullet.transform.position = _bulletSpawnpoint.position;
                 bullet.transform.rotation = _bulletSpawnpoint.rotation;
                 bullet.SetDamage(Damage);

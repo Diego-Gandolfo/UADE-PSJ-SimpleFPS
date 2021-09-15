@@ -99,17 +99,6 @@ namespace SimpleFPS.Player
 
         #region Private Methods
 
-        private void CheckAmmoSlider()
-        {
-            if (_weaponController.CurrentWeapon is Handgun)
-            {
-                if (!((IGun)_weaponController.CurrentWeapon).IsMagazineEmpty && _animationsController.Animator.GetBool("Out Of Ammo Slider"))
-                    OnSliderAmmoLeft?.Invoke();
-                if (((IGun)_weaponController.CurrentWeapon).IsMagazineEmpty && !_animationsController.Animator.GetBool("Out Of Ammo Slider"))
-                    OnSliderOutOfAmmo?.Invoke();
-            }
-        }
-
         private void GetRequiredComponent()
         {
             _weaponController = GetComponent<FPSWeaponsController>();
@@ -129,6 +118,17 @@ namespace SimpleFPS.Player
 
             _cameraController = GetComponent<CameraController>();
             _cameraController.SuscribeEvents(this);
+        }
+
+        private void CheckAmmoSlider()
+        {
+            if (_weaponController.CurrentWeapon is Handgun)
+            {
+                if (!((IGun)_weaponController.CurrentWeapon).IsMagazineEmpty && _animationsController.Animator.GetBool("Out Of Ammo Slider"))
+                    OnSliderAmmoLeft?.Invoke();
+                if (((IGun)_weaponController.CurrentWeapon).IsMagazineEmpty && !_animationsController.Animator.GetBool("Out Of Ammo Slider"))
+                    OnSliderOutOfAmmo?.Invoke();
+            }
         }
 
         private void CheckMovementInput()

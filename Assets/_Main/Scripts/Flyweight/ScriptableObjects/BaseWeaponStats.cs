@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SimpleFPS.Weapons
 {
-    [CreateAssetMenu(fileName = "BaseWeaponStats", menuName = "Flyweight/Stats/Weapons/BaseWeapon", order = 0)]
+    [CreateAssetMenu(fileName = "BaseWeaponStats", menuName = "Flyweight/Weapons/BaseWeapon", order = 0)]
     public class BaseWeaponStats : ScriptableObject
     {
         #region Serialize Fields

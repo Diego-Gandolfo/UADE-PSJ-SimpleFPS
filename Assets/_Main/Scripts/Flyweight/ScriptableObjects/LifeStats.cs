@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SimpleFPS.Damageable
 {
-    [CreateAssetMenu(fileName = "LifeStats", menuName = "Flyweight/Stats/Life/Life", order = 0)]
+    [CreateAssetMenu(fileName = "LifeStats", menuName = "Flyweight/Life", order = 0)]
     public class LifeStats : ScriptableObject
     {
         #region Serialize Fields
