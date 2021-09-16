@@ -4,6 +4,7 @@ using SimpleFPS.Player;
 using SimpleFPS.Weapons;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace SimpleFPS.Enemy
 {
@@ -43,6 +44,7 @@ namespace SimpleFPS.Enemy
             SetNearestTarget();
             LookAtTarget();
             MoveToTarget();
+            CheckJump();
         }
 
         #endregion
@@ -83,30 +85,53 @@ namespace SimpleFPS.Enemy
 
         private void MoveToTarget()
         {
-            var currentSpeed = 0f;
-
-            var distance = Vector3.Distance(transform.position, _currentTarget.position);
-
-            var direction = _currentTarget.position - transform.position;
-            direction = new Vector3(direction.x, 0f, direction.z);
-            direction.Normalize();
-            
-            if (distance > _ovjectiveTargetStats.MinDistance && distance < _ovjectiveTargetStats.MaxDistance)
+            if (_jumpComponent.CheckIsGrounded())
             {
-                currentSpeed = _moveComponent.WalkSpeed;
-            }
-            else if (distance < _ovjectiveTargetStats.RetreatDistance)
-            {
-                currentSpeed = -_moveComponent.WalkSpeed;
-            }
+                var currentSpeed = 0f;
 
-            _moveComponent.DoMove(direction, currentSpeed);
+                var distance = Vector3.Distance(transform.position, _currentTarget.position);
+
+                var direction = _currentTarget.position - transform.position;
+                direction = new Vector3(direction.x, 0f, direction.z);
+                direction.Normalize();
+
+                if (distance > _ovjectiveTargetStats.MinDistance && distance < _ovjectiveTargetStats.MaxDistance)
+                {
+                    currentSpeed = _moveComponent.WalkSpeed;
+                }
+                else if (distance < _ovjectiveTargetStats.RetreatDistance)
+                {
+                    currentSpeed = -_moveComponent.WalkSpeed;
+                }
+
+                _moveComponent.DoMove(direction, currentSpeed);
+            }
         }
 
         private void LookAtTarget()
         {
             var lookAtPosition = new Vector3(_currentTarget.position.x, transform.position.y, _currentTarget.position.z);
             transform.LookAt(lookAtPosition);
+        }
+
+        private void CheckJump()
+        {
+            if (_jumpComponent.CheckIsGrounded())
+            {
+                var offset = new Vector3(0f, -0.5f, 0f);
+
+                RaycastHit hit;
+                Ray ray = new Ray(transform.position + offset, transform.forward);
+                Debug.DrawRay(transform.position + offset, transform.forward, Color.red);
+
+                if (Physics.Raycast(ray, out hit, 2.5f))
+                {
+                    if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
+                    {
+                        _jumpComponent.DoJump();
+                    }
+                }
+            }
         }
 
         #endregion

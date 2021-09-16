@@ -1,6 +1,6 @@
 ﻿namespace SimpleFPS.Strategy.Pool
 {
-    interface IPool<T>
+    public interface IPool<T>
     {
         #region Propertys
 

@@ -42,7 +42,7 @@ namespace SimpleFPS.Movement
 
             if (Physics.Raycast(ray, out hit, 1.1f))
             {
-                if (hit.collider != null)
+                if (hit.collider != null && hit.collider.gameObject.layer == LayerMask.NameToLayer("Ground"))
                 {
                     return true;
                 }
