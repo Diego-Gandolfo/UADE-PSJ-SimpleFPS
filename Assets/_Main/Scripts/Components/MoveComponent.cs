@@ -3,7 +3,7 @@ using UnityEngine;
 namespace SimpleFPS.Movement
 {
     [RequireComponent(typeof(Rigidbody))]
-    public class MoveComponent : MonoBehaviour, IMove
+    public class MoveComponent : MonoBehaviour, IMove // TODO: Hacer que el Move solo use una velocidad y que hayan otros Componentes que den la posibilidad de correr o Sneak
     {
         #region Serialize Fields
 
