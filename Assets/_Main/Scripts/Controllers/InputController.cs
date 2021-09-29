@@ -68,7 +68,7 @@ namespace SimpleFPS.Player
 
         #region Events
 
-        public event Action<bool, float> OnMove;
+        //public event Action<bool, float> OnMove;
         public event Action<bool> OnWalk, OnRun, OnSneak;
         public event Action<IWeapon> OnReload, OnAttack, OnChangeWeapon;
         public event Action OnInspect, OnHolster, OnKnifeAttack1, OnKnifeAttack2, OnThrowGrenade;

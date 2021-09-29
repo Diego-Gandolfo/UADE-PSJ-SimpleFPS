@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SimpleFPS.FPS
 {
-    public class FPSAnimationsController : MonoBehaviour
+    public class FPSAnimationsController : MonoBehaviour, IFPSController
     {
         #region Private Fields
 

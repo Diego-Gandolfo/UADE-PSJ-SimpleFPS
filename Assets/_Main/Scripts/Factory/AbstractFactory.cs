@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SimpleFPS.Factory
 {
-    public abstract class AbstractFactory<T> : IFactory<T> where T : MonoBehaviour
+    public abstract class AbstractFactory<T> where T : MonoBehaviour
     {
         protected T _prefab;
         protected Pool<T> _pool;

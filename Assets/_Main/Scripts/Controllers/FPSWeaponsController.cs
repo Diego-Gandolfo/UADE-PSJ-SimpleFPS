@@ -6,7 +6,7 @@ using SimpleFPS.Player;
 
 namespace SimpleFPS.FPS
 {
-    public class FPSWeaponsController : MonoBehaviour, IWeaponController
+    public class FPSWeaponsController : MonoBehaviour, IFPSController
     {
         #region Serialize Fields
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SimpleFPS.FPS
 {
-    public class FPSAudioController : MonoBehaviour
+    public class FPSAudioController : MonoBehaviour, IFPSController
     {
         #region Serialize Fields
 

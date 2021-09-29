@@ -1,10 +1,9 @@
-﻿using SimpleFPS.Strategy.Pool;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace SimpleFPS.Generics.Pool
 {
-    public class Pool<T> : IPool<T> where T : MonoBehaviour
+    public class Pool<T> where T : MonoBehaviour
     {
         #region Private Fields
 

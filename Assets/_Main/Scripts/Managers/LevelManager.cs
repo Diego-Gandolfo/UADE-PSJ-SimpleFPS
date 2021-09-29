@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace SimpleFPS.LevelManagers
 {
-    public class LevelManager : MonoBehaviour, ILevelManager
+    public class LevelManager : MonoBehaviour
     {
         #region Static
 
