@@ -1,4 +1,4 @@
-using SimpleFPS.Damageable;
+using SimpleFPS.Life;
 using SimpleFPS.Generics.Pool;
 using SimpleFPS.LevelManagers;
 using UnityEngine;

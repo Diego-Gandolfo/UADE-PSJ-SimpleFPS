@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace SimpleFPS.Damageable
+namespace SimpleFPS.Life
 {
-    public class HealthComponent : MonoBehaviour, IDamageable
+    public class HealthComponent : MonoBehaviour, IAlive, IDamageable, IKilleable, IHealeable
     {
         #region Serialize Fields
 

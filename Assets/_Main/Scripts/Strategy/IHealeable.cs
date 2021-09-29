@@ -1,10 +1,10 @@
 ﻿namespace SimpleFPS.Life
 {
-    public interface IDamageable
+    public interface IHealeable
     {
         #region Public Methods
 
-        void ReceiveDamage(float damage);
+        void ReceiveHeal(float heal);
 
         #endregion
     }

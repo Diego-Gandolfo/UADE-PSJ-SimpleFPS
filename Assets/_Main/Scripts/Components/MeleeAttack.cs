@@ -1,5 +1,5 @@
 ﻿using SimpleFPS.Components;
-using SimpleFPS.Damageable;
+using SimpleFPS.Life;
 using UnityEngine;
 
 namespace SimpleFPS.Weapons

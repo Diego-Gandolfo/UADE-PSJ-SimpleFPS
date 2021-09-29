@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace SimpleFPS.Damageable
+namespace SimpleFPS.Life
 {
     [CreateAssetMenu(fileName = "LifeStats", menuName = "Flyweight/Life", order = 0)]
     public class LifeStats : ScriptableObject
