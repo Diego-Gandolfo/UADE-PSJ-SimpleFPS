@@ -143,7 +143,6 @@ namespace SimpleFPS.FPS
 
         public void DoWeapon()
         {
-
             //if (Input.GetMouseButtonDown((int)_aimMouseButton)) OnAimOn?.Invoke();
             //if (Input.GetMouseButtonUp((int)_aimMouseButton)) OnAimOff?.Invoke();
 

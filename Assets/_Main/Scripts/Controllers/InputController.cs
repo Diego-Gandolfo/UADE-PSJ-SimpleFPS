@@ -121,9 +121,13 @@ namespace SimpleFPS.Player
         private void CheckWeaponChangeInput()
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
                 _characterController.DoWeaponChange(0);
-            if (Input.GetKeyDown(KeyCode.Alpha2))
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
                 _characterController.DoWeaponChange(1);
+            }
         }
 
         private void CheckWeaponInput()
