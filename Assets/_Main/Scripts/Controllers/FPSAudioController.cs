@@ -179,19 +179,19 @@ namespace SimpleFPS.FPS
 
         #region Public Methods
 
-        public void SuscribeEvents(IInputController inputController)
+        public void SuscribeEvents(FPSCharacterController characterController)
         {
-            inputController.OnReload += OnReloadHandler;
-            inputController.OnAttack += OnAttackHandler;
-            inputController.OnChangeWeapon += OnChangeWeaponHandler;
-            inputController.OnAimOn += OnAimOnHandler;
-            inputController.OnHolster += OnHolsterHandler;
-            inputController.OnSneak += OnSneakHandler;
-            inputController.OnRun += OnRunHandler;
-            inputController.OnWalk += OnWalkHandler;
-            inputController.OnKnifeAttack1 += OnKnifeAttack1Handler;
-            inputController.OnKnifeAttack2 += OnKnifeAttack2Handler;
-            inputController.OnThrowGrenade += OnThrowGrenadeHandler;
+            characterController.OnReload += OnReloadHandler;
+            characterController.OnAttack += OnAttackHandler;
+            characterController.OnChangeWeapon += OnChangeWeaponHandler;
+            characterController.OnAimOn += OnAimOnHandler;
+            characterController.OnHolster += OnHolsterHandler;
+            characterController.OnSneak += OnSneakHandler;
+            characterController.OnRun += OnRunHandler;
+            characterController.OnWalk += OnWalkHandler;
+            characterController.OnKnifeAttack1 += OnKnifeAttack1Handler;
+            characterController.OnKnifeAttack2 += OnKnifeAttack2Handler;
+            characterController.OnThrowGrenade += OnThrowGrenadeHandler;
         }
 
         #endregion

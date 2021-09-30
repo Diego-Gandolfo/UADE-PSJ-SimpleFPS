@@ -1,9 +1,10 @@
+using SimpleFPS.FPS;
 using SimpleFPS.Player;
 using UnityEngine;
 
 namespace SimpleFPS.Cameras
 {
-    public class CameraController : MonoBehaviour
+    public class FPSCameraController : MonoBehaviour, IFPSController
     {
         #region Serialize Fields
 
@@ -70,10 +71,10 @@ namespace SimpleFPS.Cameras
             _mainCamera.transform.eulerAngles = new Vector3(_mouseMove, angles.y, angles.z);
         }
 
-        public void SuscribeEvents(IInputController inputController)
+        public void SuscribeEvents(FPSCharacterController characterController)
         {
-            inputController.OnAimOn += OnAimOnHandler;
-            inputController.OnAimOff += OnAimOffHandler;
+            characterController.OnAimOn += OnAimOnHandler;
+            characterController.OnAimOff += OnAimOffHandler;
         }
         #endregion
     }

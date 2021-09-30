@@ -113,22 +113,22 @@ namespace SimpleFPS.FPS
 
         #region Public Methods
 
-        public void SuscribeEvents(IInputController inputController)
+        public void SuscribeEvents(FPSCharacterController characterController)
         {
-            inputController.OnReload += OnReloadHandler;
-            inputController.OnAttack += OnAttackHandler;
-            inputController.OnInspect += OnInspectHander;
-            inputController.OnHolster += OnHolsterHandler;
-            inputController.OnThrowGrenade += OnThrowGrenadeHandler;
-            inputController.OnKnifeAttack1 += OnKnifeAttack1Handler;
-            inputController.OnKnifeAttack2 += OnKnifeAttack2Handler;
-            inputController.OnAimOn += OnAimOnHandler;
-            inputController.OnAimOff += OnAimOffHandler;
-            inputController.OnChangeWeapon += OnChangeWeaponHandler;
-            inputController.OnWalk += OnWalkHandler;
-            inputController.OnRun += OnRunHandler;
-            inputController.OnSliderAmmoLeft += OnSliderAmmoLeftHandler;
-            inputController.OnSliderOutOfAmmo += OnSliderOutOfAmmoHandler;
+            characterController.OnReload += OnReloadHandler;
+            characterController.OnAttack += OnAttackHandler;
+            characterController.OnInspect += OnInspectHander;
+            characterController.OnHolster += OnHolsterHandler;
+            characterController.OnThrowGrenade += OnThrowGrenadeHandler;
+            characterController.OnKnifeAttack1 += OnKnifeAttack1Handler;
+            characterController.OnKnifeAttack2 += OnKnifeAttack2Handler;
+            characterController.OnAimOn += OnAimOnHandler;
+            characterController.OnAimOff += OnAimOffHandler;
+            characterController.OnChangeWeapon += OnChangeWeaponHandler;
+            characterController.OnWalk += OnWalkHandler;
+            characterController.OnRun += OnRunHandler;
+            characterController.OnSliderAmmoLeft += OnSliderAmmoLeftHandler;
+            characterController.OnSliderOutOfAmmo += OnSliderOutOfAmmoHandler;
         }
 
         #endregion

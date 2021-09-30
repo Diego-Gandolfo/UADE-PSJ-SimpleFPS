@@ -6,7 +6,7 @@ namespace SimpleFPS.FPS
     {
         #region Public Methods
 
-        void SuscribeEvents(IInputController inputController);
+        void SuscribeEvents(FPSCharacterController characterController);
 
         #endregion
     }
