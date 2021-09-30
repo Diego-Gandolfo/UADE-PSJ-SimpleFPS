@@ -4000,11 +4000,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ec728fea85097b43ad9358333759bfa, type: 3}
---- !u!20 &191105378 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7444248562132836401, guid: 55c92db087783ed49a646da5ebd56ee2, type: 3}
-  m_PrefabInstance: {fileID: 909073355161525483}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &191922848 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012097295612, guid: 4944c29dadd7e02468c053eafe48e485, type: 3}
@@ -31248,11 +31243,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 811181557}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!20 &811460799 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 7443625809433772485, guid: 55c92db087783ed49a646da5ebd56ee2, type: 3}
-  m_PrefabInstance: {fileID: 909073355161525483}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &812796528
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -40728,23 +40718,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000011765245650, guid: 9732a241b7bd0fa4a8e59553d6d8a2b0, type: 3}
   m_PrefabInstance: {fileID: 441847390}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &989743374 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 909073353928906982, guid: 55c92db087783ed49a646da5ebd56ee2, type: 3}
-  m_PrefabInstance: {fileID: 909073355161525483}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &989743378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 989743374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00f5fe19f65a45147a64fd7c9a495413, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &992604931 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000010721903726, guid: aa63f99e99a3f454e85eff556a0b996f, type: 3}
@@ -65596,7 +65569,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 909073353928906980, guid: 55c92db087783ed49a646da5ebd56ee2, type: 3}
   m_PrefabInstance: {fileID: 909073355161525483}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 989743374}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c6d94a56b5a1254bac6d704c0d08e3b, type: 3}
@@ -69573,36 +69546,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
-    - target: {fileID: 6841807364191524994, guid: 55c92db087783ed49a646da5ebd56ee2, type: 3}
-      propertyPath: _aimFOV
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6841807364191524994, guid: 55c92db087783ed49a646da5ebd56ee2, type: 3}
-      propertyPath: _lookUp
-      value: -20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6841807364191524994, guid: 55c92db087783ed49a646da5ebd56ee2, type: 3}
-      propertyPath: _lookDown
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6841807364191524994, guid: 55c92db087783ed49a646da5ebd56ee2, type: 3}
-      propertyPath: _speedFOV
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6841807364191524994, guid: 55c92db087783ed49a646da5ebd56ee2, type: 3}
-      propertyPath: _defaultFOV
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 6841807364191524994, guid: 55c92db087783ed49a646da5ebd56ee2, type: 3}
-      propertyPath: _mainCamera
-      value: 
-      objectReference: {fileID: 811460799}
-    - target: {fileID: 6841807364191524994, guid: 55c92db087783ed49a646da5ebd56ee2, type: 3}
-      propertyPath: _weaponCamera
-      value: 
-      objectReference: {fileID: 191105378}
-    m_RemovedComponents:
-    - {fileID: 909073353928907004, guid: 55c92db087783ed49a646da5ebd56ee2, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55c92db087783ed49a646da5ebd56ee2, type: 3}
 --- !u!1001 &1193121508264087620
 PrefabInstance:

@@ -45,6 +45,11 @@ namespace SimpleFPS.FPS
             GetRequiredComponent();
         }
 
+        private void Update()
+        {
+            CheckAmmoSlider();
+        }
+
         #endregion
 
         #region Private Methods
@@ -81,6 +86,10 @@ namespace SimpleFPS.FPS
             }
         }
 
+        #endregion
+
+        #region Public Methods
+
         public void DoMovement(string movementType, Vector3 direction)
         {
             float currentSpeed;
@@ -111,50 +120,50 @@ namespace SimpleFPS.FPS
             _rotationComponent.Rotate(mouseInput);
         }
 
-        //private void CheckJumpInput()
-        //{
-        //    if (_jumpComponent.CheckIsGrounded() && Input.GetKeyDown(_jumpKey))
-        //    {
-        //        _jumpComponent.DoJump();
-        //    }
-        //}
+        public void DoLookUpDown(float mouseInput)
+        {
+            _cameraController.LookUpDown(mouseInput);
+        }
 
-        //private void CheckWeaponInput()
-        //{
-        //    if (Input.GetKeyDown(KeyCode.Alpha1) && !_weaponController.CurrentWeapon.Equals(_weaponController.WeaponList[0]))
-        //        OnChangeWeapon?.Invoke(_weaponController.WeaponList[0]);
-        //    if (Input.GetKeyDown(KeyCode.Alpha2) && !_weaponController.CurrentWeapon.Equals(_weaponController.WeaponList[1]))
-        //        OnChangeWeapon?.Invoke(_weaponController.WeaponList[1]);
+        public void DoJump()
+        {
+            //if (_jumpComponent.CheckIsGrounded() && Input.GetKeyDown(_jumpKey))
+            //{
+            //    _jumpComponent.DoJump();
+            //}
+        }
 
-        //    if (Input.GetMouseButtonDown((int)_aimMouseButton)) OnAimOn?.Invoke();
-        //    if (Input.GetMouseButtonUp((int)_aimMouseButton)) OnAimOff?.Invoke();
+        public void DoWeapon()
+        {
+            //if (Input.GetKeyDown(KeyCode.Alpha1) && !_weaponController.CurrentWeapon.Equals(_weaponController.WeaponList[0]))
+            //    OnChangeWeapon?.Invoke(_weaponController.WeaponList[0]);
+            //if (Input.GetKeyDown(KeyCode.Alpha2) && !_weaponController.CurrentWeapon.Equals(_weaponController.WeaponList[1]))
+            //    OnChangeWeapon?.Invoke(_weaponController.WeaponList[1]);
 
-        //    if (Input.GetKeyDown(KeyCode.R)) OnReload?.Invoke(_weaponController.CurrentWeapon);
+            //if (Input.GetMouseButtonDown((int)_aimMouseButton)) OnAimOn?.Invoke();
+            //if (Input.GetMouseButtonUp((int)_aimMouseButton)) OnAimOff?.Invoke();
 
-        //    if (((IGun)_weaponController.CurrentWeapon).IsAutomatic)
-        //    {
-        //        if (Input.GetMouseButton((int)_attackMouseButton) && ((IGun)_weaponController.CurrentWeapon).CanAttack)
-        //            OnAttack?.Invoke(_weaponController.CurrentWeapon);
-        //    }
-        //    else
-        //    {
-        //        if (Input.GetMouseButtonDown((int)_attackMouseButton)) OnAttack?.Invoke(_weaponController.CurrentWeapon);
-        //    }
+            //if (Input.GetKeyDown(KeyCode.R)) OnReload?.Invoke(_weaponController.CurrentWeapon);
 
-        //    if (Input.GetKeyDown(_inspectKey)) OnInspect?.Invoke();
+            //if (((IGun)_weaponController.CurrentWeapon).IsAutomatic)
+            //{
+            //    if (Input.GetMouseButton((int)_attackMouseButton) && ((IGun)_weaponController.CurrentWeapon).CanAttack)
+            //        OnAttack?.Invoke(_weaponController.CurrentWeapon);
+            //}
+            //else
+            //{
+            //    if (Input.GetMouseButtonDown((int)_attackMouseButton)) OnAttack?.Invoke(_weaponController.CurrentWeapon);
+            //}
 
-        //    if (Input.GetKeyDown(_holsterKey)) OnHolster?.Invoke();
+            //if (Input.GetKeyDown(_inspectKey)) OnInspect?.Invoke();
 
-        //    if (Input.GetKeyDown(_knifeAttack1Key)) OnKnifeAttack1?.Invoke();
-        //    if (Input.GetKeyDown(_knifeAttack2Key)) OnKnifeAttack2?.Invoke();
+            //if (Input.GetKeyDown(_holsterKey)) OnHolster?.Invoke();
 
-        //    if (Input.GetKeyDown(_granadeKey)) OnThrowGrenade?.Invoke();
-        //}
+            //if (Input.GetKeyDown(_knifeAttack1Key)) OnKnifeAttack1?.Invoke();
+            //if (Input.GetKeyDown(_knifeAttack2Key)) OnKnifeAttack2?.Invoke();
 
-        //private void CheckLookUpDown()
-        //{
-        //    _cameraController.LookUpDown(mouseInput);
-        //}
+            //if (Input.GetKeyDown(_granadeKey)) OnThrowGrenade?.Invoke();
+        }
 
         #endregion
     }

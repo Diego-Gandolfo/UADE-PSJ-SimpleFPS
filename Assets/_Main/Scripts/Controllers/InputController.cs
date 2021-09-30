@@ -60,9 +60,9 @@ namespace SimpleFPS.Player
         {
             CheckMovementInput();
             CheckRotationInput();
+            CheckLookUpDown();
             CheckJumpInput();
             CheckWeaponInput();
-            CheckLookUpDown();
         }
 
         #endregion
@@ -100,6 +100,12 @@ namespace SimpleFPS.Player
         {
             var mouseInput = Input.GetAxisRaw(_rotationAxis) * (_xMouseSensibility * 1000);
             _characterController.DoRotation(mouseInput);
+        }
+
+        private void CheckLookUpDown()
+        {
+            var mouseInput = Input.GetAxisRaw(_lookUpDownAxis) * (_yMouseSensibility * 1000);
+            _characterController.DoLookUpDown(mouseInput);
         }
 
         private void CheckJumpInput()
@@ -140,12 +146,6 @@ namespace SimpleFPS.Player
             //if (Input.GetKeyDown(_knifeAttack2Key)) OnKnifeAttack2?.Invoke();
 
             //if (Input.GetKeyDown(_granadeKey)) OnThrowGrenade?.Invoke();
-        }
-
-        private void CheckLookUpDown()
-        {
-            //var mouseInput = Input.GetAxisRaw(_lookUpDownAxis) * (_yMouseSensibility * 1000);
-            //_cameraController.LookUpDown(mouseInput);
         }
 
         #endregion
