@@ -1059,11 +1059,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainCamera: {fileID: 7443625809433772485}
   _weaponCamera: {fileID: 7444248562132836401}
-  _lookUp: -20
-  _lookDown: 20
-  _defaultFOV: 60
-  _aimFOV: 40
-  _speedFOV: 1
+  _lookUp: -80
+  _lookDown: 60
+  _defaultFOV: 40
+  _aimFOV: 15
+  _speedFOV: 15
 --- !u!1 &909073353951205964
 GameObject:
   m_ObjectHideFlags: 0
