@@ -26,9 +26,6 @@ namespace SimpleFPS.FPS
 
         #region Events
 
-        //public event Action<bool, float> OnMove;
-        //public event Action<bool, float> OnRotation;
-        //public event Action<bool, float> OnJump;
         public event Action<bool> OnWalk, OnRun, OnSneak;
         public event Action<IWeapon> OnReload, OnAttack, OnChangeWeapon;
         public event Action OnInspect, OnHolster, OnKnifeAttack1, OnKnifeAttack2, OnThrowGrenade;
@@ -127,10 +124,10 @@ namespace SimpleFPS.FPS
 
         public void DoJump()
         {
-            //if (_jumpComponent.CheckIsGrounded() && Input.GetKeyDown(_jumpKey))
-            //{
-            //    _jumpComponent.DoJump();
-            //}
+            if (_jumpComponent.CheckIsGrounded())
+            {
+                _jumpComponent.DoJump();
+            }
         }
 
         public void DoWeapon()

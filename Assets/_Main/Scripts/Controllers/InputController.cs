@@ -110,10 +110,10 @@ namespace SimpleFPS.Player
 
         private void CheckJumpInput()
         {
-            //if (_jumpComponent.CheckIsGrounded() && Input.GetKeyDown(_jumpKey))
-            //{
-            //    _jumpComponent.DoJump();
-            //}
+            if (Input.GetKeyDown(_jumpKey))
+            {
+                _characterController.DoJump();
+            }
         }
 
         private void CheckWeaponInput()
