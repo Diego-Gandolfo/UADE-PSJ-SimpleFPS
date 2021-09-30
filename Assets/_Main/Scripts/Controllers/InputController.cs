@@ -62,6 +62,8 @@ namespace SimpleFPS.Player
             CheckRotationInput();
             CheckLookUpDown();
             CheckJumpInput();
+            CheckWeaponChangeInput();
+
             CheckWeaponInput();
         }
 
@@ -116,13 +118,16 @@ namespace SimpleFPS.Player
             }
         }
 
+        private void CheckWeaponChangeInput()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+                _characterController.DoWeaponChange(0);
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+                _characterController.DoWeaponChange(1);
+        }
+
         private void CheckWeaponInput()
         {
-            //if (Input.GetKeyDown(KeyCode.Alpha1) && !_weaponController.CurrentWeapon.Equals(_weaponController.WeaponList[0]))
-            //    OnChangeWeapon?.Invoke(_weaponController.WeaponList[0]);
-            //if (Input.GetKeyDown(KeyCode.Alpha2) && !_weaponController.CurrentWeapon.Equals(_weaponController.WeaponList[1]))
-            //    OnChangeWeapon?.Invoke(_weaponController.WeaponList[1]);
-
             //if (Input.GetMouseButtonDown((int)_aimMouseButton)) OnAimOn?.Invoke();
             //if (Input.GetMouseButtonUp((int)_aimMouseButton)) OnAimOff?.Invoke();
 

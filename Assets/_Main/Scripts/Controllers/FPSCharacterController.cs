@@ -130,12 +130,19 @@ namespace SimpleFPS.FPS
             }
         }
 
+        public void DoWeaponChange(int input)
+        {
+            if (!_weaponController.CurrentWeapon.Equals(_weaponController.WeaponList[input]))
+            {
+                if (input == 0)
+                    OnChangeWeapon?.Invoke(_weaponController.WeaponList[0]);
+                if (input == 1)
+                    OnChangeWeapon?.Invoke(_weaponController.WeaponList[1]);
+            }
+        }
+
         public void DoWeapon()
         {
-            //if (Input.GetKeyDown(KeyCode.Alpha1) && !_weaponController.CurrentWeapon.Equals(_weaponController.WeaponList[0]))
-            //    OnChangeWeapon?.Invoke(_weaponController.WeaponList[0]);
-            //if (Input.GetKeyDown(KeyCode.Alpha2) && !_weaponController.CurrentWeapon.Equals(_weaponController.WeaponList[1]))
-            //    OnChangeWeapon?.Invoke(_weaponController.WeaponList[1]);
 
             //if (Input.GetMouseButtonDown((int)_aimMouseButton)) OnAimOn?.Invoke();
             //if (Input.GetMouseButtonUp((int)_aimMouseButton)) OnAimOff?.Invoke();
