@@ -1,4 +1,5 @@
 using SimpleFPS.FPS;
+using SimpleFPS.Weapons;
 using UnityEngine;
 
 public enum MouseButton
@@ -30,11 +31,12 @@ namespace SimpleFPS.Player
         [Header("Weapons")]
         [SerializeField] private MouseButton _attackMouseButton = MouseButton.Left;
         [SerializeField] private MouseButton _aimMouseButton = MouseButton.Right;
+        [SerializeField] private KeyCode _reloadKey = KeyCode.R;
         [SerializeField] private KeyCode _inspectKey = KeyCode.T;
         [SerializeField] private KeyCode _holsterKey = KeyCode.F;
         [SerializeField] private KeyCode _knifeAttack1Key = KeyCode.Q;
         [SerializeField] private KeyCode _knifeAttack2Key = KeyCode.E;
-        [SerializeField] private KeyCode _granadeKey = KeyCode.G;
+        //[SerializeField] private KeyCode _granadeKey = KeyCode.G;
         
         [Header("Look Up-Down")]
         [SerializeField] private string _lookUpDownAxis = "Mouse Y";
@@ -62,8 +64,6 @@ namespace SimpleFPS.Player
             CheckRotationInput();
             CheckLookUpDown();
             CheckJumpInput();
-            CheckWeaponChangeInput();
-
             CheckWeaponInput();
         }
 
@@ -118,6 +118,19 @@ namespace SimpleFPS.Player
             }
         }
 
+        private void CheckWeaponInput()
+        {
+            CheckWeaponChangeInput();
+            CheckWeaponAimInput();
+            CheckWeaponReloadInput();
+            CheckWeaponAttackInput();
+            CheckWeaponInspectInput();
+            CheckWeaponHolsterInput();
+            CheckWeaponKnifeAttack1();
+            CheckWeaponKnifeAttack2();
+            CheckWeaponThrowGrenade();
+        }
+
         private void CheckWeaponChangeInput()
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
@@ -130,31 +143,53 @@ namespace SimpleFPS.Player
             }
         }
 
-        private void CheckWeaponInput()
+        private void CheckWeaponAimInput()
         {
-            //if (Input.GetMouseButtonDown((int)_aimMouseButton)) OnAimOn?.Invoke();
-            //if (Input.GetMouseButtonUp((int)_aimMouseButton)) OnAimOff?.Invoke();
+            if (Input.GetMouseButtonDown((int)_aimMouseButton)) _characterController.DoWeaponAimOn();
+            if (Input.GetMouseButtonUp((int)_aimMouseButton)) _characterController.DoWeaponAimOff();
+        }
 
-            //if (Input.GetKeyDown(KeyCode.R)) OnReload?.Invoke(_weaponController.CurrentWeapon);
+        private void CheckWeaponReloadInput()
+        {
+            if (Input.GetKeyDown(_reloadKey)) _characterController.DoWeaponReload();
+        }
 
-            //if (((IGun)_weaponController.CurrentWeapon).IsAutomatic)
-            //{
-            //    if (Input.GetMouseButton((int)_attackMouseButton) && ((IGun)_weaponController.CurrentWeapon).CanAttack)
-            //        OnAttack?.Invoke(_weaponController.CurrentWeapon);
-            //}
-            //else
-            //{
-            //    if (Input.GetMouseButtonDown((int)_attackMouseButton)) OnAttack?.Invoke(_weaponController.CurrentWeapon);
-            //}
+        private void CheckWeaponAttackInput()
+        {
+            if (((IGun)_characterController.CurrentWeapon).IsAutomatic)
+            {
+                if (Input.GetMouseButton((int)_attackMouseButton) && ((IGun)_characterController.CurrentWeapon).CanAttack)
+                    _characterController.DoWeaponAttack();
+            }
+            else
+            {
+                if (Input.GetMouseButtonDown((int)_attackMouseButton)) _characterController.DoWeaponAttack();
+            }
+        }
 
-            //if (Input.GetKeyDown(_inspectKey)) OnInspect?.Invoke();
+        private void CheckWeaponInspectInput()
+        {
+            if (Input.GetKeyDown(_inspectKey)) _characterController.DoWeaponInspect();
+        }
 
-            //if (Input.GetKeyDown(_holsterKey)) OnHolster?.Invoke();
+        private void CheckWeaponHolsterInput()
+        {
+            if (Input.GetKeyDown(_holsterKey)) _characterController.DoWeaponHolster();
+        }
 
-            //if (Input.GetKeyDown(_knifeAttack1Key)) OnKnifeAttack1?.Invoke();
-            //if (Input.GetKeyDown(_knifeAttack2Key)) OnKnifeAttack2?.Invoke();
+        private void CheckWeaponKnifeAttack1()
+        {
+            if (Input.GetKeyDown(_knifeAttack1Key)) _characterController.DoWeaponKnifeAttack1();
+        }
 
-            //if (Input.GetKeyDown(_granadeKey)) OnThrowGrenade?.Invoke();
+        private void CheckWeaponKnifeAttack2()
+        {
+            if (Input.GetKeyDown(_knifeAttack2Key)) _characterController.DoWeaponKnifeAttack2();
+        }
+
+        private void CheckWeaponThrowGrenade()
+        {
+            //if (Input.GetKeyDown(_granadeKey)) _characterController.DoWeaponThrowGrenade();
         }
 
         #endregion

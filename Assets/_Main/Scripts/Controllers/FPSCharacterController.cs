@@ -24,6 +24,12 @@ namespace SimpleFPS.FPS
 
         #endregion
 
+        #region Propertys
+
+        public IWeapon CurrentWeapon => _weaponController.CurrentWeapon;
+
+        #endregion
+
         #region Events
 
         public event Action<bool> OnWalk, OnRun, OnSneak;
@@ -141,31 +147,49 @@ namespace SimpleFPS.FPS
             }
         }
 
-        public void DoWeapon()
+        public void DoWeaponAimOn()
         {
-            //if (Input.GetMouseButtonDown((int)_aimMouseButton)) OnAimOn?.Invoke();
-            //if (Input.GetMouseButtonUp((int)_aimMouseButton)) OnAimOff?.Invoke();
+            OnAimOn?.Invoke();
+        }
 
-            //if (Input.GetKeyDown(KeyCode.R)) OnReload?.Invoke(_weaponController.CurrentWeapon);
+        public void DoWeaponAimOff()
+        {
+            OnAimOff?.Invoke();
+        }
 
-            //if (((IGun)_weaponController.CurrentWeapon).IsAutomatic)
-            //{
-            //    if (Input.GetMouseButton((int)_attackMouseButton) && ((IGun)_weaponController.CurrentWeapon).CanAttack)
-            //        OnAttack?.Invoke(_weaponController.CurrentWeapon);
-            //}
-            //else
-            //{
-            //    if (Input.GetMouseButtonDown((int)_attackMouseButton)) OnAttack?.Invoke(_weaponController.CurrentWeapon);
-            //}
+        public void DoWeaponReload()
+        {
+            OnReload?.Invoke(_weaponController.CurrentWeapon);
+        }
 
-            //if (Input.GetKeyDown(_inspectKey)) OnInspect?.Invoke();
+        public void DoWeaponAttack()
+        {
+            OnAttack?.Invoke(_weaponController.CurrentWeapon);
+        }
 
-            //if (Input.GetKeyDown(_holsterKey)) OnHolster?.Invoke();
+        public void DoWeaponInspect()
+        {
+            OnInspect?.Invoke();
+        }
 
-            //if (Input.GetKeyDown(_knifeAttack1Key)) OnKnifeAttack1?.Invoke();
-            //if (Input.GetKeyDown(_knifeAttack2Key)) OnKnifeAttack2?.Invoke();
+        public void DoWeaponHolster()
+        {
+            OnHolster?.Invoke();
+        }
 
-            //if (Input.GetKeyDown(_granadeKey)) OnThrowGrenade?.Invoke();
+        public void DoWeaponKnifeAttack1()
+        {
+            OnKnifeAttack1?.Invoke();
+        }
+
+        public void DoWeaponKnifeAttack2()
+        {
+            OnKnifeAttack2?.Invoke();
+        }
+
+        public void DoWeaponThrowGrenade()
+        {
+            OnThrowGrenade?.Invoke();
         }
 
         #endregion

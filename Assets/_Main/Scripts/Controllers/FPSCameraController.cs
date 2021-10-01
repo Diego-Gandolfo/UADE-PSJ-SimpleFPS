@@ -13,13 +13,13 @@ namespace SimpleFPS.Cameras
         [SerializeField] private Camera _weaponCamera;
 
         [Header("Look Up-Down")]
-        [SerializeField] private float _lookUp;
-        [SerializeField] private float _lookDown;
+        [SerializeField] private float _lookUp = -80f;
+        [SerializeField] private float _lookDown = 60f;
 
         [Header("Aim")]
-        [SerializeField] private float _defaultFOV;
-        [SerializeField] private float _aimFOV;
-        [SerializeField] private float _speedFOV;
+        [SerializeField] private float _defaultFOV = 40f;
+        [SerializeField] private float _aimFOV = 15f;
+        [SerializeField] private float _speedFOV = 15f;
 
         #endregion
 
