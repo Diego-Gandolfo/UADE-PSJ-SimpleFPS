@@ -33,6 +33,7 @@ namespace SimpleFPS.Cameras
 
         private void Update()
         {
+            print(_isAiming);
             if (_isAiming)
                 _weaponCamera.fieldOfView = Mathf.Lerp(_weaponCamera.fieldOfView, _aimFOV, _speedFOV * Time.deltaTime);
             else
