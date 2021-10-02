@@ -30901,7 +30901,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 986690949}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4248125398757271}
@@ -31009,7 +31009,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 995225850}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 477523488}
@@ -31202,7 +31202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1010536890}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 15}
+  m_LocalPosition: {x: 4.91, y: -2.5, z: 14.43}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1134468161}
@@ -31308,8 +31308,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _layerMask:
     serializedVersion: 2
-    m_Bits: 0
-  _explotionParticles: {fileID: 0}
+    m_Bits: 8
+  _explotionParticles: {fileID: 630917756}
 --- !u!1001 &1010680025
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33141,8 +33141,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1134468160}
-  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.25, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 630917754}
