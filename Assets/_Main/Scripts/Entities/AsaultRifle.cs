@@ -15,8 +15,9 @@ namespace SimpleFPS.Weapons
 
         #region Unity Methods
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
             _canAttack = true;
         }
 

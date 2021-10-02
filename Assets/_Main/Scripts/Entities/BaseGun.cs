@@ -62,7 +62,7 @@ namespace SimpleFPS.Weapons
 
         #region Unity Methods
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             _extraAmmoText.text = _currentExtraAmmo.ToString();
             _magazineAmmoText.text = _currentMagazineAmmo.ToString();
