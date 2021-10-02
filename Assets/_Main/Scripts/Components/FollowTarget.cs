@@ -1,20 +1,22 @@
-﻿using SimpleFPS.Movement;
+﻿using SimpleFPS.Command;
+using SimpleFPS.Enemy;
+using SimpleFPS.Movement;
 using UnityEngine;
 
 namespace SimpleFPS.Patrol
 {
-    [RequireComponent(typeof(MoveComponent))]
     public class FollowTarget : MonoBehaviour
     {
         #region Serialize Fields
 
-        [SerializeField] private Transform _target;
+        [SerializeField] private Transform _target = null;
+        [SerializeField] private float _moveSpeed = 10f;
 
         #endregion
 
         #region Private Fields
 
-        private MoveComponent _moveComponent;
+        //private MoveComponent _moveComponent;
 
         #endregion
 
@@ -23,7 +25,7 @@ namespace SimpleFPS.Patrol
         void Start()
         {
             if (_target == null) Debug.LogError($"{this} en {this.gameObject} no tiene asignado el Target");
-            _moveComponent = GetComponent<MoveComponent>();
+            //_moveComponent = GetComponent<MoveComponent>();
         }
 
         void Update()
@@ -34,7 +36,9 @@ namespace SimpleFPS.Patrol
             direction.Normalize();
 
             transform.LookAt(xzTargetPosition);
-            _moveComponent.DoMove(direction, _moveComponent.WalkSpeed);
+            //_moveComponent.DoMove(direction, _moveComponent.WalkSpeed);
+            EnemyManager.Instance.AddCommand(new CmdMovement(gameObject, direction, _moveSpeed));
+
         }
 
         #endregion

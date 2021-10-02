@@ -1,6 +1,3 @@
-using SimpleFPS.Generics.Pool;
-using SimpleFPS.Projectiles;
-
 namespace SimpleFPS.Weapons
 {
     public interface IGun : IWeapon
@@ -25,7 +22,6 @@ namespace SimpleFPS.Weapons
         #region Public Methods
 
         void Reload();
-        void SetBulletPool(Pool<Bullet> bulletPool);
 
         #endregion
     }

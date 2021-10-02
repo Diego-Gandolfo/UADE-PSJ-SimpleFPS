@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SimpleFPS.Weapons;
-using SimpleFPS.LevelManagers;
 using SimpleFPS.Player;
 
 namespace SimpleFPS.FPS
@@ -28,21 +27,6 @@ namespace SimpleFPS.FPS
         public IWeapon CurrentWeapon => _weaponsList[_currentWeaponIndex];
         public List<BaseWeapon> WeaponList => _weaponsList;
 
-
-        #endregion
-
-        #region Unity Methods
-
-        private void Start()
-        {
-            foreach (var weapon in _weaponsList)
-            {
-                if (weapon is IGun)
-                {
-                    ((IGun)weapon).SetBulletPool(LevelManager.Instance.PlayerBulletPool);
-                }
-            }
-        }
 
         #endregion
 

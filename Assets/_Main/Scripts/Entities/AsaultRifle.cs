@@ -9,7 +9,6 @@ namespace SimpleFPS.Weapons
         #region Private Fields
 
         private float _cooldownTimer;
-        private Pool<Bullet> _bulletPool;
 
         #endregion
 
@@ -44,7 +43,6 @@ namespace SimpleFPS.Weapons
                 _canAttack = false;
                 
                 Bullet bullet = _bulletPool.GetInstance();
-                bullet.SetBulletPool(_bulletPool);
                 bullet.transform.position = _bulletSpawnpoint.position;
                 bullet.transform.rotation = _bulletSpawnpoint.rotation;
                 bullet.SetDamage(Damage);
@@ -65,11 +63,6 @@ namespace SimpleFPS.Weapons
         public override void Reload()
         {
             base.Reload();
-        }
-
-        public override void SetBulletPool(Pool<Bullet> bulletPool)
-        {
-            _bulletPool = bulletPool;
         }
 
         #endregion

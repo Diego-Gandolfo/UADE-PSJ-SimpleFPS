@@ -27,16 +27,19 @@ namespace SimpleFPS.Command
 
         public void Execute()
         {
-            var rigidbody = _subject.GetComponent<Rigidbody>();
+            if (_subject != null)
+            {
+                var rigidbody = _subject.GetComponent<Rigidbody>();
 
-            if (rigidbody != null)
-            {
-                rigidbody.velocity = new Vector3(0f, rigidbody.velocity.y, 0f);
-                rigidbody.AddForce(_direction * _speed, ForceMode.VelocityChange);
-            }
-            else
-            {
-                _subject.transform.position += (_direction * _speed);
+                if (rigidbody != null)
+                {
+                    rigidbody.velocity = new Vector3(0f, rigidbody.velocity.y, 0f);
+                    rigidbody.AddForce(_direction * _speed, ForceMode.VelocityChange);
+                }
+                else
+                {
+                    _subject.transform.position += (_direction * _speed);
+                }
             }
         }
 

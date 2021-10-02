@@ -1,4 +1,3 @@
-using SimpleFPS.LevelManagers;
 using UnityEngine;
 
 
@@ -40,7 +39,7 @@ namespace SimpleFPS.Projectiles
 
             if (_timer <= 0f)
             {
-                LevelManager.Instance.BulletImpactPool.StoreInstance(this);
+                Managers.LevelManager.Instance.BulletImpactPool.StoreInstance(this);
             }
         }
 

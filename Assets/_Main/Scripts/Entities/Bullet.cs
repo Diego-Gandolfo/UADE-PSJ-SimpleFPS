@@ -1,6 +1,5 @@
 using SimpleFPS.Life;
 using SimpleFPS.Generics.Pool;
-using SimpleFPS.LevelManagers;
 using UnityEngine;
 
 namespace SimpleFPS.Projectiles
@@ -9,7 +8,7 @@ namespace SimpleFPS.Projectiles
     {
         #region Serialize Fields
 
-        [SerializeField] private float _timeToDestroy = 1f;
+        [SerializeField] private float _timeToDespawn = 1f;
 
         #endregion
 
@@ -17,8 +16,6 @@ namespace SimpleFPS.Projectiles
 
         private float _timer;
         private float _damage;
-        private Pool<Bullet> _bulletPool;
-        private Pool<BulletImpact> _bulletImpactPool;
 
         #endregion
 
@@ -32,12 +29,7 @@ namespace SimpleFPS.Projectiles
 
         private void OnEnable()
         {
-            _timer = _timeToDestroy;
-        }
-
-        private void Start()
-        {
-            _bulletImpactPool = LevelManager.Instance.BulletImpactPool;
+            _timer = _timeToDespawn;
         }
 
         private void Update()
@@ -46,7 +38,7 @@ namespace SimpleFPS.Projectiles
 
             if (_timer <= 0f)
             {
-                _bulletPool.StoreInstance(this);
+                Managers.LevelManager.Instance.BulletPool.StoreInstance(this);
             }
         }
 
@@ -60,12 +52,12 @@ namespace SimpleFPS.Projectiles
             }
             else
             {
-                BulletImpact bulletImpact = _bulletImpactPool.GetInstance();
+                BulletImpact bulletImpact = Managers.LevelManager.Instance.BulletImpactPool.GetInstance();
                 bulletImpact.transform.position = transform.position;
                 bulletImpact.transform.rotation = transform.rotation;
             }
 
-            _bulletPool.StoreInstance(this);
+            Managers.LevelManager.Instance.BulletPool.StoreInstance(this);
         }
 
         #endregion
@@ -75,11 +67,6 @@ namespace SimpleFPS.Projectiles
         public void SetDamage(float damage)
         {
             _damage = damage;
-        }
-
-        public void SetBulletPool(Pool<Bullet> bulletPool)
-        {
-            _bulletPool = bulletPool;
         }
 
         #endregion

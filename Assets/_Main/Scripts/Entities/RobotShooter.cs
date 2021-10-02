@@ -1,4 +1,3 @@
-using SimpleFPS.LevelManagers;
 using SimpleFPS.Movement;
 using SimpleFPS.Player;
 using System.Collections.Generic;
@@ -31,8 +30,8 @@ namespace SimpleFPS.Enemy
         private void Start()
         {
             GetRequiredComponents();
-            _character = LevelManager.Instance.Character;
-            _objectivesList = LevelManager.Instance.ObjectivesList;            
+            _character = Managers.LevelManager.Instance.Character;
+            _objectivesList = Managers.LevelManager.Instance.ObjectivesList;            
         }
 
         private void Update()

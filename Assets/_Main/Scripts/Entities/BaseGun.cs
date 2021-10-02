@@ -40,6 +40,7 @@ namespace SimpleFPS.Weapons
         protected int _currentMagazineAmmo;
         protected const float BULLET_FORCE = 400f;
         protected bool _canAttack = true;
+        protected Pool<Bullet> _bulletPool;
 
         #endregion
 
@@ -72,6 +73,7 @@ namespace SimpleFPS.Weapons
 
         private void Start()
         {
+            _bulletPool = Managers.LevelManager.Instance.BulletPool;
             _currentExtraAmmo = MaxExtraAmmo;
             _currentMagazineAmmo = MaxMagazineAmmo;
             _extraAmmoText.text = _currentExtraAmmo.ToString();
