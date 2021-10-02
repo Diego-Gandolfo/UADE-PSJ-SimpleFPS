@@ -29,7 +29,9 @@ namespace SimpleFPS.Enemy
         {
             if ((_layerMask.value & (1 << collision.transform.gameObject.layer)) > 0)
             {
-                Managers.LevelManager.Instance.ExplotionPool.GetInstance();
+                var explotion = Managers.LevelManager.Instance.ExplotionPool.GetInstance();
+                explotion.transform.position = transform.position;
+                explotion.transform.rotation = transform.rotation;
                 OnExplotion?.Invoke();
                 Destroy(gameObject);
             }
