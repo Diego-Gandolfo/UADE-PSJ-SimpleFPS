@@ -28,10 +28,9 @@ namespace SimpleFPS.Patrol
 
         void Update()
         {
-            var xzTranformPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
             var xzTargetPosition = new Vector3(_target.position.x, transform.position.y, _target.position.z);
 
-            var direction = xzTargetPosition - xzTranformPosition;
+            var direction = xzTargetPosition - transform.position;
             direction.Normalize();
 
             transform.LookAt(xzTargetPosition);
