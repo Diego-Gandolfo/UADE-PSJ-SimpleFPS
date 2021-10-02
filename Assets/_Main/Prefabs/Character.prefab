@@ -834,14 +834,14 @@ GameObject:
   - component: {fileID: 909073353928907002}
   - component: {fileID: 909073353928906994}
   - component: {fileID: 909073353928907006}
-  - component: {fileID: 909073353928907007}
   - component: {fileID: 909073353928907000}
-  - component: {fileID: 909073353928906980}
+  - component: {fileID: 909073353928907007}
   - component: {fileID: 909073353928907003}
-  - component: {fileID: 909073353928906995}
   - component: {fileID: 909073353928907005}
-  - component: {fileID: 989743378}
   - component: {fileID: 989743385}
+  - component: {fileID: 909073353928906995}
+  - component: {fileID: 989743378}
+  - component: {fileID: 7091608567371737563}
   m_Layer: 3
   m_Name: Character
   m_TagString: Untagged
@@ -924,18 +924,6 @@ MonoBehaviour:
   _walkSpeed: 1
   _runSpeed: 2
   _sneakSpeed: 0.5
---- !u!114 &909073353928907007
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 909073353928906982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bc9f1065181a794999746887ad0194f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &909073353928907000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -949,7 +937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jumpForce: 20
---- !u!114 &909073353928906980
+--- !u!114 &909073353928907007
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -958,25 +946,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 909073353928906982}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c6d94a56b5a1254bac6d704c0d08e3b, type: 3}
+  m_Script: {fileID: 11500000, guid: 2bc9f1065181a794999746887ad0194f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _horizontalAxis: Horizontal
-  _verticalAxis: Vertical
-  _runKey: 304
-  _sneakKey: 306
-  _rotationAxis: Mouse X
-  _xMouseSensibility: 0.5
-  _jumpKey: 32
-  _attackMouseButton: 0
-  _aimMouseButton: 1
-  _reloadKey: 114
-  _inspectKey: 116
-  _holsterKey: 102
-  _knifeAttack1Key: 113
-  _knifeAttack2Key: 101
-  _lookUpDownAxis: Mouse Y
-  _yMouseSensibility: 0.5
 --- !u!114 &909073353928907003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -989,23 +961,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be00793517f97bf439b5479fff16b10d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &909073353928906995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 909073353928906982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e4ebc1187662474180f5b7ceb7e049a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _weaponsList:
-  - {fileID: 7421939142886516330}
-  - {fileID: 909073353736116243}
-  _cutAttack: {fileID: 909073353951205953}
-  _stabAttack: {fileID: 909073355510343843}
 --- !u!114 &909073353928907005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1033,18 +988,6 @@ MonoBehaviour:
   _knifeCutAttackSound: {fileID: 8300000, guid: b235f52c649a5334d990a4a67be691c0, type: 3}
   _knifeSlabAttackSound: {fileID: 8300000, guid: 6695f388b6cf44b4ea7a3f98d57df9f2, type: 3}
   _throwGrenadeSound: {fileID: 8300000, guid: a640cc6972f037f4ca8f590635bb4f2a, type: 3}
---- !u!114 &989743378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 909073353928906982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00f5fe19f65a45147a64fd7c9a495413, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &989743385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1064,6 +1007,63 @@ MonoBehaviour:
   _defaultFOV: 40
   _aimFOV: 15
   _speedFOV: 15
+--- !u!114 &909073353928906995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909073353928906982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e4ebc1187662474180f5b7ceb7e049a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponsList:
+  - {fileID: 7421939142886516330}
+  - {fileID: 909073353736116243}
+  _cutAttack: {fileID: 909073353951205953}
+  _stabAttack: {fileID: 909073355510343843}
+--- !u!114 &989743378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909073353928906982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f5fe19f65a45147a64fd7c9a495413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7091608567371737563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 909073353928906982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200f5577fbb0abd4cba84f7d9652e61b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _horizontalAxis: Horizontal
+  _verticalAxis: Vertical
+  _runKey: 304
+  _sneakKey: 306
+  _rotationAxis: Mouse X
+  _xMouseSensibility: 0.5
+  _jumpKey: 32
+  _attackMouseButton: 0
+  _aimMouseButton: 1
+  _reloadKey: 114
+  _inspectKey: 116
+  _holsterKey: 102
+  _knifeAttack1Key: 113
+  _knifeAttack2Key: 101
+  _lookUpDownAxis: Mouse Y
+  _yMouseSensibility: 0.5
 --- !u!1 &909073353951205964
 GameObject:
   m_ObjectHideFlags: 0
