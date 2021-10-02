@@ -179,7 +179,7 @@ namespace SimpleFPS.Player
 
         private void CheckWeaponKnifeAttack1()
         {
-            if (Input.GetKeyDown(_knifeAttack1Key)) _characterController.DoWeaponKnifeAttack1();
+            if (Input.GetKeyDown(_knifeAttack1Key)) _characterController?.DoWeaponKnifeAttack1();
         }
 
         private void CheckWeaponKnifeAttack2()

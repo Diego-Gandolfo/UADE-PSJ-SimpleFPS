@@ -6,7 +6,7 @@ namespace SimpleFPS.Components
     {
         #region Serialize Fields
 
-        [SerializeField] private float _timeToDisable;
+        [SerializeField] private float _timeToDisable = 0f;
 
         #endregion
 
@@ -23,6 +23,11 @@ namespace SimpleFPS.Components
         #endregion
 
         #region Unity Methods
+
+        private void Start()
+        {
+            gameObject.SetActive(false);
+        }
 
         private void OnEnable()
         {
