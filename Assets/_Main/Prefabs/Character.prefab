@@ -970,11 +970,11 @@ MonoBehaviour:
   _jumpKey: 32
   _attackMouseButton: 0
   _aimMouseButton: 1
+  _reloadKey: 114
   _inspectKey: 116
   _holsterKey: 102
   _knifeAttack1Key: 113
   _knifeAttack2Key: 101
-  _granadeKey: 103
   _lookUpDownAxis: Mouse Y
   _yMouseSensibility: 0.5
 --- !u!114 &909073353928907003
@@ -23797,7 +23797,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967039
+    m_Bits: 247
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -24416,7 +24416,7 @@ Camera:
   m_Depth: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 8
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
