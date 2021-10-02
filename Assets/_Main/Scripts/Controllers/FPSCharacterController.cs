@@ -1,10 +1,7 @@
 using SimpleFPS.Cameras;
 using SimpleFPS.Movement;
-using SimpleFPS.Player;
 using SimpleFPS.Weapons;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SimpleFPS.FPS
