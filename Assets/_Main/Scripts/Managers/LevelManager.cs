@@ -17,7 +17,7 @@ namespace SimpleFPS.LevelManagers
         #region Serialize Fields
 
         [Header("Character")]
-        [SerializeField] private InputController _character;
+        [SerializeField] private FPSInputController _character;
 
         [Header("Pool Prefabs")]
         [SerializeField] private Bullet _playerBulletPrefab;
@@ -38,7 +38,7 @@ namespace SimpleFPS.LevelManagers
         #region Propertys
 
         // Character
-        public InputController Character => _character;
+        public FPSInputController Character => _character;
 
         // Pools
         public Pool<Bullet> PlayerBulletPool => _playerBulletPool;

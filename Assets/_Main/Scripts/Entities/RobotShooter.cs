@@ -7,7 +7,7 @@ using UnityEngine;
 namespace SimpleFPS.Enemy
 {
     [RequireComponent(typeof(MoveComponent))]
-    public class EnemyController : MonoBehaviour
+    public class RobotShooter : MonoBehaviour
     {
         [SerializeField] private EnemyTargetStats _objectiveTargetStats;
         [SerializeField] private EnemyTargetStats _characterTargetStats;
@@ -18,7 +18,7 @@ namespace SimpleFPS.Enemy
         private MoveComponent _moveComponent;
 
         // Character
-        private InputController _character;
+        private FPSInputController _character;
 
         // Objetives
         private List<Transform> _objectivesList = new List<Transform>();

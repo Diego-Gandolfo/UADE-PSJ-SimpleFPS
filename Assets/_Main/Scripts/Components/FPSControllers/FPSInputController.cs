@@ -11,7 +11,7 @@ public enum MouseButton
 
 namespace SimpleFPS.Player
 {
-    public class InputController : MonoBehaviour
+    public class FPSInputController : MonoBehaviour
     {
         #region Serialize Fields
 

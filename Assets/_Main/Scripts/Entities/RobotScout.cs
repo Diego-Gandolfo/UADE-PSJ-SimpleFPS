@@ -3,10 +3,7 @@ using UnityEngine;
 
 namespace SimpleFPS.Patrol
 {
-    [RequireComponent(typeof(PatrolArea))]
-    [RequireComponent(typeof(FollowTarget))]
-    [RequireComponent(typeof(ExploteOnCollision))]
-    public class RobotScoutController : MonoBehaviour
+    public class RobotScout : MonoBehaviour
     {
         #region Serialize Fields
 
@@ -39,7 +36,8 @@ namespace SimpleFPS.Patrol
             _meshRenderer = GetComponentInChildren<MeshRenderer>();
 
             _exploteOnCollision = GetComponent<ExploteOnCollision>();
-            _exploteOnCollision.OnExplotion += OnExplotionHandler;
+            if (_exploteOnCollision == null) Debug.LogError($"{this.gameObject.name} no tiene un ExploteOnCollision");
+            else _exploteOnCollision.OnExplotion += OnExplotionHandler;
 
             if (_visionCone == null) Debug.LogError($"{this.gameObject.name} no tiene asignado un DetectTarget");
             else _visionCone.OnDetection += OnDetectionHandler;
