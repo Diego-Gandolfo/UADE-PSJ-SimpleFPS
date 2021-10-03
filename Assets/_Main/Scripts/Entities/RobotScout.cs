@@ -42,7 +42,7 @@ namespace SimpleFPS.Patrol
             if (_visionCone == null) Debug.LogError($"{this.gameObject.name} no tiene asignado un DetectTarget");
             else _visionCone.OnDetection += OnDetectionHandler;
 
-            _patrolArea.enabled = false;
+            _patrolArea.enabled = true;
             _visionCone.gameObject.SetActive(true);
             _followTarget.enabled = false;
         }

@@ -38,7 +38,7 @@ namespace SimpleFPS.Command
                 }
                 else
                 {
-                    _subject.transform.position += (_direction * _speed);
+                    _subject.transform.position += (_direction * _speed * Time.deltaTime);
                 }
             }
         }

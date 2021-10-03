@@ -1,3 +1,4 @@
+using SimpleFPS.Life;
 using UnityEngine;
 
 namespace SimpleFPS.Components
@@ -7,6 +8,9 @@ namespace SimpleFPS.Components
         #region SerializeFields
 
         [SerializeField] private float _timeToDespawn = 1f;
+        [SerializeField] private float _radius = 1f;
+        [SerializeField] private float _damage = 1f;
+        [SerializeField] private LayerMask _layerMask;
 
         #endregion
 
@@ -18,9 +22,10 @@ namespace SimpleFPS.Components
 
         #region Unity Methods
 
-        private void OnEnable()
+        private void Start()
         {
             _timer = _timeToDespawn;
+            DoExplotion();
         }
 
         private void Update()
@@ -30,6 +35,34 @@ namespace SimpleFPS.Components
             if (_timer <= 0f)
             {
                 Managers.LevelManager.Instance.ExplotionPool.StoreInstance(this);
+            }
+        }
+
+        void OnDrawGizmos()
+        {
+            Gizmos.color = new Color(1, 0, 0, 0.5f);
+            Gizmos.DrawSphere(transform.position, _radius);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void DoExplotion()
+        {
+            var hits = Physics.OverlapSphere(transform.position, _radius, _layerMask);
+
+            if (hits.Length > 0)
+            {
+                foreach (var hit in hits)
+                {
+                    var health = hit.GetComponent<HealthComponent>();
+
+                    if (health != null)
+                    {
+                        health.ReceiveDamage(_damage);
+                    }
+                }
             }
         }
 

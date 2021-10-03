@@ -45,6 +45,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _timeToDespawn: 1
+  _radius: 2.5
+  _damage: 1
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 72
 --- !u!1 &5602712659486253357
 GameObject:
   m_ObjectHideFlags: 0
