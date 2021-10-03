@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SimpleFPS.Components
 {
-    public class Explotion : MonoBehaviour
+    public class Explosion : MonoBehaviour
     {
         #region SerializeFields
 

@@ -23,7 +23,7 @@ namespace SimpleFPS.Managers
         [Header("Pool Prefabs")]
         [SerializeField] private Bullet _bulletPrefab;
         [SerializeField] private BulletImpact _bulletImpactPrefab;
-        [SerializeField] private Explotion _explotionPrefab;
+        [SerializeField] private Explosion _explotionPrefab;
 
         [Header("Objectives")]
         [SerializeField] private List<Transform> _objectivesList = new List<Transform>();
@@ -34,7 +34,7 @@ namespace SimpleFPS.Managers
 
         protected Pool<Bullet> _bulletPool;
         protected Pool<BulletImpact> _bulletImpactPool;
-        protected Pool<Explotion> _explotionPool;
+        protected Pool<Explosion> _explotionPool;
 
         #endregion
 
@@ -46,7 +46,7 @@ namespace SimpleFPS.Managers
         // Pools
         public Pool<Bullet> BulletPool => _bulletPool;
         public Pool<BulletImpact> BulletImpactPool => _bulletImpactPool;
-        public Pool<Explotion> ExplotionPool => _explotionPool;
+        public Pool<Explosion> ExplotionPool => _explotionPool;
 
         // Objectives
         public List<Transform> ObjectivesList => _objectivesList;
@@ -68,7 +68,7 @@ namespace SimpleFPS.Managers
 
             _bulletPool = new Pool<Bullet>(_bulletPrefab);
             _bulletImpactPool = new Pool<BulletImpact>(_bulletImpactPrefab);
-            _explotionPool = new Pool<Explotion>(_explotionPrefab);
+            _explotionPool = new Pool<Explosion>(_explotionPrefab);
         }
 
         private void Start()

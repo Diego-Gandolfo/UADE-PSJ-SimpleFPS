@@ -22,8 +22,6 @@ namespace SimpleFPS.Patrol
         // Componentes
         private PatrolArea _patrolArea;
         private FollowTarget _followTarget;
-        private ExploteOnCollision _exploteOnCollision;
-        private MeshRenderer _meshRenderer;
 
         #endregion
 
@@ -33,11 +31,6 @@ namespace SimpleFPS.Patrol
         {
             _patrolArea = GetComponent<PatrolArea>();
             _followTarget = GetComponent<FollowTarget>();
-            _meshRenderer = GetComponentInChildren<MeshRenderer>();
-
-            _exploteOnCollision = GetComponent<ExploteOnCollision>();
-            if (_exploteOnCollision == null) Debug.LogError($"{this.gameObject.name} no tiene un ExploteOnCollision");
-            else _exploteOnCollision.OnExplotion += OnExplotionHandler;
 
             if (_visionCone == null) Debug.LogError($"{this.gameObject.name} no tiene asignado un DetectTarget");
             else _visionCone.OnDetection += OnDetectionHandler;
@@ -56,14 +49,6 @@ namespace SimpleFPS.Patrol
             _patrolArea.enabled = false;
             _visionCone.gameObject.SetActive(false);
             _followTarget.enabled = true;
-        }
-
-        private void OnExplotionHandler()
-        {
-            _patrolArea.enabled = false;
-            _visionCone.gameObject.SetActive(false);
-            _followTarget.enabled = false;
-            _meshRenderer.enabled = false;
         }
 
         #endregion
