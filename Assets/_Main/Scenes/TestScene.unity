@@ -26499,7 +26499,7 @@ MonoBehaviour:
   _rayDistance: 0
   _rayLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   _rayOffset: 0
 --- !u!114 &1010536896
 MonoBehaviour:
