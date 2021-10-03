@@ -64,6 +64,7 @@ namespace SimpleFPS.Patrol
             _enemyManager = EnemyManager.Instance;
 
             _patrolPosition = new GameObject("Patrol Position");
+            _patrolPosition.transform.parent = gameObject.transform.parent;
             _patrolPosition.SetActive(false);
             RandomMovePatrolPosition();
 
