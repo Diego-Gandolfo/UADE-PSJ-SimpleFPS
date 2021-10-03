@@ -26420,6 +26420,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1010536891}
   - component: {fileID: 1010536894}
+  - component: {fileID: 1010536893}
   - component: {fileID: 1010536896}
   - component: {fileID: 1010536892}
   - component: {fileID: 1010536895}
@@ -26461,6 +26462,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 1797668561}
   _moveSpeed: 1
+--- !u!135 &1010536893
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010536890}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1010536894
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -26490,17 +26504,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemySize: {x: 0.5, y: 0.5, z: 1}
-  _patrolSpeed: 0.5
-  _minWaitTime: 0.5
+  _patrolSpeed: 1
+  _minWaitTime: 1
   _maxWaitTime: 1
-  _minDistance: 0.25
+  _minDistance: 0.5
   _patrolCenter: {fileID: 2138918326}
-  _areaSize: {x: 5, y: 0, z: 5}
-  _rayDistance: 0
-  _rayLayerMask:
+  _areaSize: {x: 20, y: 0, z: 20}
+  _collisionStopDistance: 0.75
+  _collisionStopLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
-  _rayOffset: 0
+    m_Bits: 201
 --- !u!114 &1010536896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42284,7 +42297,6 @@ GameObject:
   - component: {fileID: 4248125398757271}
   - component: {fileID: 33354542189532083}
   - component: {fileID: 23784389047298713}
-  - component: {fileID: 1914547628023238}
   m_Layer: 6
   m_Name: Robot_Scout
   m_TagString: Untagged
@@ -42292,20 +42304,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &1914547628023238
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1914547628023237}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.35
-  m_Height: 1
-  m_Direction: 2
-  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!4 &4248125398757271
 Transform:
   m_ObjectHideFlags: 0
@@ -45200,7 +45198,7 @@ GameObject:
   - component: {fileID: 9163207479833242570}
   - component: {fileID: 2136249525956605705}
   - component: {fileID: 2898879694719385165}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: VisionCone_Scout
   m_TagString: Untagged
   m_Icon: {fileID: 0}

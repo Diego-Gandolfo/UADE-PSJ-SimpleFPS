@@ -21,27 +21,38 @@ namespace SimpleFPS.Patrol
         [SerializeField] private Transform _patrolCenter = null;
         [SerializeField] private Vector3 _areaSize = Vector3.zero;
 
-        [Header("Raycast Settings")]
-        [SerializeField] private float _rayDistance = 0f;
-        [SerializeField] private LayerMask _rayLayerMask = 0;
-        [SerializeField] private float _rayOffset = 0f;
+        [Header("Collision Stop Settings")]
+        [SerializeField] private float _collisionStopDistance = 0f;
+        [SerializeField] private LayerMask _collisionStopLayerMask = 0;
 
         #endregion
 
         #region Private Fields
 
+        // Components
         private EnemyManager _enemyManager;
         private GameObject _patrolPosition = null;
-        private float _waitTimeCounter = 0.0f;
+
+        // Area
         private float _minX = 0;
         private float _maxX = 0;
         private float _minZ = 0;
         private float _maxZ = 0;
-        private bool _canMove = true;
+
+        // Flags
+        private bool _canRotate = true;
+        private bool _canMove = false;
         private bool _canCount = false;
+
+        // Parameters
+        private float _waitTimeCounter = 0.0f;
+        private float _rotateCounter = 0.0f;
+        private float _currentSpeed;
+        private Vector3 _direction;
 
         #endregion
 
+        #region Unity Methods
 
         private void Awake()
         {
@@ -54,75 +65,84 @@ namespace SimpleFPS.Patrol
 
             _patrolPosition = new GameObject("Patrol Position");
             _patrolPosition.SetActive(false);
+            RandomMovePatrolPosition();
 
             _minX = (_areaSize.x / -2) + _patrolCenter.position.x;
             _maxX = (_areaSize.x / 2) + _patrolCenter.position.x;
             _minZ = (_areaSize.z / -2) + _patrolCenter.position.z;
             _maxZ = (_areaSize.z / 2) + _patrolCenter.position.z;
 
-            _patrolPosition.transform.position = new Vector3(Random.Range(_minX, _maxX), transform.position.y, Random.Range(_minZ, _maxZ));
             _waitTimeCounter = Random.Range(_minWaitTime, _maxWaitTime);
+
+            _currentSpeed = 0f;
         }
 
         private void Update()
         {
-
-            if (_canMove)
+            if (_canCount)
             {
-                var xzPatrolPosition = new Vector3(_patrolPosition.transform.position.x, transform.position.y, _patrolPosition.transform.position.z);
-
-                var direction = xzPatrolPosition - transform.position;
-                direction.Normalize();
-
-                transform.LookAt(xzPatrolPosition);
-                _enemyManager.AddCommand(new CmdMovement(gameObject, direction, _patrolSpeed));
-
-                if (Vector2.Distance(transform.position, _patrolPosition.transform.position) < 0.2f)
+                if (_waitTimeCounter <= 0)
                 {
-                    _patrolPosition.transform.position = new Vector3(Random.Range(_minX, _maxX), transform.position.y, Random.Range(_minZ, _maxZ));
+                    _canCount = false;
 
-                    while (Vector2.Distance(transform.position, _patrolPosition.transform.position) < _minDistance)
-                    {
-                        _patrolPosition.transform.position = new Vector3(Random.Range(_minX, _maxX), transform.position.y, Random.Range(_minZ, _maxZ));
-                    }
-
-                    _enemyManager.AddCommand(new CmdMovement(gameObject, Vector3.zero, 0f));
                     _waitTimeCounter = Random.Range(_minWaitTime, _maxWaitTime);
-                    _canMove = false;
-                    _canCount = true;
+                    
+                    _canRotate = true;
+                }
+                else
+                {
+                    _waitTimeCounter -= Time.deltaTime;
                 }
             }
 
-            if (_waitTimeCounter <= 0 && _canCount)
+            if (_canRotate)
             {
-                _canCount = false;
-                _canMove = true;
+                var lookRotation = Quaternion.LookRotation(_direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, _rotateCounter);
+                _rotateCounter += Time.deltaTime;
+
+                if (_rotateCounter >= 1f)
+                {
+                    _canRotate = false;
+
+                    _rotateCounter = 0f;
+
+                    _canMove = true;
+                }
             }
-            else
+
+            if (_canMove)
             {
-                _waitTimeCounter -= Time.deltaTime;
+                _currentSpeed = _patrolSpeed;
+
+                if (Vector2.Distance(transform.position, _patrolPosition.transform.position) < 0.2f)
+                {
+                    _canMove = false;
+
+                    _currentSpeed = 0f;
+                    RandomMovePatrolPosition();
+
+                    _canCount = true;
+                }
             }
-
-}
-
-private void FixedUpdate()
-        {
-            Vector2 rayPosition = transform.position + (_patrolPosition.transform.position - transform.position).normalized * _rayOffset;
-            Vector2 rayDirection = (_patrolPosition.transform.position - transform.position).normalized;
-
-            RaycastHit2D raycast = Physics2D.Raycast(rayPosition, rayDirection, _rayDistance, _rayLayerMask);
-            Debug.DrawRay(rayPosition, rayDirection * _rayDistance, Color.blue);
-
-            if (raycast)
-                _patrolPosition.transform.position = transform.position;
         }
 
-        private void OnCollisionExit2D(Collision2D collision)
+        private void FixedUpdate()
         {
-            if (collision.gameObject.CompareTag("Enemy"))
+            _enemyManager.AddCommand(new CmdMovement(gameObject, _direction, _currentSpeed));
+
+            var hits = Physics.OverlapSphere(transform.position, _collisionStopDistance, _collisionStopLayerMask);
+
+            foreach (var hit in hits)
             {
-                Rigidbody2D rb = collision.gameObject.GetComponent<Rigidbody2D>();
-                if (rb != null) rb.velocity = Vector2.zero;
+                if (hit.gameObject != gameObject)
+                {
+                    _canMove = false;
+                    _currentSpeed = _patrolSpeed;
+                    RandomMovePatrolPosition();
+                    _rotateCounter = 0f;
+                    _canRotate = true;
+                }
             }
         }
 
@@ -131,11 +151,34 @@ private void FixedUpdate()
             Gizmos.color = new Color(0.9f, 0f, 0f, 0.25f);
             if (_patrolCenter != null) Gizmos.DrawCube(_patrolCenter.position, new Vector3(_areaSize.x + _enemySize.x, 0.01f, _areaSize.z + _enemySize.z));
             else Gizmos.DrawCube(transform.position, new Vector3(_areaSize.x + _enemySize.x, 0.01f, _areaSize.z + _enemySize.z));
+
+            Gizmos.color = new Color(0f, 0.25f, 0f, 0.25f);
+            Gizmos.DrawSphere(transform.position, _collisionStopDistance);
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             Destroy(_patrolPosition);
         }
+
+        #endregion
+
+        #region Private Methods
+
+        private void RandomMovePatrolPosition()
+        {
+            _patrolPosition.transform.position = new Vector3(Random.Range(_minX, _maxX), transform.position.y, Random.Range(_minZ, _maxZ));
+
+            while (Vector2.Distance(transform.position, _patrolPosition.transform.position) < _minDistance)
+            {
+                _patrolPosition.transform.position = new Vector3(Random.Range(_minX, _maxX), transform.position.y, Random.Range(_minZ, _maxZ));
+            }
+
+            var xzPatrolPosition = new Vector3(_patrolPosition.transform.position.x, transform.position.y, _patrolPosition.transform.position.z);
+            _direction = xzPatrolPosition - transform.position;
+            _direction.Normalize();
+        }
+
+        #endregion
     }
 }
