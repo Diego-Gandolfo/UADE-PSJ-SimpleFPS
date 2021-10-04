@@ -27912,6 +27912,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 909073353928907000, guid: 55c92db087783ed49a646da5ebd56ee2, type: 3}
+      propertyPath: _jumpForce
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 909073353928907006, guid: 55c92db087783ed49a646da5ebd56ee2, type: 3}
+      propertyPath: _runSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 909073353928907006, guid: 55c92db087783ed49a646da5ebd56ee2, type: 3}
+      propertyPath: _walkSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 909073353928907006, guid: 55c92db087783ed49a646da5ebd56ee2, type: 3}
+      propertyPath: _sneakSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55c92db087783ed49a646da5ebd56ee2, type: 3}
 --- !u!1001 &1193121508264087620

@@ -1,6 +1,3 @@
-using SimpleFPS.FPS;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SimpleFPS.Enemy
@@ -19,10 +16,15 @@ namespace SimpleFPS.Enemy
 
         #region Private Fields
 
+        // Components
         private Transform _character;
-        private Vector3 _direction;
+
+        // Flags
         private bool _canRotate;
         private bool _canShoot;
+
+        // Parameters
+        private Vector3 _direction;
         private float _shootingTimer;
 
         #endregion
@@ -41,7 +43,9 @@ namespace SimpleFPS.Enemy
             {
                 var xzCharacterPosition = new Vector3(_character.position.x, _gameObjectToRotate.position.y, _character.position.z);
                 _direction = xzCharacterPosition - _gameObjectToRotate.position;
-                _direction.Normalize(); var lookRotation = Quaternion.LookRotation(_direction);
+                _direction.Normalize();
+
+                var lookRotation = Quaternion.LookRotation(_direction);
                 _gameObjectToRotate.rotation = Quaternion.RotateTowards(_gameObjectToRotate.rotation, lookRotation, .25f);
             }
 
@@ -62,26 +66,10 @@ namespace SimpleFPS.Enemy
         private void FixedUpdate()
         {
             var targetsDetected = Physics.OverlapSphere(transform.position, _detectionRadius, _layerMask);
-
-            if (targetsDetected.Length > 0)
-            {
-                _canRotate = true;
-            }
-            else
-            {
-                _canRotate = false;
-            }
+            _canRotate = (targetsDetected.Length > 0);
 
             var targetsInRange = Physics.OverlapSphere(transform.position, _shootingRadius, _layerMask);
-
-            if (targetsInRange.Length > 0)
-            {
-                _canShoot = true;
-            }
-            else
-            {
-                _canShoot = false;
-            }
+            _canShoot = (targetsInRange.Length > 0);
         }
 
         private void OnDrawGizmos()
