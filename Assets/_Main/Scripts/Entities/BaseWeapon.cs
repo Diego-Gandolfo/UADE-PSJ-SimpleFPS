@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace SimpleFPS.Weapons
 {
-    public class BaseWeapon : MonoBehaviour, IWeapon
+    public abstract class BaseWeapon : MonoBehaviour, IWeapon
     {
         #region Serialize Fields
 

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace SimpleFPS.Weapons
 {
-    public class BaseGun : BaseWeapon, IGun
+    public abstract class BaseGun : BaseWeapon, IGun
     {
         #region Serialize Fields
 
