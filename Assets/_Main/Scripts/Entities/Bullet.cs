@@ -16,6 +16,7 @@ namespace SimpleFPS.Projectiles
 
         private float _timer;
         private float _damage;
+        private bool _canCount;
 
         #endregion
 
@@ -30,15 +31,21 @@ namespace SimpleFPS.Projectiles
         private void OnEnable()
         {
             _timer = _timeToDespawn;
+            _canCount = true;
         }
 
         private void Update()
         {
-            _timer -= Time.deltaTime;
-
-            if (_timer <= 0f)
+            if (_canCount)
             {
-                Managers.LevelManager.Instance.BulletPool.StoreInstance(this);
+                if (_timer <= 0f)
+                {
+                    Managers.LevelManager.Instance.BulletPool.StoreInstance(this);
+                }
+                else
+                {
+                    _timer -= Time.deltaTime;
+                }
             }
         }
 
@@ -57,6 +64,7 @@ namespace SimpleFPS.Projectiles
                 bulletImpact.transform.rotation = transform.rotation;
             }
 
+            _canCount = false;
             Managers.LevelManager.Instance.BulletPool.StoreInstance(this);
         }
 

@@ -22,7 +22,7 @@ namespace SimpleFPS.Components
 
         #region Unity Methods
 
-        private void Start()
+        private void OnEnable()
         {
             _timer = _timeToDespawn;
             DoExplotion();

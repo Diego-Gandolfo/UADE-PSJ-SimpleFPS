@@ -27723,6 +27723,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 869376497799117298, guid: dfe8753e362a69648bec845a0802e819, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 869376497968957710, guid: dfe8753e362a69648bec845a0802e819, type: 3}
       propertyPath: m_Name
       value: RobotScout (1)
@@ -27771,6 +27775,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 869376498209675732, guid: dfe8753e362a69648bec845a0802e819, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 869376498332485228, guid: dfe8753e362a69648bec845a0802e819, type: 3}
       propertyPath: _target
       value: 
@@ -27782,6 +27790,10 @@ PrefabInstance:
     - target: {fileID: 869376498332485231, guid: dfe8753e362a69648bec845a0802e819, type: 3}
       propertyPath: _areaSize.z
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 869376498462688293, guid: dfe8753e362a69648bec845a0802e819, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfe8753e362a69648bec845a0802e819, type: 3}

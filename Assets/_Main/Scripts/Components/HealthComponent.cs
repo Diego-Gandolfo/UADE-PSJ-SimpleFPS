@@ -29,6 +29,7 @@ namespace SimpleFPS.Life
         #region Events
 
         public event Action OnDie;
+        public event Action OnRecieveDamage;
 
         #endregion
 
@@ -47,7 +48,7 @@ namespace SimpleFPS.Life
         public void ReceiveDamage(float damage)
         {
             _currentLife -= damage;
-
+            OnRecieveDamage?.Invoke();
             if (_currentLife <= 0f) OnDie?.Invoke();
         }
 
