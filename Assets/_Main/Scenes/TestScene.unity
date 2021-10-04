@@ -15387,7 +15387,8 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 8
-  _detectionRadius: 10
+  _detectionRadius: 20
+  _shootingRadius: 10
   _gameObjectToRotate: {fileID: 1773968946}
 --- !u!4 &1227200993
 Transform:
@@ -15895,8 +15896,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2114e275679f1024099883b49590c66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectiveTargetStats: {fileID: 0}
-  _characterTargetStats: {fileID: 11400000, guid: 295e2ebd202e96b459cd2ae4bf04177f, type: 2}
 --- !u!4 &1251714031 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013149834228, guid: 6857ff1d3761e21479727f3b27cc8f68, type: 3}
