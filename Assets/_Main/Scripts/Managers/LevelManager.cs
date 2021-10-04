@@ -4,6 +4,7 @@ using UnityEngine;
 using SimpleFPS.Player;
 using System.Collections.Generic;
 using SimpleFPS.Components;
+using SimpleFPS.FPS;
 
 namespace SimpleFPS.Managers
 {
@@ -18,15 +19,12 @@ namespace SimpleFPS.Managers
         #region Serialize Fields
 
         [Header("Character")]
-        [SerializeField] private FPSInputController _character;
+        [SerializeField] private FPSCharacterController _character;
 
         [Header("Pool Prefabs")]
         [SerializeField] private Bullet _bulletPrefab;
         [SerializeField] private BulletImpact _bulletImpactPrefab;
         [SerializeField] private Explosion _explotionPrefab;
-
-        [Header("Objectives")]
-        [SerializeField] private List<Transform> _objectivesList = new List<Transform>();
 
         #endregion
 
@@ -41,15 +39,12 @@ namespace SimpleFPS.Managers
         #region Propertys
 
         // Character
-        public FPSInputController Character => _character;
+        public FPSCharacterController Character => _character;
 
         // Pools
         public Pool<Bullet> BulletPool => _bulletPool;
         public Pool<BulletImpact> BulletImpactPool => _bulletImpactPool;
         public Pool<Explosion> ExplotionPool => _explotionPool;
-
-        // Objectives
-        public List<Transform> ObjectivesList => _objectivesList;
 
         #endregion
 
@@ -69,10 +64,6 @@ namespace SimpleFPS.Managers
             _bulletPool = new Pool<Bullet>(_bulletPrefab);
             _bulletImpactPool = new Pool<BulletImpact>(_bulletImpactPrefab);
             _explotionPool = new Pool<Explosion>(_explotionPrefab);
-        }
-
-        private void Start()
-        {
         }
 
         #endregion

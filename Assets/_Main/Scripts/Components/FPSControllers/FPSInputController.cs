@@ -9,7 +9,7 @@ public enum MouseButton
     Middle
 }
 
-namespace SimpleFPS.Player
+namespace SimpleFPS.FPS
 {
     public class FPSInputController : MonoBehaviour
     {

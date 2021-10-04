@@ -46,7 +46,6 @@ namespace SimpleFPS.Patrol
 
         // Parameters
         private float _waitTimeCounter = 0.0f;
-        private float _rotateCounter = 0.0f;
         private float _currentSpeed;
         private Vector3 _direction;
 
@@ -99,15 +98,11 @@ namespace SimpleFPS.Patrol
             if (_canRotate)
             {
                 var lookRotation = Quaternion.LookRotation(_direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, _rotateCounter);
-                _rotateCounter += Time.deltaTime;
-
-                if (_rotateCounter >= 1f)
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, .5f);
+                
+                if (Quaternion.Angle(transform.rotation, lookRotation) < .1f)
                 {
                     _canRotate = false;
-
-                    _rotateCounter = 0f;
-
                     _canMove = true;
                 }
             }
@@ -141,7 +136,6 @@ namespace SimpleFPS.Patrol
                     _canMove = false;
                     _currentSpeed = _patrolSpeed;
                     RandomMovePatrolPosition();
-                    _rotateCounter = 0f;
                     _canRotate = true;
                 }
             }
