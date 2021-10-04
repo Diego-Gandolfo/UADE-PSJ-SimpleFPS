@@ -13,6 +13,7 @@ namespace SimpleFPS.Enemy
         [SerializeField] private float _detectionRadius;
         [SerializeField] private float _shootingRadius;
         [SerializeField] private Transform _gameObjectToRotate;
+        [SerializeField] private float _shootingCooldown;
 
         #endregion
 
@@ -21,6 +22,8 @@ namespace SimpleFPS.Enemy
         private Transform _character;
         private Vector3 _direction;
         private bool _canRotate;
+        private bool _canShoot;
+        private float _shootingTimer;
 
         #endregion
 
@@ -29,6 +32,7 @@ namespace SimpleFPS.Enemy
         private void Start()
         {
             _character = Managers.LevelManager.Instance.Character.transform;
+            _shootingTimer = _shootingCooldown;
         }
 
         private void Update()
@@ -39,6 +43,19 @@ namespace SimpleFPS.Enemy
                 _direction = xzCharacterPosition - _gameObjectToRotate.position;
                 _direction.Normalize(); var lookRotation = Quaternion.LookRotation(_direction);
                 _gameObjectToRotate.rotation = Quaternion.RotateTowards(_gameObjectToRotate.rotation, lookRotation, .25f);
+            }
+
+            if(_canShoot)
+            {
+                if (_shootingTimer <= 0f)
+                {
+                    print($"POW!");
+                    _shootingTimer = _shootingCooldown;
+                }
+                else
+                {
+                    _shootingTimer -= Time.deltaTime;
+                }
             }
         }
 
@@ -53,6 +70,17 @@ namespace SimpleFPS.Enemy
             else
             {
                 _canRotate = false;
+            }
+
+            var targetsInRange = Physics.OverlapSphere(transform.position, _shootingRadius, _layerMask);
+
+            if (targetsInRange.Length > 0)
+            {
+                _canShoot = true;
+            }
+            else
+            {
+                _canShoot = false;
             }
         }
 

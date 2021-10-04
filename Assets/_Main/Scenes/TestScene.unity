@@ -15390,6 +15390,7 @@ MonoBehaviour:
   _detectionRadius: 20
   _shootingRadius: 10
   _gameObjectToRotate: {fileID: 1773968946}
+  _shootingCooldown: 2
 --- !u!4 &1227200993
 Transform:
   m_ObjectHideFlags: 0
