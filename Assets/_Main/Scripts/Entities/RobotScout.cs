@@ -81,7 +81,6 @@ namespace SimpleFPS.Patrol
 
         private void OnRecieveDamageHandler()
         {
-            print($"{gameObject.transform.parent.name} says 'Ouch!' <> CurrentLife: {_healthComponent.CurrentLife}");
             if (!_damageParticles1.isPlaying && _healthComponent.CurrentLife <= ((_healthComponent.MaxLife / 2) + (_healthComponent.MaxLife / 4)))
             {
                 _damageParticles1.Play();

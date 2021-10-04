@@ -161,7 +161,14 @@ namespace SimpleFPS.FPS
 
         public void DoWeaponAttack()
         {
-            OnAttack?.Invoke(_weaponController.CurrentWeapon);
+            if (((IGun)_weaponController.CurrentWeapon).CurrentMagazineAmmo > 0)
+            {
+                OnAttack?.Invoke(_weaponController.CurrentWeapon);
+            }
+            else
+            {
+                DoWeaponReload();
+            }
         }
 
         public void DoWeaponInspect()
