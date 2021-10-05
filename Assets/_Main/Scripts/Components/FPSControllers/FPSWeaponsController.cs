@@ -64,11 +64,6 @@ namespace SimpleFPS.FPS
             }
         }
 
-        private void OnThrowGrenadeHandler()
-        {
-            // TODO: Throw Grenade
-        }
-
         private void OnKnifeAttack1Handler()
         {
             _cutAttack.gameObject.SetActive(true);
@@ -93,7 +88,6 @@ namespace SimpleFPS.FPS
         {
             characterController.OnReload += OnReloadHandler;
             characterController.OnAttack += OnAttackHandler;
-            characterController.OnThrowGrenade += OnThrowGrenadeHandler;
             characterController.OnKnifeAttack1 += OnKnifeAttack1Handler;
             characterController.OnKnifeAttack2 += OnKnifeAttack2Handler;
             characterController.OnChangeWeapon += OnChangeWeaponHandler;

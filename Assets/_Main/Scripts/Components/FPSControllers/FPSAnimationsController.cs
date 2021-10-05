@@ -50,11 +50,6 @@ namespace SimpleFPS.FPS
             _weaponAnimator.Play("Knife Attack 1", 0, 0f);
         }
 
-        private void OnThrowGrenadeHandler()
-        {
-            _weaponAnimator.Play("GrenadeThrow", 0, 0.0f);
-        }
-
         private void OnHolsterHandler()
         {
             _weaponAnimator.SetBool("Holster", !_weaponAnimator.GetBool("Holster"));
@@ -133,7 +128,6 @@ namespace SimpleFPS.FPS
             characterController.OnAttack += OnAttackHandler;
             characterController.OnInspect += OnInspectHander;
             characterController.OnHolster += OnHolsterHandler;
-            characterController.OnThrowGrenade += OnThrowGrenadeHandler;
             characterController.OnKnifeAttack1 += OnKnifeAttack1Handler;
             characterController.OnKnifeAttack2 += OnKnifeAttack2Handler;
             characterController.OnAimOn += OnAimOnHandler;

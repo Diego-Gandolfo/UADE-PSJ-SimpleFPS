@@ -1,5 +1,8 @@
 using SimpleFPS.Factory;
+using SimpleFPS.Life;
 using SimpleFPS.Projectiles;
+using SimpleFPS.Sounds;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace SimpleFPS.Enemy
@@ -8,14 +11,26 @@ namespace SimpleFPS.Enemy
     {
         #region Serialized Fields
 
+        [Header("Stats")]
         [SerializeField] private BulletStats _bulletStats;
+
+        [Header("Sounds")]
+        [SerializeField] private AudioSource _mainAudioSource;
+        [SerializeField] private AudioSource _shootAudioSource;
+        [SerializeField] private FXSounds _sounds;
+
+        [Header("Overlaps Settings")]
         [SerializeField] private LayerMask _characterLayer;
         [SerializeField] private float _detectionRadius;
         [SerializeField] private float _shootingRadius;
+
+        [Header("Rotation")]
         [SerializeField] private Transform _gameObjectToRotate;
+        [SerializeField] private float _rotationSpeed;
+
+        [Header("Shooting")]
         [SerializeField] private Transform _bulletSpawnpoint;
         [SerializeField] private float _shootingCooldown;
-        [SerializeField] private float _rotationSpeed;
         [SerializeField] private float _damage;
 
         [Header("Sparks")]
@@ -25,14 +40,24 @@ namespace SimpleFPS.Enemy
 
         [Header("Muzzle Flash")]
         [SerializeField] private ParticleSystem _muzzleFlashParticles;
-        [SerializeField] protected Light _muzzleFlashLight;
+        [SerializeField] private Light _muzzleFlashLight;
+
+        [Header("Destroy")]
+        [SerializeField] private GameObject _destroyOnDie;
+        [SerializeField] private List<Collider> _colliders;
+
+        [Header("Smoke")]
+        [SerializeField] private ParticleSystem _damageParticles1;
+        [SerializeField] private ParticleSystem _damageParticles2;
+        [SerializeField] private ParticleSystem _damageParticles3;
 
         #endregion
 
         #region Private Fields
 
         // Components
-        private Transform _character;
+        private Transform _characterTransform;
+        private HealthComponent _healthComponent;
 
         // Factorys
         private BulletFactory _bulletFactory;
@@ -53,34 +78,40 @@ namespace SimpleFPS.Enemy
         private void Start()
         {
             var levelManager = Managers.LevelManager.Instance;
-            _character = levelManager.Character.transform;
+            _characterTransform = levelManager.Character.transform;
             _bulletFactory = levelManager.BulletFactory;
+
+            _healthComponent = GetComponent<HealthComponent>();
+            if (_healthComponent == null) Debug.LogError($"{this.gameObject.name} no tiene asignado un HealthComponent");
+            else
+            {
+                _healthComponent.OnDie += OnDieHandler;
+                _healthComponent.OnRecieveDamage += OnRecieveDamageHandler;
+            }
+
             _shootingTimer = _shootingCooldown;
         }
 
         private void Update()
         {
+            SetDirection();
+
+            var lookRotation = Quaternion.LookRotation(_direction);
+
             if (_canRotate)
             {
-                var xzCharacterPosition = new Vector3(_character.position.x, _gameObjectToRotate.position.y, _character.position.z);
-                _direction = xzCharacterPosition - _gameObjectToRotate.position;
-                _direction.Normalize();
-
-                var lookRotation = Quaternion.LookRotation(_direction);
-                _gameObjectToRotate.rotation = Quaternion.RotateTowards(_gameObjectToRotate.rotation, lookRotation, _rotationSpeed);
+                RotateTo(lookRotation);
             }
 
             if(_canShoot)
             {
                 if (_shootingTimer <= 0f)
                 {
-                    print($"POW!");
-                    _bulletFactory.GetBullet(_bulletStats, _bulletSpawnpoint.position, _bulletSpawnpoint.rotation, _damage, BULLET_FORCE);
-                    _muzzleFlashLight.enabled = true;
-                    Invoke("TurnMuzzleFlashLightOff", 0.02f);
-                    PlayMuzzleFlashParticles();
-                    PlaySparkParticles();
-                    _shootingTimer = _shootingCooldown;
+                    if (Quaternion.Angle(_gameObjectToRotate.rotation, lookRotation) <= 30)
+                    {
+                        Shoot();
+                        _shootingTimer = _shootingCooldown;
+                    }
                 }
                 else
                 {
@@ -111,6 +142,33 @@ namespace SimpleFPS.Enemy
 
         #region Private Methods
 
+        private void SetDirection()
+        {
+            var xzCharacterPosition = new Vector3(_characterTransform.position.x, _gameObjectToRotate.position.y, _characterTransform.position.z);
+            _direction = xzCharacterPosition - _gameObjectToRotate.position;
+            _direction.Normalize();
+        }
+
+        private void RotateTo(Quaternion rotateTo)
+        {
+            _gameObjectToRotate.rotation = Quaternion.RotateTowards(_gameObjectToRotate.rotation, rotateTo, _rotationSpeed);
+
+            if (!_mainAudioSource.isPlaying && Quaternion.Angle(_gameObjectToRotate.rotation, rotateTo) >= 1)
+            {
+                _mainAudioSource.PlayOneShot(_sounds.TurretRotationRound);
+            }
+        }
+
+        private void Shoot()
+        {
+            _shootAudioSource.PlayOneShot(_sounds.ShootSound);
+            _bulletFactory.GetBullet(_bulletStats, _bulletSpawnpoint.position, _bulletSpawnpoint.rotation, _damage, BULLET_FORCE);
+            _muzzleFlashLight.enabled = true;
+            Invoke("TurnMuzzleFlashLightOff", 0.02f);
+            PlayMuzzleFlashParticles();
+            PlaySparkParticles();
+        }
+
         private void TurnMuzzleFlashLightOff()
         {
             _muzzleFlashLight.enabled = false;
@@ -124,6 +182,39 @@ namespace SimpleFPS.Enemy
         private void PlaySparkParticles()
         {
             _sparkParticles.Emit(Random.Range(_minSparks, _maxSparks));
+        }
+
+        private void OnRecieveDamageHandler()
+        {
+            _mainAudioSource.PlayOneShot(_sounds.HitSound);
+
+            if (!_damageParticles1.isPlaying && _healthComponent.CurrentLife <= ((_healthComponent.MaxLife / 2) + (_healthComponent.MaxLife / 4)))
+            {
+                _damageParticles1.Play();
+            }
+            else if (!_damageParticles2.isPlaying && _healthComponent.CurrentLife <= (_healthComponent.MaxLife / 2))
+            {
+                _damageParticles2.Play();
+            }
+            else if (!_damageParticles3.isPlaying && _healthComponent.CurrentLife <= (_healthComponent.MaxLife / 4))
+            {
+                _damageParticles3.Play();
+            }
+        }
+
+        private void OnDieHandler()
+        {
+            foreach (var collider in _colliders)
+            {
+                collider.enabled = false;
+            }
+
+            Destroy(_destroyOnDie);
+
+            _healthComponent.OnRecieveDamage -= OnRecieveDamageHandler;
+            _healthComponent.OnDie -= OnDieHandler;
+
+            this.enabled = false;
         }
 
         #endregion

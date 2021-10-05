@@ -1,6 +1,7 @@
 ﻿using SimpleFPS.Command;
 using SimpleFPS.Enemy;
 using SimpleFPS.Life;
+using SimpleFPS.Sounds;
 using UnityEngine;
 
 namespace SimpleFPS.Patrol
@@ -11,6 +12,11 @@ namespace SimpleFPS.Patrol
 
         [Header("Patrol Settings")]
         [SerializeField] private DetectTarget _visionCone;
+
+        [Header("Sounds")]
+        [SerializeField] private AudioSource _mainAudioSource;
+        [SerializeField] private AudioSource _shootAudioSource;
+        [SerializeField] private FXSounds _sounds;
 
         [Header("Health")]
         [SerializeField] private ParticleSystem _damageParticles1;

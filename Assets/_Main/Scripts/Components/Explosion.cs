@@ -1,4 +1,5 @@
 using SimpleFPS.Life;
+using SimpleFPS.Sounds;
 using UnityEngine;
 
 namespace SimpleFPS.Components
@@ -7,6 +8,8 @@ namespace SimpleFPS.Components
     {
         #region SerializeFields
 
+        [SerializeField] private AudioSource _mainAudioSource;
+        [SerializeField] private FXSounds _sounds;
         [SerializeField] private float _timeToDespawn = 1f;
         [SerializeField] private float _radius = 1f;
         [SerializeField] private float _damage = 1f;
@@ -50,6 +53,9 @@ namespace SimpleFPS.Components
 
         private void DoExplotion()
         {
+            var explosionSound = _sounds.ExplosionSounds[Random.Range(0, _sounds.ExplosionSounds.Count)];
+            _mainAudioSource.PlayOneShot(explosionSound);
+
             var hits = Physics.OverlapSphere(transform.position, _radius, _layerMask);
 
             if (hits.Length > 0)

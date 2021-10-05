@@ -36,7 +36,6 @@ namespace SimpleFPS.FPS
         [SerializeField] private KeyCode _holsterKey = KeyCode.F;
         [SerializeField] private KeyCode _knifeAttack1Key = KeyCode.Q;
         [SerializeField] private KeyCode _knifeAttack2Key = KeyCode.E;
-        //[SerializeField] private KeyCode _granadeKey = KeyCode.G;
         
         [Header("Look Up-Down")]
         [SerializeField] private string _lookUpDownAxis = "Mouse Y";
@@ -128,7 +127,6 @@ namespace SimpleFPS.FPS
             CheckWeaponHolsterInput();
             CheckWeaponKnifeAttack1();
             CheckWeaponKnifeAttack2();
-            CheckWeaponThrowGrenade();
         }
 
         private void CheckWeaponChangeInput()
@@ -185,11 +183,6 @@ namespace SimpleFPS.FPS
         private void CheckWeaponKnifeAttack2()
         {
             if (Input.GetKeyDown(_knifeAttack2Key)) _characterController.DoWeaponKnifeAttack2();
-        }
-
-        private void CheckWeaponThrowGrenade()
-        {
-            //if (Input.GetKeyDown(_granadeKey)) _characterController.DoWeaponThrowGrenade();
         }
 
         #endregion

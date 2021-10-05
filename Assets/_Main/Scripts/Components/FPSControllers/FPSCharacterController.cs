@@ -40,7 +40,7 @@ namespace SimpleFPS.FPS
 
         public event Action<bool> OnWalk, OnRun, OnSneak;
         public event Action<IWeapon> OnReload, OnAttack, OnChangeWeapon;
-        public event Action OnInspect, OnHolster, OnKnifeAttack1, OnKnifeAttack2, OnThrowGrenade;
+        public event Action OnInspect, OnHolster, OnKnifeAttack1, OnKnifeAttack2;
         public event Action OnAimOn, OnAimOff, OnSliderOutOfAmmo, OnSliderAmmoLeft;
 
         public event Action OnRecieveDamage;
@@ -203,11 +203,6 @@ namespace SimpleFPS.FPS
         public void DoWeaponKnifeAttack2()
         {
             OnKnifeAttack2?.Invoke();
-        }
-
-        public void DoWeaponThrowGrenade()
-        {
-            OnThrowGrenade?.Invoke();
         }
 
         public void DoRecieveDamageHandler()

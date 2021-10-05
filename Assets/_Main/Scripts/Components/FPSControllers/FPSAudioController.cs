@@ -1,4 +1,5 @@
 using SimpleFPS.Player;
+using SimpleFPS.Sounds;
 using SimpleFPS.Weapons;
 using UnityEngine;
 
@@ -14,18 +15,7 @@ namespace SimpleFPS.FPS
         [SerializeField] private AudioSource _attackWeaponAudioSource;
 
         [Header("Sounds")]
-        [SerializeField] private AudioClip _shootSound;
-        [SerializeField] private AudioClip _aimSound;
-        [SerializeField] private AudioClip _reloadAmmoLeftSound;
-        [SerializeField] private AudioClip _reloadOutOfAmmoSound;
-        [SerializeField] private AudioClip _walkSound;
-        [SerializeField] private AudioClip _runSound;
-        [SerializeField] private AudioClip _sneakSound;
-        [SerializeField] private AudioClip _holsterWeaponSound;
-        [SerializeField] private AudioClip _takeOutGunSound;
-        [SerializeField] private AudioClip _knifeCutAttackSound;
-        [SerializeField] private AudioClip _knifeSlabAttackSound;
-        [SerializeField] private AudioClip _throwGrenadeSound;
+        [SerializeField] private FXSounds _sounds;
 
         #endregion
 
@@ -35,10 +25,10 @@ namespace SimpleFPS.FPS
         {
             if (value)
             {
-                _movementAudioSource.clip = _walkSound;
+                _movementAudioSource.clip = _sounds.WalkSound;
                 _movementAudioSource.volume = 0.075f;
 
-                if (_movementAudioSource.clip != _walkSound) _movementAudioSource.Stop();
+                if (_movementAudioSource.clip != _sounds.WalkSound) _movementAudioSource.Stop();
 
                 if (!_movementAudioSource.isPlaying)
                 {
@@ -47,7 +37,7 @@ namespace SimpleFPS.FPS
             }
             else
             {
-                if (_movementAudioSource.clip == _walkSound) _movementAudioSource.Stop();
+                if (_movementAudioSource.clip == _sounds.WalkSound) _movementAudioSource.Stop();
             }
         }
 
@@ -55,10 +45,10 @@ namespace SimpleFPS.FPS
         {
             if (value)
             {
-                _movementAudioSource.clip = _runSound;
+                _movementAudioSource.clip = _sounds.RunSound;
                 _movementAudioSource.volume = 1f;
 
-                if (_movementAudioSource.clip != _runSound) _movementAudioSource.Stop();
+                if (_movementAudioSource.clip != _sounds.RunSound) _movementAudioSource.Stop();
 
                 if (!_movementAudioSource.isPlaying)
                 {
@@ -67,7 +57,7 @@ namespace SimpleFPS.FPS
             }
             else
             {
-                if (_movementAudioSource.clip == _runSound) _movementAudioSource.Stop();
+                if (_movementAudioSource.clip == _sounds.RunSound) _movementAudioSource.Stop();
             }
         }
 
@@ -75,10 +65,10 @@ namespace SimpleFPS.FPS
         {
             if (value)
             {
-                _movementAudioSource.clip = _sneakSound;
+                _movementAudioSource.clip = _sounds.SneakSound;
                 _movementAudioSource.volume = 0.05f;
 
-                if (_movementAudioSource.clip != _sneakSound) _movementAudioSource.Stop();
+                if (_movementAudioSource.clip != _sounds.SneakSound) _movementAudioSource.Stop();
 
                 if (!_movementAudioSource.isPlaying)
                 {
@@ -87,7 +77,7 @@ namespace SimpleFPS.FPS
             }
             else
             {
-                if (_movementAudioSource.clip == _sneakSound) _movementAudioSource.Stop();
+                if (_movementAudioSource.clip == _sounds.SneakSound) _movementAudioSource.Stop();
             }
         }
 
@@ -97,7 +87,7 @@ namespace SimpleFPS.FPS
             {
                 if (!((IGun)currentWeapon).IsMagazineEmpty)
                 {
-                    _attackWeaponAudioSource.clip = _shootSound;
+                    _attackWeaponAudioSource.clip = _sounds.ShootSound;
                     _attackWeaponAudioSource.Play();
                 }
             }
@@ -111,12 +101,12 @@ namespace SimpleFPS.FPS
                 {
                     if (((BaseGun)currentWeapon).IsMagazineEmpty)
                     {
-                        _mainWeaponAudioSource.clip = _reloadOutOfAmmoSound;
+                        _mainWeaponAudioSource.clip = _sounds.ReloadOutOfAmmoSound;
                         _mainWeaponAudioSource.Play();
                     }
                     else
                     {
-                        _mainWeaponAudioSource.clip = _reloadAmmoLeftSound;
+                        _mainWeaponAudioSource.clip = _sounds.ReloadAmmoLeftSound;
                         _mainWeaponAudioSource.Play();
                     }
                 }
@@ -127,51 +117,39 @@ namespace SimpleFPS.FPS
         {
             if (currentWeapon is Handgun)
             {
-                _mainWeaponAudioSource.clip = _takeOutGunSound;
+                _mainWeaponAudioSource.clip = _sounds.TakeOutGunSound;
                 _mainWeaponAudioSource.Play();
             }
             else if (currentWeapon is AsaultRifle)
             {
-                _mainWeaponAudioSource.clip = _reloadAmmoLeftSound;
+                _mainWeaponAudioSource.clip = _sounds.ReloadAmmoLeftSound;
                 _mainWeaponAudioSource.Play();
             }
         }
 
         private void OnHolsterHandler()
         {
-            //if (currentWeapon is IGun)
-            //{
-                _mainWeaponAudioSource.clip = _holsterWeaponSound;
-                _mainWeaponAudioSource.Play();
-            //}
+            _mainWeaponAudioSource.clip = _sounds.HolsterWeaponSound;
+            _mainWeaponAudioSource.Play();
         }
 
         private void OnAimOnHandler()
         {
-            //if (currentWeapon is IGun)
-            //{
-                _mainWeaponAudioSource.clip = _aimSound;
-                _mainWeaponAudioSource.Play();
-            //}
-        }
-
-        private void OnThrowGrenadeHandler()
-        {
-            _mainWeaponAudioSource.clip = _throwGrenadeSound;
+            _mainWeaponAudioSource.clip = _sounds.AimSound;
             _mainWeaponAudioSource.Play();
         }
 
         private void OnKnifeAttack2Handler()
         {
-            _attackWeaponAudioSource.clip = _knifeCutAttackSound;
+            _attackWeaponAudioSource.clip = _sounds.KnifeCutAttackSound;
             _attackWeaponAudioSource.Play();
         }
 
         private void OnKnifeAttack1Handler()
         {
-            _attackWeaponAudioSource.clip = _knifeCutAttackSound;
+            _attackWeaponAudioSource.clip = _sounds.KnifeCutAttackSound;
             _attackWeaponAudioSource.Play();
-            _mainWeaponAudioSource.clip = _knifeSlabAttackSound;
+            _mainWeaponAudioSource.clip = _sounds.KnifeStabAttackSound;
             _mainWeaponAudioSource.PlayDelayed(0.472f);
         }
 
@@ -191,7 +169,6 @@ namespace SimpleFPS.FPS
             characterController.OnWalk += OnWalkHandler;
             characterController.OnKnifeAttack1 += OnKnifeAttack1Handler;
             characterController.OnKnifeAttack2 += OnKnifeAttack2Handler;
-            characterController.OnThrowGrenade += OnThrowGrenadeHandler;
         }
 
         #endregion

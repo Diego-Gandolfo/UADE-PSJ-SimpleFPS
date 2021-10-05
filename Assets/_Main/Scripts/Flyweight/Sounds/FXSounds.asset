@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a851cb2c72d36846940f2d80df8a3ed, type: 3}
+  m_Name: FXSounds
+  m_EditorClassIdentifier: 
+  _explosionSounds:
+  - {fileID: 8300000, guid: dd0264e11df5d694fbe924abc3e80301, type: 3}
+  - {fileID: 8300000, guid: ca80aad89fdc47a4b91e62a663ebd1f0, type: 3}
+  - {fileID: 8300000, guid: 0579dc5d712b04b4291909f2dd3fd64e, type: 3}
+  - {fileID: 8300000, guid: 2cc6c6aebec9fd343aab9a4451b7e5e8, type: 3}
+  - {fileID: 8300000, guid: f51e493a8b9df094b868413e03a7d0e1, type: 3}
+  - {fileID: 8300000, guid: 37a8c4b99174fa742938356c88331c14, type: 3}
+  _impactSounds:
+  - {fileID: 8300000, guid: fceb333e433c97e4497267e3c3a508c3, type: 3}
+  - {fileID: 8300000, guid: f49b461f95e0def45b1ad2a5a350e574, type: 3}
+  - {fileID: 8300000, guid: 091908a06d0b56143aaf6d3913444ab7, type: 3}
+  - {fileID: 8300000, guid: fd208dd7a0eafc84f82ad5fde72ab8fc, type: 3}
+  _shootSound: {fileID: 8300000, guid: 38b450e2adcb6f542acc8c1d423bd8dc, type: 3}
+  _scoutMoveSound: {fileID: 8300000, guid: dc922999b51175f42be94de0ae09f4de, type: 3}
+  _turretRotationSound: {fileID: 8300000, guid: b5a1dd7d105f59847b8d6ae79329632d, type: 3}
+  _hitSound: {fileID: 8300000, guid: 1e3c3e5017588f84586a1d954a199f71, type: 3}
+  _aimSound: {fileID: 8300000, guid: acaebc89b98b82142bd2b24edb6081e4, type: 3}
+  _reloadAmmoLeftSound: {fileID: 8300000, guid: b0d51244fd32fc647960320540b32f66, type: 3}
+  _reloadOutOfAmmoSound: {fileID: 8300000, guid: fee3a21f251a4914cabce25b13e7d2a8, type: 3}
+  _walkSound: {fileID: 8300000, guid: 6597a368cd74a924eaedb0171d5b28d3, type: 3}
+  _runSound: {fileID: 8300000, guid: 01ce1965955492c469d924495b566c28, type: 3}
+  _sneakSound: {fileID: 8300000, guid: 5a079fc0249c0a5419bf6ffd2d244c9b, type: 3}
+  _holsterWeaponSound: {fileID: 8300000, guid: 33a4a9bf1a1dbca4cb379a1118c6b20d, type: 3}
+  _takeOutGunSound: {fileID: 8300000, guid: 2ae41e984ff1f3e4a840a1a46b6a8816, type: 3}
+  _knifeCutAttackSound: {fileID: 8300000, guid: b235f52c649a5334d990a4a67be691c0, type: 3}
+  _knifeStabAttackSound: {fileID: 8300000, guid: 6695f388b6cf44b4ea7a3f98d57df9f2, type: 3}

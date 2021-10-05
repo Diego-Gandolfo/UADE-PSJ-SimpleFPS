@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SimpleFPS.Projectiles
 {
-    [CreateAssetMenu(fileName = "BulletStats", menuName = "Flyweight/Projectiles/Bullet", order = 1)]
+    [CreateAssetMenu(fileName = "BulletStats", menuName = "Flyweight/Projectiles/Bullet", order = 0)]
     public class BulletStats : ScriptableObject
     {
         #region Serialize Fields
