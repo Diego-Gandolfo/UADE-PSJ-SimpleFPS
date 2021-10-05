@@ -26,7 +26,7 @@ namespace SimpleFPS.FPS
         private FPSAnimationsController _animationsController;
         private FPSCameraController _cameraController;
         private FPSAudioController _audioController;
-        private HealthComponent _healthComponent;
+        private Health _healthComponent;
 
         #endregion
 
@@ -85,7 +85,7 @@ namespace SimpleFPS.FPS
             _cameraController = GetComponent<FPSCameraController>();
             _cameraController.SuscribeEvents(this);
 
-            _healthComponent = GetComponent<HealthComponent>();
+            _healthComponent = GetComponent<Health>();
             _healthComponent.OnRecieveDamage += DoRecieveDamageHandler;
         }
 

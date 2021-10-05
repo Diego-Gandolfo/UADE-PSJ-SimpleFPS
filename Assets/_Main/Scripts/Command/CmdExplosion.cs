@@ -15,7 +15,8 @@ namespace SimpleFPS.Command
 
         public void Execute()
         {
-            Managers.LevelManager.Instance.ExplosionFactory.GetExplosion(_position, _rotation);
+            var explotion = Managers.LevelManager.Instance.ExplosionFactory.GetExplosion(_position, _rotation);
+            explotion.DoExplotion();
         }
     }
 }

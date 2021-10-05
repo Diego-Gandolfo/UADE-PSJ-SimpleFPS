@@ -1,3 +1,4 @@
+using SimpleFPS.Command;
 using SimpleFPS.Factory;
 using SimpleFPS.Life;
 using SimpleFPS.Projectiles;
@@ -5,7 +6,7 @@ using SimpleFPS.Sounds;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SimpleFPS.Enemy
+namespace SimpleFPS.Enemy.Turret
 {
     public class Turret : MonoBehaviour
     {
@@ -57,7 +58,7 @@ namespace SimpleFPS.Enemy
 
         // Components
         private Transform _characterTransform;
-        private HealthComponent _healthComponent;
+        private Health _healthComponent;
 
         // Factorys
         private BulletFactory _bulletFactory;
@@ -69,7 +70,7 @@ namespace SimpleFPS.Enemy
         // Parameters
         private Vector3 _direction;
         private float _shootingTimer;
-        private const float BULLET_FORCE = 50f;
+        private const float BULLET_FORCE = 100f;
 
         #endregion
 
@@ -81,7 +82,7 @@ namespace SimpleFPS.Enemy
             _characterTransform = levelManager.Character.transform;
             _bulletFactory = levelManager.BulletFactory;
 
-            _healthComponent = GetComponent<HealthComponent>();
+            _healthComponent = GetComponent<Health>();
             if (_healthComponent == null) Debug.LogError($"{this.gameObject.name} no tiene asignado un HealthComponent");
             else
             {
@@ -204,6 +205,8 @@ namespace SimpleFPS.Enemy
 
         private void OnDieHandler()
         {
+            EnemyManager.Instance.AddCommand(new CmdExplosion(transform.position, transform.rotation));
+
             foreach (var collider in _colliders)
             {
                 collider.enabled = false;

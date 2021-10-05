@@ -1,12 +1,12 @@
 ﻿using SimpleFPS.Command;
-using SimpleFPS.Enemy;
 using SimpleFPS.Life;
+using SimpleFPS.Patrol;
 using SimpleFPS.Sounds;
 using UnityEngine;
 
-namespace SimpleFPS.Patrol
+namespace SimpleFPS.Enemy.Scout
 {
-    public class RobotScout : MonoBehaviour
+    public class Scout : MonoBehaviour
     {
         #region Serialize Fields
 
@@ -29,7 +29,7 @@ namespace SimpleFPS.Patrol
         // Componentes
         private PatrolArea _patrolArea;
         private FollowTarget _followTarget;
-        private HealthComponent _healthComponent;
+        private Health _healthComponent;
 
         #endregion
 
@@ -40,7 +40,7 @@ namespace SimpleFPS.Patrol
             _patrolArea = GetComponent<PatrolArea>();
             _followTarget = GetComponent<FollowTarget>();
             
-            _healthComponent = GetComponent<HealthComponent>();
+            _healthComponent = GetComponent<Health>();
             if (_healthComponent == null) Debug.LogError($"{this.gameObject.name} no tiene asignado un HealthComponent");
             else
             {

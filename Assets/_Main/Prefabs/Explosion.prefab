@@ -49,7 +49,7 @@ MonoBehaviour:
   _sounds: {fileID: 11400000, guid: 65c0a9d0bd17bf34f81951777f8b6ac5, type: 2}
   _timeToDespawn: 1
   _radius: 2.5
-  _damage: 1
+  _damage: 10
   _layerMask:
     serializedVersion: 2
     m_Bits: 72

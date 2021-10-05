@@ -535,7 +535,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.75
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -787,8 +787,8 @@ GameObject:
   - component: {fileID: 5041262911836505391}
   - component: {fileID: 5041262911836505388}
   - component: {fileID: 5041262911836505389}
-  - component: {fileID: 5041262911836505386}
   - component: {fileID: 5041262911836505390}
+  - component: {fileID: 1588026032760138137}
   m_Layer: 6
   m_Name: Turret
   m_TagString: Untagged
@@ -840,19 +840,6 @@ CapsuleCollider:
   m_Height: 0.75
   m_Direction: 2
   m_Center: {x: 0, y: 0.9, z: 0.4}
---- !u!114 &5041262911836505386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5041262911836505361}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1bde4d33914c3442a846d2c4a679c4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lifeStats: {fileID: 11400000, guid: 4cbfd5d6a6e913944b1eaca20aaebbe9, type: 2}
 --- !u!114 &5041262911836505390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -872,12 +859,12 @@ MonoBehaviour:
   _characterLayer:
     serializedVersion: 2
     m_Bits: 8
-  _detectionRadius: 20
-  _shootingRadius: 10
+  _detectionRadius: 25
+  _shootingRadius: 20
   _gameObjectToRotate: {fileID: 5041262912380125948}
   _rotationSpeed: 0.1
   _bulletSpawnpoint: {fileID: 5041262912154931839}
-  _shootingCooldown: 0.5
+  _shootingCooldown: 1
   _damage: 1
   _sparkParticles: {fileID: 5041262913473129001}
   _minSparks: 1
@@ -891,6 +878,19 @@ MonoBehaviour:
   _damageParticles1: {fileID: 5041262912911140370}
   _damageParticles2: {fileID: 5041262913219391262}
   _damageParticles3: {fileID: 5041262912482926486}
+--- !u!114 &1588026032760138137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5041262911836505361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8263a953ca503514aa1f87efe58e433f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lifeStats: {fileID: 11400000, guid: 4cbfd5d6a6e913944b1eaca20aaebbe9, type: 2}
 --- !u!1 &5041262911943079379
 GameObject:
   m_ObjectHideFlags: 0

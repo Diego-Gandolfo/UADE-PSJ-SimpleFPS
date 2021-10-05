@@ -57,7 +57,7 @@ namespace SimpleFPS.Projectiles
         {
             if ((_bulletStats.TargetsLayers & 1 << collision.gameObject.layer) != 0)
             {
-                var heatlhComponent = collision.gameObject.GetComponent<HealthComponent>();
+                var heatlhComponent = collision.gameObject.GetComponent<Health>();
 
                 if (heatlhComponent != null)
                 {

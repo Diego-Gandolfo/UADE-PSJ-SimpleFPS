@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SimpleFPS.Life
 {
-    public class HealthComponent : MonoBehaviour, IAlive, IDamageable, IKilleable, IHealeable
+    public class Health : MonoBehaviour, IAlive, IDamageable, IKilleable, IHealeable
     {
         #region Serialize Fields
 

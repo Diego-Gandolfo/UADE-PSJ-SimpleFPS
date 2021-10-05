@@ -4814,7 +4814,7 @@ GameObject:
   m_Component:
   - component: {fileID: 869376497968957711}
   m_Layer: 0
-  m_Name: RobotScout
+  m_Name: Scout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9720,8 +9720,8 @@ GameObject:
   - component: {fileID: 869376498332485228}
   - component: {fileID: 869376498332485231}
   - component: {fileID: 869376498332485137}
-  - component: {fileID: 6541786835953387985}
   - component: {fileID: 5780516997920067939}
+  - component: {fileID: 3502868053621044797}
   m_Layer: 6
   m_Name: Components
   m_TagString: Untagged
@@ -9844,19 +9844,6 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 8
---- !u!114 &6541786835953387985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869376498332485226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1bde4d33914c3442a846d2c4a679c4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _lifeStats: {fileID: 11400000, guid: 7462b6906b33c924ca8f932b882985ae, type: 2}
 --- !u!82 &5780516997920067939
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9953,6 +9940,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &3502868053621044797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869376498332485226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8263a953ca503514aa1f87efe58e433f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _lifeStats: {fileID: 11400000, guid: 7462b6906b33c924ca8f932b882985ae, type: 2}
 --- !u!1 &869376498462688290
 GameObject:
   m_ObjectHideFlags: 0

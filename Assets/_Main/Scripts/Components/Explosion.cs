@@ -28,7 +28,6 @@ namespace SimpleFPS.Components
         private void OnEnable()
         {
             _timer = _timeToDespawn;
-            DoExplotion();
         }
 
         private void Update()
@@ -49,23 +48,24 @@ namespace SimpleFPS.Components
 
         #endregion
 
-        #region Private Methods
+        #region Public Methods
 
-        private void DoExplotion()
+        public void DoExplotion()
         {
             var explosionSound = _sounds.ExplosionSounds[Random.Range(0, _sounds.ExplosionSounds.Count)];
             _mainAudioSource.PlayOneShot(explosionSound);
 
             var hits = Physics.OverlapSphere(transform.position, _radius, _layerMask);
-
+            print($"Position: {transform.position} - Radio: {_radius} - Hits: {hits.Length}");
             if (hits.Length > 0)
             {
                 foreach (var hit in hits)
                 {
-                    var health = hit.GetComponent<HealthComponent>();
+                    var health = hit.GetComponent<Health>();
 
                     if (health != null)
                     {
+                        print(health.gameObject.name);
                         health.ReceiveDamage(_damage);
                     }
                 }

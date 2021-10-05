@@ -38,7 +38,7 @@ namespace SimpleFPS.Weapons
 
         private void OnTriggerEnter(Collider other)
         {
-            var healthComponent = other.gameObject.GetComponent<HealthComponent>();
+            var healthComponent = other.gameObject.GetComponent<Health>();
 
             if (healthComponent != null)
             {
