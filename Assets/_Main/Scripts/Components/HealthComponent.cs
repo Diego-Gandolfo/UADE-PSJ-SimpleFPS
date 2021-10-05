@@ -55,7 +55,7 @@ namespace SimpleFPS.Life
         public void ReceiveHeal(float heal)
         {
             _currentLife += heal;
-
+            OnRecieveDamage?.Invoke();
             if (_currentLife >= _maxLife) _currentLife = _maxLife;
         }
 

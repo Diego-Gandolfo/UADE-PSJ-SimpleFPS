@@ -1,4 +1,5 @@
 using SimpleFPS.Cameras;
+using SimpleFPS.Life;
 using SimpleFPS.Movement;
 using SimpleFPS.Weapons;
 using System;
@@ -18,6 +19,7 @@ namespace SimpleFPS.FPS
         private FPSAnimationsController _animationsController;
         private FPSCameraController _cameraController;
         private FPSAudioController _audioController;
+        private HealthComponent _healthComponent;
 
         #endregion
 
@@ -33,6 +35,8 @@ namespace SimpleFPS.FPS
         public event Action<IWeapon> OnReload, OnAttack, OnChangeWeapon;
         public event Action OnInspect, OnHolster, OnKnifeAttack1, OnKnifeAttack2, OnThrowGrenade;
         public event Action OnAimOn, OnAimOff, OnSliderOutOfAmmo, OnSliderAmmoLeft;
+
+        public event Action OnRecieveDamage;
 
         #endregion
 
@@ -73,6 +77,9 @@ namespace SimpleFPS.FPS
 
             _cameraController = GetComponent<FPSCameraController>();
             _cameraController.SuscribeEvents(this);
+
+            _healthComponent = GetComponent<HealthComponent>();
+            _healthComponent.OnRecieveDamage += DoRecieveDamageHandler;
         }
 
         private void CheckAmmoSlider()
@@ -194,6 +201,11 @@ namespace SimpleFPS.FPS
         public void DoWeaponThrowGrenade()
         {
             OnThrowGrenade?.Invoke();
+        }
+
+        public void DoRecieveDamageHandler()
+        {
+            OnRecieveDamage?.Invoke();
         }
 
         #endregion

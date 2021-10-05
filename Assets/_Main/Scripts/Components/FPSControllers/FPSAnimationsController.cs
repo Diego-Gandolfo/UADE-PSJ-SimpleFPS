@@ -6,16 +6,22 @@ namespace SimpleFPS.FPS
 {
     public class FPSAnimationsController : MonoBehaviour, IFPSController
     {
+        #region Serialized Fields
+
+        [SerializeField] private Animator _canvasAnimator;
+
+        #endregion
+
         #region Private Fields
 
         // Components
-        private Animator _animator;
+        private Animator _weaponAnimator;
 
         #endregion
 
         #region Propertys
 
-        public Animator Animator => _animator;
+        public Animator Animator => _weaponAnimator;
 
         #endregion
 
@@ -23,40 +29,40 @@ namespace SimpleFPS.FPS
 
         private void OnAimOnHandler()
         {
-            if (!_animator.GetBool("Run"))
+            if (!_weaponAnimator.GetBool("Run"))
             {
-                _animator.SetBool("Aim", true);
+                _weaponAnimator.SetBool("Aim", true);
             }
         }
 
         private void OnAimOffHandler()
         {
-            _animator.SetBool("Aim", false);
+            _weaponAnimator.SetBool("Aim", false);
         }
 
         private void OnKnifeAttack2Handler()
         {
-            _animator.Play("Knife Attack 2", 0, 0f);
+            _weaponAnimator.Play("Knife Attack 2", 0, 0f);
         }
 
         private void OnKnifeAttack1Handler()
         {
-            _animator.Play("Knife Attack 1", 0, 0f);
+            _weaponAnimator.Play("Knife Attack 1", 0, 0f);
         }
 
         private void OnThrowGrenadeHandler()
         {
-            _animator.Play("GrenadeThrow", 0, 0.0f);
+            _weaponAnimator.Play("GrenadeThrow", 0, 0.0f);
         }
 
         private void OnHolsterHandler()
         {
-            _animator.SetBool("Holster", !_animator.GetBool("Holster"));
+            _weaponAnimator.SetBool("Holster", !_weaponAnimator.GetBool("Holster"));
         }
 
         private void OnInspectHander()
         {
-            _animator.SetTrigger("Inspect");
+            _weaponAnimator.SetTrigger("Inspect");
         }
 
         private void OnAttackHandler(IWeapon currentWeapon)
@@ -65,8 +71,8 @@ namespace SimpleFPS.FPS
             {
                 if (((BaseGun)currentWeapon).CurrentMagazineAmmo > 0)
                 {
-                    if (_animator.GetBool("Aim")) _animator.Play("Aim Fire", 0, 0f);
-                    else _animator.Play("Fire", 0, 0f);
+                    if (_weaponAnimator.GetBool("Aim")) _weaponAnimator.Play("Aim Fire", 0, 0f);
+                    else _weaponAnimator.Play("Fire", 0, 0f);
                 }
             }
         }
@@ -77,11 +83,11 @@ namespace SimpleFPS.FPS
             {
                 if (((BaseGun)currentWeapon).IsMagazineEmpty && !((BaseGun)currentWeapon).IsOutOfAmmo)
                 {
-                    _animator.Play("Reload Out Of Ammo", 0, 0f);
+                    _weaponAnimator.Play("Reload Out Of Ammo", 0, 0f);
                 }
                 else
                 {
-                    _animator.Play("Reload Ammo Left", 0, 0f);
+                    _weaponAnimator.Play("Reload Ammo Left", 0, 0f);
                 }
             }
         }
@@ -89,27 +95,32 @@ namespace SimpleFPS.FPS
         private void OnChangeWeaponHandler(IWeapon currentWeapon)
         {
             if (currentWeapon is IGun)
-                _animator = ((BaseWeapon)currentWeapon).gameObject.GetComponent<Animator>();
+                _weaponAnimator = ((BaseWeapon)currentWeapon).gameObject.GetComponent<Animator>();
         }
 
         private void OnRunHandler(bool value)
         {
-            _animator.SetBool("Run", value);
+            _weaponAnimator.SetBool("Run", value);
         }
 
         private void OnWalkHandler(bool value)
         {
-            _animator.SetBool("Walk", value);
+            _weaponAnimator.SetBool("Walk", value);
         }
 
         private void OnSliderOutOfAmmoHandler()
         {
-            _animator.SetBool("Out Of Ammo Slider", true);
+            _weaponAnimator.SetBool("Out Of Ammo Slider", true);
         }
 
         private void OnSliderAmmoLeftHandler()
         {
-            _animator.SetBool("Out Of Ammo Slider", false);
+            _weaponAnimator.SetBool("Out Of Ammo Slider", false);
+        }
+
+        private void OnRecieveDamageHandler()
+        {
+            _canvasAnimator.SetTrigger("OnRecieveDamage");
         }
 
         #endregion
@@ -132,6 +143,7 @@ namespace SimpleFPS.FPS
             characterController.OnRun += OnRunHandler;
             characterController.OnSliderAmmoLeft += OnSliderAmmoLeftHandler;
             characterController.OnSliderOutOfAmmo += OnSliderOutOfAmmoHandler;
+            characterController.OnRecieveDamage += OnRecieveDamageHandler;
         }
 
         #endregion
