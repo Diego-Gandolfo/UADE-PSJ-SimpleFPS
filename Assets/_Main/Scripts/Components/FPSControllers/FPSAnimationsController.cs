@@ -73,13 +73,16 @@ namespace SimpleFPS.FPS
 
         private void OnReloadHandler(IWeapon currentWeapon)
         {
-            if (((BaseGun)currentWeapon).IsMagazineEmpty && !((BaseGun)currentWeapon).IsOutOfAmmo)
+            if (currentWeapon is IGun)
             {
-                _animator.Play("Reload Out Of Ammo", 0, 0f);
-            }
-            else
-            {
-                _animator.Play("Reload Ammo Left", 0, 0f);
+                if (((BaseGun)currentWeapon).IsMagazineEmpty && !((BaseGun)currentWeapon).IsOutOfAmmo)
+                {
+                    _animator.Play("Reload Out Of Ammo", 0, 0f);
+                }
+                else
+                {
+                    _animator.Play("Reload Ammo Left", 0, 0f);
+                }
             }
         }
 

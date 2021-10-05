@@ -80,6 +80,7 @@ namespace SimpleFPS.Cameras
             characterController.OnAimOn += OnAimOnHandler;
             characterController.OnAimOff += OnAimOffHandler;
         }
+
         #endregion
     }
 }
