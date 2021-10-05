@@ -1,6 +1,3 @@
-using SimpleFPS.Enemy;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace SimpleFPS.Command
@@ -18,9 +15,7 @@ namespace SimpleFPS.Command
 
         public void Execute()
         {
-            var explotion = Managers.LevelManager.Instance.ExplotionPool.GetInstance();
-            explotion.transform.position = _position;
-            explotion.transform.rotation = _rotation;
+            Managers.LevelManager.Instance.ExplosionFactory.GetExplosion(_position, _rotation);
         }
     }
 }

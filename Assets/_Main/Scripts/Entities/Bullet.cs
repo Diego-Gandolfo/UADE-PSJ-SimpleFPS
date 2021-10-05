@@ -1,7 +1,5 @@
 using SimpleFPS.Life;
-using SimpleFPS.Generics.Pool;
 using UnityEngine;
-using SimpleFPS.Factory;
 
 namespace SimpleFPS.Projectiles
 {
@@ -67,9 +65,7 @@ namespace SimpleFPS.Projectiles
                 }
                 else
                 {
-                    BulletImpact bulletImpact = Managers.LevelManager.Instance.BulletImpactFactory.GetBulletImpact();
-                    bulletImpact.transform.position = transform.position;
-                    bulletImpact.transform.rotation = transform.rotation;
+                    Managers.LevelManager.Instance.BulletImpactFactory.GetBulletImpact(transform.position, transform.rotation);
                 }
 
                 _canCount = false;

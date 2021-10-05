@@ -1,8 +1,5 @@
 using SimpleFPS.Projectiles;
-using SimpleFPS.Generics.Pool;
 using UnityEngine;
-using SimpleFPS.Player;
-using System.Collections.Generic;
 using SimpleFPS.Components;
 using SimpleFPS.FPS;
 using SimpleFPS.Factory;
@@ -22,7 +19,7 @@ namespace SimpleFPS.Managers
         [Header("Character")]
         [SerializeField] private FPSCharacterController _character;
 
-        [Header("Pool Prefabs")]
+        [Header("Factory Prefabs")]
         [SerializeField] private Bullet _bulletPrefab;
         [SerializeField] private BulletImpact _bulletImpactPrefab;
         [SerializeField] private Explosion _explotionPrefab;
@@ -33,8 +30,7 @@ namespace SimpleFPS.Managers
 
         private BulletFactory _bulletFactory;
         private BulletImpactFactory _bulletImpactFactory;
-
-        private Pool<Explosion> _explotionPool;
+        private ExplosionFactory _explosionFactory;
 
         #endregion
 
@@ -46,10 +42,7 @@ namespace SimpleFPS.Managers
         // Factorys
         public BulletFactory BulletFactory => _bulletFactory;
         public BulletImpactFactory BulletImpactFactory => _bulletImpactFactory;
-
-        // Pools
-        public Pool<Explosion> ExplotionPool => _explotionPool;
-
+        public ExplosionFactory ExplosionFactory => _explosionFactory;
 
         #endregion
 
@@ -68,8 +61,7 @@ namespace SimpleFPS.Managers
 
             _bulletFactory = new BulletFactory(_bulletPrefab);
             _bulletImpactFactory = new BulletImpactFactory(_bulletImpactPrefab);
-
-            _explotionPool = new Pool<Explosion>(_explotionPrefab);
+            _explosionFactory = new ExplosionFactory(_explotionPrefab);
         }
 
         #endregion

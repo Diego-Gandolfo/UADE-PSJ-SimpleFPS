@@ -1,4 +1,5 @@
 using SimpleFPS.Projectiles;
+using UnityEngine;
 
 namespace SimpleFPS.Factory
 {
@@ -12,9 +13,11 @@ namespace SimpleFPS.Factory
 
         #region Public Methods
 
-        public BulletImpact GetBulletImpact()
+        public BulletImpact GetBulletImpact(Vector3 position, Quaternion rotation)
         {
             var bulletImpact = Pool.GetInstance();
+            bulletImpact.transform.position = position;
+            bulletImpact.transform.rotation = rotation;
             return bulletImpact;
         }
 

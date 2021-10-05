@@ -39,7 +39,6 @@ namespace SimpleFPS.Projectiles
 
             if (_timer <= 0f)
             {
-                //Managers.LevelManager.Instance.BulletImpactPool.StoreInstance(this);
                 Managers.LevelManager.Instance.BulletImpactFactory.StoreBulletImpact(this);
             }
         }

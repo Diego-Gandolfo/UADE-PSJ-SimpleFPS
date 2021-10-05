@@ -34,7 +34,7 @@ namespace SimpleFPS.Components
 
             if (_timer <= 0f)
             {
-                Managers.LevelManager.Instance.ExplotionPool.StoreInstance(this);
+                Managers.LevelManager.Instance.ExplosionFactory.StoreExplosion(this);
             }
         }
 

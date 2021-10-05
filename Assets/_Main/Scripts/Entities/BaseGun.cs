@@ -110,11 +110,7 @@ namespace SimpleFPS.Weapons
 
         public override void Attack()
         {
-            Bullet bullet = _bulletFactory.GetBullet(_bulletStats);
-            bullet.transform.position = _bulletSpawnpoint.position;
-            bullet.transform.rotation = _bulletSpawnpoint.rotation;
-            bullet.SetDamage(Damage);
-            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * BULLET_FORCE;
+            _bulletFactory.GetBullet(_bulletStats, _bulletSpawnpoint.position, _bulletSpawnpoint.rotation, Damage, BULLET_FORCE);
 
             _currentMagazineAmmo--;
             _magazineAmmoText.text = _currentMagazineAmmo.ToString();
