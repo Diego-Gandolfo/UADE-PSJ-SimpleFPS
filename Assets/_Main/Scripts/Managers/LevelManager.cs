@@ -32,8 +32,8 @@ namespace SimpleFPS.Managers
         #region Private Fields
 
         private BulletFactory _bulletFactory;
-        //private Pool<Bullet> _bulletPool;
-        private Pool<BulletImpact> _bulletImpactPool;
+        private BulletImpactFactory _bulletImpactFactory;
+
         private Pool<Explosion> _explotionPool;
 
         #endregion
@@ -45,11 +45,11 @@ namespace SimpleFPS.Managers
 
         // Factorys
         public BulletFactory BulletFactory => _bulletFactory;
+        public BulletImpactFactory BulletImpactFactory => _bulletImpactFactory;
 
         // Pools
-        //public Pool<Bullet> BulletPool => _bulletPool;
-        public Pool<BulletImpact> BulletImpactPool => _bulletImpactPool;
         public Pool<Explosion> ExplotionPool => _explotionPool;
+
 
         #endregion
 
@@ -67,9 +67,8 @@ namespace SimpleFPS.Managers
             }
 
             _bulletFactory = new BulletFactory(_bulletPrefab);
+            _bulletImpactFactory = new BulletImpactFactory(_bulletImpactPrefab);
 
-            //_bulletPool = new Pool<Bullet>(_bulletPrefab);
-            _bulletImpactPool = new Pool<BulletImpact>(_bulletImpactPrefab);
             _explotionPool = new Pool<Explosion>(_explotionPrefab);
         }
 

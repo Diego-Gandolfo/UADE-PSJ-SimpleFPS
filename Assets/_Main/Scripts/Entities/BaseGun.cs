@@ -38,12 +38,14 @@ namespace SimpleFPS.Weapons
 
         #region Protected Fields
 
+        // Factorys
+        protected BulletFactory _bulletFactory;
+
+        // Parameters
         protected int _currentExtraAmmo;
         protected int _currentMagazineAmmo;
         protected const float BULLET_FORCE = 400f;
         protected bool _canAttack = true;
-        //protected Pool<Bullet> _bulletPool;
-        protected BulletFactory _bulletFactory;
 
         #endregion
 
@@ -77,7 +79,6 @@ namespace SimpleFPS.Weapons
         private void Start()
         {
             _bulletFactory = Managers.LevelManager.Instance.BulletFactory;
-            //_bulletPool = Managers.LevelManager.Instance.BulletPool;
             _currentExtraAmmo = MaxExtraAmmo;
             _currentMagazineAmmo = MaxMagazineAmmo;
             _extraAmmoText.text = _currentExtraAmmo.ToString();
@@ -109,7 +110,6 @@ namespace SimpleFPS.Weapons
 
         public override void Attack()
         {
-            //Bullet bullet = _bulletPool.GetInstance();
             Bullet bullet = _bulletFactory.GetBullet(_bulletStats);
             bullet.transform.position = _bulletSpawnpoint.position;
             bullet.transform.rotation = _bulletSpawnpoint.rotation;
@@ -145,8 +145,6 @@ namespace SimpleFPS.Weapons
                 }
             }
         }
-
-        //public virtual void SetBulletPool(Pool<Bullet> bulletPool) { }
 
         #endregion
     }

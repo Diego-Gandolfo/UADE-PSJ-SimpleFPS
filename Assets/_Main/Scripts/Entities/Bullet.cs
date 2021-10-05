@@ -46,7 +46,6 @@ namespace SimpleFPS.Projectiles
             {
                 if (_timer <= 0f)
                 {
-                    //Managers.LevelManager.Instance.BulletPool.StoreInstance(this);
                     Managers.LevelManager.Instance.BulletFactory.StoreBullet(this);
                 }
                 else
@@ -68,13 +67,13 @@ namespace SimpleFPS.Projectiles
                 }
                 else
                 {
-                    BulletImpact bulletImpact = Managers.LevelManager.Instance.BulletImpactPool.GetInstance();
+                    BulletImpact bulletImpact = Managers.LevelManager.Instance.BulletImpactFactory.GetBulletImpact();
                     bulletImpact.transform.position = transform.position;
                     bulletImpact.transform.rotation = transform.rotation;
                 }
 
                 _canCount = false;
-                //Managers.LevelManager.Instance.BulletPool.StoreInstance(this);
+
                 Managers.LevelManager.Instance.BulletFactory.StoreBullet(this);
             }
         }
