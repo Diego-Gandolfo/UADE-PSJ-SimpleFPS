@@ -51,6 +51,12 @@ namespace SimpleFPS.Patrol
 
         #endregion
 
+        #region Propertys
+
+        public float CurrentSpeed => _currentSpeed;
+
+        #endregion
+
         #region Unity Methods
 
         private void Awake()

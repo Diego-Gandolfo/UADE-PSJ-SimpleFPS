@@ -27981,21 +27981,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Turret
       objectReference: {fileID: 0}
+    - target: {fileID: 5041262911836505361, guid: 0e4d1a8b58e3da24399d5e20ef26d22d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5041262911836505391, guid: 0e4d1a8b58e3da24399d5e20ef26d22d, type: 3}
       propertyPath: m_RootOrder
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5041262911836505391, guid: 0e4d1a8b58e3da24399d5e20ef26d22d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 9.92
       objectReference: {fileID: 0}
     - target: {fileID: 5041262911836505391, guid: 0e4d1a8b58e3da24399d5e20ef26d22d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.5
+      value: -1.88
       objectReference: {fileID: 0}
     - target: {fileID: 5041262911836505391, guid: 0e4d1a8b58e3da24399d5e20ef26d22d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 11
+      value: -27.32
       objectReference: {fileID: 0}
     - target: {fileID: 5041262911836505391, guid: 0e4d1a8b58e3da24399d5e20ef26d22d, type: 3}
       propertyPath: m_LocalRotation.w

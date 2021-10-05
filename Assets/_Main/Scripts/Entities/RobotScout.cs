@@ -15,7 +15,6 @@ namespace SimpleFPS.Patrol
 
         [Header("Sounds")]
         [SerializeField] private AudioSource _mainAudioSource;
-        [SerializeField] private AudioSource _shootAudioSource;
         [SerializeField] private FXSounds _sounds;
 
         [Header("Health")]
@@ -55,6 +54,17 @@ namespace SimpleFPS.Patrol
             _patrolArea.enabled = true;
             _visionCone.gameObject.SetActive(true);
             _followTarget.enabled = false;
+        }
+
+        private void Update()
+        {
+            if ((_patrolArea.enabled && _patrolArea.CurrentSpeed != 0) || _followTarget.enabled)
+            {
+                if (!_mainAudioSource.isPlaying)
+                {
+                    _mainAudioSource.PlayOneShot(_sounds.ScoutMoveSound);
+                }
+            }
         }
 
         private void OnDestroy()
