@@ -59,9 +59,8 @@ namespace SimpleFPS.Enemy.Turret
         // Components
         private Transform _characterTransform;
         private Health _healthComponent;
-
-        // Factorys
         private BulletFactory _bulletFactory;
+        private EnemyManager _enemyManager;
 
         // Flags
         private bool _canRotate;
@@ -81,6 +80,8 @@ namespace SimpleFPS.Enemy.Turret
             var levelManager = Managers.LevelManager.Instance;
             _characterTransform = levelManager.Character.transform;
             _bulletFactory = levelManager.BulletFactory;
+
+            _enemyManager = EnemyManager.Instance;
 
             _healthComponent = GetComponent<Health>();
             if (_healthComponent == null) Debug.LogError($"{this.gameObject.name} no tiene asignado un HealthComponent");
@@ -152,7 +153,7 @@ namespace SimpleFPS.Enemy.Turret
 
         private void RotateTo(Quaternion rotateTo)
         {
-            _gameObjectToRotate.rotation = Quaternion.RotateTowards(_gameObjectToRotate.rotation, rotateTo, _rotationSpeed);
+            _enemyManager.AddCommand(new CmdRotation(_gameObjectToRotate, rotateTo, _rotationSpeed));
 
             if (!_mainAudioSource.isPlaying && Quaternion.Angle(_gameObjectToRotate.rotation, rotateTo) >= 1)
             {
@@ -205,7 +206,7 @@ namespace SimpleFPS.Enemy.Turret
 
         private void OnDieHandler()
         {
-            EnemyManager.Instance.AddCommand(new CmdExplosion(transform.position, transform.rotation));
+            _enemyManager.AddCommand(new CmdExplosion(transform.position, transform.rotation));
 
             foreach (var collider in _colliders)
             {

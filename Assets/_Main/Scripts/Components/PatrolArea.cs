@@ -13,6 +13,7 @@ namespace SimpleFPS.Patrol
 
         [Header("Patrol Settings")]
         [SerializeField] private float _patrolSpeed = .5f;
+        [SerializeField] private float _rotationSpeed = .5f;
         [SerializeField] private float _minWaitTime = 0f;
         [SerializeField] private float _maxWaitTime = 0f;
         [SerializeField] private float _minDistance = 0;
@@ -104,8 +105,9 @@ namespace SimpleFPS.Patrol
             if (_canRotate)
             {
                 var lookRotation = Quaternion.LookRotation(_direction);
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, .5f);
-                
+                _enemyManager.AddCommand(new CmdRotation(transform, lookRotation, _rotationSpeed));
+
+
                 if (Quaternion.Angle(transform.rotation, lookRotation) < .1f)
                 {
                     _canRotate = false;
