@@ -4,11 +4,18 @@ using SimpleFPS.Movement;
 using SimpleFPS.Weapons;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SimpleFPS.FPS
 {
     public class FPSCharacterController : MonoBehaviour
     {
+        #region Serialized Fields
+
+        [SerializeField] private Text _currentHealth;
+
+        #endregion
+
         #region Private Fields
 
         // Components
@@ -205,6 +212,7 @@ namespace SimpleFPS.FPS
 
         public void DoRecieveDamageHandler()
         {
+            _currentHealth.text = _healthComponent.CurrentLife.ToString();
             OnRecieveDamage?.Invoke();
         }
 
