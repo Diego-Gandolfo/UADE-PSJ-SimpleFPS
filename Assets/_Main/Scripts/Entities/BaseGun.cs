@@ -1,3 +1,4 @@
+using SimpleFPS.Factory;
 using SimpleFPS.Generics.Pool;
 using SimpleFPS.Projectiles;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace SimpleFPS.Weapons
 
         [Header("Stats")]
         [SerializeField] protected BaseGunStats _baseGunStats;
+        [SerializeField] private BulletStats _bulletStats;
 
         [Header("UI")]
         [SerializeField] protected Text _extraAmmoText;
@@ -40,7 +42,8 @@ namespace SimpleFPS.Weapons
         protected int _currentMagazineAmmo;
         protected const float BULLET_FORCE = 400f;
         protected bool _canAttack = true;
-        protected Pool<Bullet> _bulletPool;
+        //protected Pool<Bullet> _bulletPool;
+        protected BulletFactory _bulletFactory;
 
         #endregion
 
@@ -73,7 +76,8 @@ namespace SimpleFPS.Weapons
 
         private void Start()
         {
-            _bulletPool = Managers.LevelManager.Instance.BulletPool;
+            _bulletFactory = Managers.LevelManager.Instance.BulletFactory;
+            //_bulletPool = Managers.LevelManager.Instance.BulletPool;
             _currentExtraAmmo = MaxExtraAmmo;
             _currentMagazineAmmo = MaxMagazineAmmo;
             _extraAmmoText.text = _currentExtraAmmo.ToString();
@@ -103,7 +107,23 @@ namespace SimpleFPS.Weapons
 
         #region Public Methods
 
-        public override void Attack() { }
+        public override void Attack()
+        {
+            //Bullet bullet = _bulletPool.GetInstance();
+            Bullet bullet = _bulletFactory.GetBullet(_bulletStats);
+            bullet.transform.position = _bulletSpawnpoint.position;
+            bullet.transform.rotation = _bulletSpawnpoint.rotation;
+            bullet.SetDamage(Damage);
+            bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * BULLET_FORCE;
+
+            _currentMagazineAmmo--;
+            _magazineAmmoText.text = _currentMagazineAmmo.ToString();
+
+            _muzzleFlashLight.enabled = true;
+            Invoke("TurnMuzzleFlashLightOff", 0.02f);
+            PlayMuzzleFlashParticles();
+            PlaySparkParticles();
+        }
 
         public virtual void Reload()
         {
@@ -126,7 +146,7 @@ namespace SimpleFPS.Weapons
             }
         }
 
-        public virtual void SetBulletPool(Pool<Bullet> bulletPool) { }
+        //public virtual void SetBulletPool(Pool<Bullet> bulletPool) { }
 
         #endregion
     }

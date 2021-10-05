@@ -5,6 +5,7 @@ using SimpleFPS.Player;
 using System.Collections.Generic;
 using SimpleFPS.Components;
 using SimpleFPS.FPS;
+using SimpleFPS.Factory;
 
 namespace SimpleFPS.Managers
 {
@@ -30,9 +31,10 @@ namespace SimpleFPS.Managers
 
         #region Private Fields
 
-        protected Pool<Bullet> _bulletPool;
-        protected Pool<BulletImpact> _bulletImpactPool;
-        protected Pool<Explosion> _explotionPool;
+        private BulletFactory _bulletFactory;
+        //private Pool<Bullet> _bulletPool;
+        private Pool<BulletImpact> _bulletImpactPool;
+        private Pool<Explosion> _explotionPool;
 
         #endregion
 
@@ -41,8 +43,11 @@ namespace SimpleFPS.Managers
         // Character
         public FPSCharacterController Character => _character;
 
+        // Factorys
+        public BulletFactory BulletFactory => _bulletFactory;
+
         // Pools
-        public Pool<Bullet> BulletPool => _bulletPool;
+        //public Pool<Bullet> BulletPool => _bulletPool;
         public Pool<BulletImpact> BulletImpactPool => _bulletImpactPool;
         public Pool<Explosion> ExplotionPool => _explotionPool;
 
@@ -61,7 +66,9 @@ namespace SimpleFPS.Managers
                 Instance = this;
             }
 
-            _bulletPool = new Pool<Bullet>(_bulletPrefab);
+            _bulletFactory = new BulletFactory(_bulletPrefab);
+
+            //_bulletPool = new Pool<Bullet>(_bulletPrefab);
             _bulletImpactPool = new Pool<BulletImpact>(_bulletImpactPrefab);
             _explotionPool = new Pool<Explosion>(_explotionPrefab);
         }

@@ -1,6 +1,7 @@
 using SimpleFPS.Life;
 using SimpleFPS.Generics.Pool;
 using UnityEngine;
+using SimpleFPS.Factory;
 
 namespace SimpleFPS.Projectiles
 {
@@ -14,6 +15,10 @@ namespace SimpleFPS.Projectiles
 
         #region Private Fields
 
+        // Stats
+        private BulletStats _bulletStats;
+
+        // Parameters
         private float _timer;
         private float _damage;
         private bool _canCount;
@@ -23,6 +28,7 @@ namespace SimpleFPS.Projectiles
         #region Propertys
 
         public float Damage => _damage;
+        public BulletStats BulletStats => _bulletStats;
 
         #endregion
 
@@ -40,7 +46,8 @@ namespace SimpleFPS.Projectiles
             {
                 if (_timer <= 0f)
                 {
-                    Managers.LevelManager.Instance.BulletPool.StoreInstance(this);
+                    //Managers.LevelManager.Instance.BulletPool.StoreInstance(this);
+                    Managers.LevelManager.Instance.BulletFactory.StoreBullet(this);
                 }
                 else
                 {
@@ -51,21 +58,25 @@ namespace SimpleFPS.Projectiles
 
         private void OnCollisionEnter(Collision collision)
         {
-            var heatlhComponent = collision.gameObject.GetComponent<HealthComponent>();
-
-            if (heatlhComponent != null)
+            if ((_bulletStats.TargetsLayers & 1 << collision.gameObject.layer) != 0)
             {
-                heatlhComponent.ReceiveDamage(Damage);
-            }
-            else
-            {
-                BulletImpact bulletImpact = Managers.LevelManager.Instance.BulletImpactPool.GetInstance();
-                bulletImpact.transform.position = transform.position;
-                bulletImpact.transform.rotation = transform.rotation;
-            }
+                var heatlhComponent = collision.gameObject.GetComponent<HealthComponent>();
 
-            _canCount = false;
-            Managers.LevelManager.Instance.BulletPool.StoreInstance(this);
+                if (heatlhComponent != null)
+                {
+                    heatlhComponent.ReceiveDamage(Damage);
+                }
+                else
+                {
+                    BulletImpact bulletImpact = Managers.LevelManager.Instance.BulletImpactPool.GetInstance();
+                    bulletImpact.transform.position = transform.position;
+                    bulletImpact.transform.rotation = transform.rotation;
+                }
+
+                _canCount = false;
+                //Managers.LevelManager.Instance.BulletPool.StoreInstance(this);
+                Managers.LevelManager.Instance.BulletFactory.StoreBullet(this);
+            }
         }
 
         #endregion
@@ -75,6 +86,11 @@ namespace SimpleFPS.Projectiles
         public void SetDamage(float damage)
         {
             _damage = damage;
+        }
+
+        public void SetStats(BulletStats stats)
+        {
+            _bulletStats = stats;
         }
 
         #endregion

@@ -38,26 +38,11 @@ namespace SimpleFPS.Weapons
 
         public override void Attack()
         {
-            if (_currentMagazineAmmo > 0)
-            {
-                _canAttack = false;
-                
-                Bullet bullet = _bulletPool.GetInstance();
-                bullet.transform.position = _bulletSpawnpoint.position;
-                bullet.transform.rotation = _bulletSpawnpoint.rotation;
-                bullet.SetDamage(Damage);
-                bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * BULLET_FORCE;
+            _canAttack = false;
 
-                _currentMagazineAmmo--;
-                _magazineAmmoText.text = _currentMagazineAmmo.ToString();
+            base.Attack();
 
-                _muzzleFlashLight.enabled = true;
-                Invoke("TurnMuzzleFlashLightOff", 0.02f);
-                PlayMuzzleFlashParticles();
-                PlaySparkParticles();
-
-                _cooldownTimer = _baseGunStats.FireCooldown;
-            }
+            _cooldownTimer = _baseGunStats.FireCooldown;
         }
 
         public override void Reload()

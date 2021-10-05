@@ -47,4 +47,5 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 7353995788016934702, guid: 1d74d5bf74ac3e048930521f3783450b, type: 3}
   _bulletImpactPrefab: {fileID: 6839730286073559490, guid: 1f06a0cf795466e42afac0985a20c518, type: 3}
   _explotionPrefab: {fileID: 5315155662388770841, guid: f18d5243ce76aea4e9b53d525eab02e1, type: 3}
-  _objectivesList: []
+  _characterBulletStats: {fileID: 11400000, guid: 19ff93cfc23c01f42bd79edf4678cb62, type: 2}
+  _enemyBulletStats: {fileID: 11400000, guid: 5ce41f9095d462d4681ada5d88ea6454, type: 2}

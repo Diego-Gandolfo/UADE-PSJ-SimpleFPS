@@ -376,6 +376,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseWeaponStats: {fileID: 11400000, guid: 2c1f920c4abecbf468536e5f0f6d4890, type: 2}
   _baseGunStats: {fileID: 11400000, guid: 6a70bd4708f3cb0499494858cba28aa4, type: 2}
+  _bulletStats: {fileID: 11400000, guid: 19ff93cfc23c01f42bd79edf4678cb62, type: 2}
   _extraAmmoText: {fileID: 7390591903389958635}
   _magazineAmmoText: {fileID: 7390866878506230597}
   _weaponName: Asault Rifle
@@ -12489,6 +12490,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _baseWeaponStats: {fileID: 11400000, guid: 0c49ce5da4be73e498e3cc8ac8824f48, type: 2}
   _baseGunStats: {fileID: 11400000, guid: 6e280368bf7dda642a137b18dbc493a7, type: 2}
+  _bulletStats: {fileID: 11400000, guid: 19ff93cfc23c01f42bd79edf4678cb62, type: 2}
   _extraAmmoText: {fileID: 7390591903389958635}
   _magazineAmmoText: {fileID: 7390866878506230597}
   _weaponName: Handgun
