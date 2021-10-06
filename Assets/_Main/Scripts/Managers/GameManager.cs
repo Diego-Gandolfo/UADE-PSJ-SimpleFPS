@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace SimpleFPS.Managers
 {
@@ -33,6 +34,12 @@ namespace SimpleFPS.Managers
             }
         }
 
+        private void Update()
+        {
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.F12)) Victory();
+            if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.F11)) GameOver();
+        }
+
         #endregion
 
         #region Public Methods
@@ -44,12 +51,12 @@ namespace SimpleFPS.Managers
 
         public void GameOver()
         {
-            print("GameOver");
+            SceneManager.LoadScene("Defeated");
         }
 
         public void Victory()
         {
-            print("Victory");
+            SceneManager.LoadScene("Victory");
         }
 
         #endregion

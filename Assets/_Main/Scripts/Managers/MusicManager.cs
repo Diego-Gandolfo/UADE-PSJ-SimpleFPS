@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.UI;
@@ -19,6 +20,7 @@ namespace SimpleFPS.Managers
         [SerializeField] private AudioMixerGroup _audioMixerGroup;
 
         [Header("UI")]
+        [SerializeField] private Canvas _canvas;
         [SerializeField] private Slider _slider;
 
         [Header("Settings")]
@@ -31,6 +33,18 @@ namespace SimpleFPS.Managers
         private bool _canCount;
         private float _fadeInCounter;
         private float _currentVolume;
+
+        #endregion
+
+        #region Propertys
+
+        public Canvas Canvas => _canvas;
+
+        #endregion
+
+        #region Events
+
+        public event Action OnBackButtonClicked;
 
         #endregion
 
@@ -54,6 +68,7 @@ namespace SimpleFPS.Managers
             _currentVolume = _slider.value;
             _canCount = true;
             _audioSource.Play();
+            _canvas.gameObject.SetActive(false);
         }
 
         private void Update()
@@ -81,7 +96,8 @@ namespace SimpleFPS.Managers
 
         public void OnClickBackButton()
         {
-            gameObject.SetActive(false);
+            OnBackButtonClicked?.Invoke();
+            _canvas.gameObject.SetActive(false);
         }
 
         #endregion

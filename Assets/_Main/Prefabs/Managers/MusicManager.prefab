@@ -445,6 +445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _audioSource: {fileID: 3329002355874147201}
   _audioMixerGroup: {fileID: 0}
+  _canvas: {fileID: 3329002356816139583}
   _slider: {fileID: 3329002356718048302}
   _fadeInTime: 5
 --- !u!82 &3329002355874147201

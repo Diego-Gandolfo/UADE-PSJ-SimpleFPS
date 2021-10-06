@@ -136,8 +136,9 @@ GameObject:
   - component: {fileID: 56899991}
   - component: {fileID: 56899990}
   - component: {fileID: 56899989}
+  - component: {fileID: 56899994}
   m_Layer: 5
-  m_Name: Canvas_MainMenu
+  m_Name: Canvas_Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,6 +247,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &56899994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 56899988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a2f66a87ec75874487d4d35feb7af72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &95333002
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +340,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 95333005}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 56899994}
+        m_TargetAssemblyTypeName: SimpleFPS.Managers.Screens.ScreenManager, Assembly-CSharp
+        m_MethodName: OnClickReplayButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &95333005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -605,7 +630,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1495491476}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 56899994}
+        m_TargetAssemblyTypeName: SimpleFPS.Managers.Screens.ScreenManager, Assembly-CSharp
+        m_MethodName: OnClickMenuButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1495491476
 MonoBehaviour:
   m_ObjectHideFlags: 0
