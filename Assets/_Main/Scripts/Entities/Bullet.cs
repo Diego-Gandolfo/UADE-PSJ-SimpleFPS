@@ -67,11 +67,11 @@ namespace SimpleFPS.Projectiles
                 {
                     Managers.LevelManager.Instance.BulletImpactFactory.GetBulletImpact(transform.position, transform.rotation);
                 }
-
-                _canCount = false;
-
-                Managers.LevelManager.Instance.BulletFactory.StoreBullet(this);
             }
+
+            _canCount = false;
+
+            Managers.LevelManager.Instance.BulletFactory.StoreBullet(this);
         }
 
         #endregion

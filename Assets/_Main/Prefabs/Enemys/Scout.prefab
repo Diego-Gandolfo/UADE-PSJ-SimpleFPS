@@ -9805,7 +9805,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
-  _moveSpeed: 1
+  _moveSpeed: 2
 --- !u!114 &869376498332485231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9819,8 +9819,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemySize: {x: 0.5, y: 0.5, z: 1}
-  _patrolSpeed: 1
-  _rotationSpeed: 0.5
+  _patrolSpeed: 2
+  _rotationSpeed: 1
   _minWaitTime: 1
   _maxWaitTime: 1
   _minDistance: 0.5

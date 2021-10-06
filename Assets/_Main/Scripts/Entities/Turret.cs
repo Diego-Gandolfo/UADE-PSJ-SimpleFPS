@@ -133,8 +133,8 @@ namespace SimpleFPS.Enemy.Turret
 
         private void OnDrawGizmos()
         {
-            Gizmos.color = new Color(0f, 0.5f, 0f, 0.25f);
-            Gizmos.DrawSphere(transform.position, _detectionRadius);
+            //Gizmos.color = new Color(0f, 0.5f, 0f, 0.25f);
+            //Gizmos.DrawSphere(transform.position, _detectionRadius);
 
             Gizmos.color = new Color(0.5f, 0f, 0f, 0.25f);
             Gizmos.DrawSphere(transform.position, _shootingRadius);
@@ -163,12 +163,20 @@ namespace SimpleFPS.Enemy.Turret
 
         private void Shoot()
         {
-            _shootAudioSource.PlayOneShot(_sounds.ShootSound);
-            _commandManager.AddCommand(new CmdShoot(_bulletSpawnpoint, _bulletStats, _damage, BULLET_FORCE));
-            _muzzleFlashLight.enabled = true;
-            Invoke("TurnMuzzleFlashLightOff", 0.02f);
-            PlayMuzzleFlashParticles();
-            PlaySparkParticles();
+            RaycastHit hit;
+
+            if (Physics.Raycast(_bulletSpawnpoint.position, _bulletSpawnpoint.forward, out hit, Mathf.Infinity, _bulletStats.TargetsLayers))
+            {
+                if (hit.collider.gameObject.layer == 3)
+                {
+                    _shootAudioSource.PlayOneShot(_sounds.ShootSound);
+                    _commandManager.AddCommand(new CmdShoot(_bulletSpawnpoint, _bulletStats, _damage, BULLET_FORCE));
+                    _muzzleFlashLight.enabled = true;
+                    Invoke("TurnMuzzleFlashLightOff", 0.02f);
+                    PlayMuzzleFlashParticles();
+                    PlaySparkParticles();
+                }
+            }
         }
 
         private void TurnMuzzleFlashLightOff()

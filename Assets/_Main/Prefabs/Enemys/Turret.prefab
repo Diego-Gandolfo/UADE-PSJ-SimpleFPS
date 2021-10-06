@@ -859,8 +859,8 @@ MonoBehaviour:
   _characterLayer:
     serializedVersion: 2
     m_Bits: 8
-  _detectionRadius: 15
-  _shootingRadius: 10
+  _detectionRadius: 30
+  _shootingRadius: 20
   _gameObjectToRotate: {fileID: 5041262912380125948}
   _rotationSpeed: 0.1
   _bulletSpawnpoint: {fileID: 5041262912154931839}
