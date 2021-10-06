@@ -29,6 +29,7 @@ namespace SimpleFPS.Managers
             else
             {
                 Instance = this;
+                DontDestroyOnLoad(gameObject);
             }
         }
 
