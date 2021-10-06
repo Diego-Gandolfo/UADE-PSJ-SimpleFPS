@@ -36,7 +36,6 @@ namespace SimpleFPS.Enemy.Boss
         [SerializeField] private Light _muzzleFlashLight;
 
         [Header("Sounds")]
-        [SerializeField] private AudioSource _mainAudioSource;
         [SerializeField] private AudioSource _shootAudioSource;
         [SerializeField] private FXSounds _sounds;
 
@@ -57,7 +56,6 @@ namespace SimpleFPS.Enemy.Boss
         private CommandManager _commandManager;
         private Transform _characterTransform;
         private Animator _animator;
-        private Rigidbody _rigidbody;
 
         // Flags
         private bool _canShoot;
@@ -75,7 +73,6 @@ namespace SimpleFPS.Enemy.Boss
         {
             _followTarget = GetComponent<FollowTarget>();
             _animator = GetComponent<Animator>();
-            _rigidbody = GetComponent<Rigidbody>();
             _gameManager = GameManager.Instance;
 
             _healthComponent = GetComponent<Health>();
@@ -133,7 +130,7 @@ namespace SimpleFPS.Enemy.Boss
             }
 
             var characterDetected = Physics.OverlapSphere(transform.position, _detectionRadius, _characterLayer);
-            _followTarget.enabled = (characterDetected.Length > 0) /*&& !_canShoot*/;
+            _followTarget.enabled = (characterDetected.Length > 0);
 
             var characterInRange = Physics.OverlapSphere(transform.position, _shootingRadius, _characterLayer);
             _canShoot = (characterInRange.Length > 0);
