@@ -4909,8 +4909,8 @@ MonoBehaviour:
   _characterLayer:
     serializedVersion: 2
     m_Bits: 8
-  _detectionRadius: 50
-  _shootingRadius: 10
+  _detectionRadius: 75
+  _shootingRadius: 25
   _bulletSpawnpoint: {fileID: 286536344602668607}
   _shootingCooldowns:
   - 1

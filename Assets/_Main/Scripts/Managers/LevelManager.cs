@@ -5,6 +5,7 @@ using SimpleFPS.FPS;
 using SimpleFPS.Factory;
 using SimpleFPS.Enemy.Boss;
 using SimpleFPS.Life;
+using UnityEngine.UI;
 
 namespace SimpleFPS.Managers
 {
@@ -28,6 +29,10 @@ namespace SimpleFPS.Managers
         [SerializeField] private Bullet _bulletPrefab;
         [SerializeField] private BulletImpact _bulletImpactPrefab;
         [SerializeField] private Explosion _explotionPrefab;
+
+        [Header("Canvas InGame")]
+        [SerializeField] private Animator _canvasAnimator;
+        [SerializeField] private Text _counterText;
 
         #endregion
 
@@ -87,17 +92,31 @@ namespace SimpleFPS.Managers
             GameManager.Instance.Invoke("Victory", 1.5f);
         }
 
+        private void TriggerAnimatorFadeIn()
+        {
+            _counterText.text = _batteryDeadCounter.ToString();
+            _canvasAnimator.SetTrigger("DoFadeIn");
+        }
+
+        private void TriggerAnimatorFinalBoss()
+        {
+            _canvasAnimator.SetTrigger("DoFinalBoss");
+        }
+
         #endregion
 
         #region Public Methods
 
         public void IncreaseBatteryDeadCounter()
         {
+            _canvasAnimator.SetTrigger("DoFadeOut");
             _batteryDeadCounter++;
+            Invoke("TriggerAnimatorFadeIn", 0.5f);
 
             if (_batteryDeadCounter >= 5)
             {
                 _boss.gameObject.SetActive(true);
+                Invoke("TriggerAnimatorFinalBoss", 1f);
             }
         }
 

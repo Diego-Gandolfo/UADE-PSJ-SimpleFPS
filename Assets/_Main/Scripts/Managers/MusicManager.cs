@@ -17,7 +17,6 @@ namespace SimpleFPS.Managers
 
         [Header("Audio")]
         [SerializeField] private AudioSource _audioSource;
-        [SerializeField] private AudioMixerGroup _audioMixerGroup;
 
         [Header("UI")]
         [SerializeField] private Canvas _canvas;

@@ -7,15 +7,10 @@ namespace SimpleFPS.Managers.MainMenu
 {
     public class MainMenuManager : MonoBehaviour
     {
-        #region Serialized Fields
-
-        [SerializeField] private MusicManager _musicManager;
-
-        #endregion
-
         #region Private Fields
 
         private GraphicRaycaster _graphicRaycaster;
+        private MusicManager _musicManager;
 
         #endregion
 
@@ -30,6 +25,7 @@ namespace SimpleFPS.Managers.MainMenu
         private void Start()
         {
             _graphicRaycaster = GetComponent<GraphicRaycaster>();
+            _musicManager = MusicManager.Instance;
             _musicManager.OnBackButtonClicked += OnBackButtonClickedHandler;
         }
 
@@ -48,7 +44,7 @@ namespace SimpleFPS.Managers.MainMenu
 
         public void OnClickPlayButton()
         {
-            SceneManager.LoadScene("Game");
+            SceneManager.LoadScene("Tutorial");
         }
 
         public void OnClickMusicButton()
