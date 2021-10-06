@@ -164,7 +164,6 @@ namespace SimpleFPS.Enemy.Turret
         private void Shoot()
         {
             _shootAudioSource.PlayOneShot(_sounds.ShootSound);
-            //_bulletFactory.GetBullet(_bulletStats, _bulletSpawnpoint.position, _bulletSpawnpoint.rotation, _damage, BULLET_FORCE);
             _commandManager.AddCommand(new CmdShoot(_bulletSpawnpoint, _bulletStats, _damage, BULLET_FORCE));
             _muzzleFlashLight.enabled = true;
             Invoke("TurnMuzzleFlashLightOff", 0.02f);

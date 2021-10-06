@@ -447,7 +447,7 @@ MonoBehaviour:
   _audioMixerGroup: {fileID: 0}
   _canvas: {fileID: 3329002356816139583}
   _slider: {fileID: 3329002356718048302}
-  _fadeInTime: 5
+  _initualVolumen: 0.01
 --- !u!82 &3329002355874147201
 AudioSource:
   m_ObjectHideFlags: 0
@@ -460,7 +460,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: fa53d001383423c4fb55f15b43fa01b6, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -816,7 +816,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.01
+  m_Value: 0.25
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:

@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using SimpleFPS.FPS;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +9,13 @@ namespace SimpleFPS.Managers
         #region Static
 
         public static GameManager Instance { get; private set; }
+
+        #endregion
+
+        #region Private Fields
+
+        private FPSCharacterController _character;
+        private int _batteryDeadCounter;
 
         #endregion
 
@@ -42,6 +48,25 @@ namespace SimpleFPS.Managers
 
         #endregion
 
+        #region Private Methods
+
+        private void GameOver()
+        {
+            SceneManager.LoadScene("Defeated");
+        }
+
+        private void Victory()
+        {
+            SceneManager.LoadScene("Victory");
+        }
+
+        private void OnDieHandler()
+        {
+            Invoke("GameOver", 1.5f);
+        }
+
+        #endregion
+
         #region Public Methods
 
         public void SetIsPaused(bool value)
@@ -49,14 +74,20 @@ namespace SimpleFPS.Managers
             IsPaused = value;
         }
 
-        public void GameOver()
+        public void SetCharacter(FPSCharacterController character)
         {
-            SceneManager.LoadScene("Defeated");
+            _character = character;
+            _character.OnDie += OnDieHandler;
         }
 
-        public void Victory()
+        public void IncreaseBatteryDeadCounter()
         {
-            SceneManager.LoadScene("Victory");
+            _batteryDeadCounter++;
+
+            if (_batteryDeadCounter >= 5)
+            {
+                Invoke("Victory", 1.5f);
+            }
         }
 
         #endregion

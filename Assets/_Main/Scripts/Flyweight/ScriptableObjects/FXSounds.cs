@@ -26,6 +26,7 @@ namespace SimpleFPS.Sounds
         [SerializeField] private AudioClip _takeOutGunSound;
         [SerializeField] private AudioClip _knifeCutAttackSound;
         [SerializeField] private AudioClip _knifeStabAttackSound;
+        [SerializeField] private AudioClip _energySound;
 
         #endregion
 
@@ -47,6 +48,7 @@ namespace SimpleFPS.Sounds
         public AudioClip TakeOutGunSound => _takeOutGunSound;
         public AudioClip KnifeCutAttackSound => _knifeCutAttackSound;
         public AudioClip KnifeStabAttackSound => _knifeStabAttackSound;
+        public AudioClip EnergySound => _energySound;
 
         #endregion
     }

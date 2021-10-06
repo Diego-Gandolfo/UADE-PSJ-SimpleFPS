@@ -9820,6 +9820,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemySize: {x: 0.5, y: 0.5, z: 1}
   _patrolSpeed: 1
+  _rotationSpeed: 0.5
   _minWaitTime: 1
   _maxWaitTime: 1
   _minDistance: 0.5
@@ -9864,10 +9865,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0
+  MinDistance: 1
   MaxDistance: 50
   Pan2D: 0
-  rolloffMode: 1
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0

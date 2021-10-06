@@ -64,6 +64,11 @@ namespace SimpleFPS.Managers
             _explosionFactory = new ExplosionFactory(_explotionPrefab);
         }
 
+        private void Start()
+        {
+            GameManager.Instance.SetCharacter(_character);
+        }
+
         #endregion
     }
 }

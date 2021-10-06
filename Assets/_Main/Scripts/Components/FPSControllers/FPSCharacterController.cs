@@ -131,7 +131,6 @@ namespace SimpleFPS.FPS
             {
                 IsAlive = false;
                 OnDie?.Invoke();
-                _gameManager.Invoke("GameOver", 1.5f);
             }
         }
 

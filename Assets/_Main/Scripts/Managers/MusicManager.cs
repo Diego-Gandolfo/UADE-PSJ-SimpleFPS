@@ -24,15 +24,7 @@ namespace SimpleFPS.Managers
         [SerializeField] private Slider _slider;
 
         [Header("Settings")]
-        [SerializeField] private float _fadeInTime;
-
-        #endregion
-
-        #region Private Fields
-
-        private bool _canCount;
-        private float _fadeInCounter;
-        private float _currentVolume;
+        [SerializeField, Range(0.0f, 0.1f)] private float _initualVolumen = 0.025f;
 
         #endregion
 
@@ -68,24 +60,9 @@ namespace SimpleFPS.Managers
 
         private void Start()
         {
-            _currentVolume = _slider.value;
-            _canCount = true;
+            _slider.value = _initualVolumen * 10;
             _audioSource.Play();
             _canvas.gameObject.SetActive(false);
-        }
-
-        private void Update()
-        {
-            if (_canCount)
-            {
-                _fadeInCounter += Time.deltaTime;
-                _audioSource.volume = Mathf.Lerp(0f, _currentVolume, (_fadeInCounter / _fadeInTime));
-
-                if (_fadeInCounter >= _fadeInTime)
-                {
-                    _canCount = false;
-                }
-            }
         }
 
         #endregion
@@ -94,7 +71,7 @@ namespace SimpleFPS.Managers
 
         public void OnSliderValueChange()
         {
-            _audioSource.volume = _slider.value;
+            _audioSource.volume = (_slider.value / 10);
         }
 
         public void OnClickBackButton()
