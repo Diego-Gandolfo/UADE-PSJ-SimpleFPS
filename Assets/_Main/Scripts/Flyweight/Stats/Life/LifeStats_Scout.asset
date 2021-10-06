@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c408c0620807b5d43b869bdc1254c206, type: 3}
   m_Name: LifeStats_Scout
   m_EditorClassIdentifier: 
-  _maxLife: 25
+  _maxLife: 5
