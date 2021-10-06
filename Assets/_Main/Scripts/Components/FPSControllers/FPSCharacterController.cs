@@ -1,5 +1,6 @@
 using SimpleFPS.Cameras;
 using SimpleFPS.Life;
+using SimpleFPS.Managers;
 using SimpleFPS.Movement;
 using SimpleFPS.Weapons;
 using System;
@@ -18,6 +19,9 @@ namespace SimpleFPS.FPS
 
         #region Private Fields
 
+        // Managers
+        private GameManager _gameManager;
+
         // Components
         private MoveComponent _moveComponent;
         private RotationComponent _rotationComponent;
@@ -33,6 +37,7 @@ namespace SimpleFPS.FPS
         #region Propertys
 
         public IWeapon CurrentWeapon => _weaponController.CurrentWeapon;
+        public bool IsAlive { get; private set; }
 
         #endregion
 
@@ -43,7 +48,7 @@ namespace SimpleFPS.FPS
         public event Action OnInspect, OnHolster, OnKnifeAttack1, OnKnifeAttack2;
         public event Action OnAimOn, OnAimOff, OnSliderOutOfAmmo, OnSliderAmmoLeft;
 
-        public event Action OnRecieveDamage;
+        public event Action OnRecieveDamage, OnDie;
 
         #endregion
 
@@ -54,11 +59,17 @@ namespace SimpleFPS.FPS
             Cursor.lockState = CursorLockMode.Locked;
 
             GetRequiredComponent();
+            _gameManager = GameManager.Instance;
+
+            IsAlive = true;
         }
 
         private void Update()
         {
-            CheckAmmoSlider();
+            if (IsAlive && !_gameManager.IsPaused)
+            {
+                CheckAmmoSlider();
+            }
         }
 
         #endregion
@@ -86,7 +97,12 @@ namespace SimpleFPS.FPS
             _cameraController.SuscribeEvents(this);
 
             _healthComponent = GetComponent<Health>();
-            _healthComponent.OnRecieveDamage += DoRecieveDamageHandler;
+            if (_healthComponent == null) Debug.LogError($"{this.gameObject.name} no tiene asignado un HealthComponent");
+            else
+            {
+                _healthComponent.OnDie += OnDieHandler;
+                _healthComponent.OnRecieveDamage += OnRecieveDamageHandler;
+            }
         }
 
         private void CheckAmmoSlider()
@@ -97,6 +113,25 @@ namespace SimpleFPS.FPS
                     OnSliderAmmoLeft?.Invoke();
                 if (((IGun)_weaponController.CurrentWeapon).IsMagazineEmpty && !_animationsController.Animator.GetBool("Out Of Ammo Slider"))
                     OnSliderOutOfAmmo?.Invoke();
+            }
+        }
+
+        private void OnRecieveDamageHandler()
+        {
+            if (IsAlive)
+            {
+                _currentHealth.text = _healthComponent.CurrentLife.ToString();
+                OnRecieveDamage?.Invoke();
+            }
+        }
+
+        private void OnDieHandler()
+        {
+            if (IsAlive)
+            {
+                IsAlive = false;
+                OnDie?.Invoke();
+                _gameManager.Invoke("GameOver", 1.5f);
             }
         }
 
@@ -203,12 +238,6 @@ namespace SimpleFPS.FPS
         public void DoWeaponKnifeAttack2()
         {
             OnKnifeAttack2?.Invoke();
-        }
-
-        public void DoRecieveDamageHandler()
-        {
-            _currentHealth.text = _healthComponent.CurrentLife.ToString();
-            OnRecieveDamage?.Invoke();
         }
 
         #endregion

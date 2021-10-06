@@ -118,6 +118,11 @@ namespace SimpleFPS.FPS
             _canvasAnimator.SetTrigger("OnRecieveDamage");
         }
 
+        private void OnDieHandler()
+        {
+            _canvasAnimator.SetTrigger("OnDie");
+        }
+
         #endregion
 
         #region Public Methods
@@ -138,6 +143,7 @@ namespace SimpleFPS.FPS
             characterController.OnSliderAmmoLeft += OnSliderAmmoLeftHandler;
             characterController.OnSliderOutOfAmmo += OnSliderOutOfAmmoHandler;
             characterController.OnRecieveDamage += OnRecieveDamageHandler;
+            characterController.OnDie += OnDieHandler;
         }
 
         #endregion

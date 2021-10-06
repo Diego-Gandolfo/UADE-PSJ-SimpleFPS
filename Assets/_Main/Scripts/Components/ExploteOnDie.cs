@@ -2,9 +2,9 @@ using SimpleFPS.Command;
 using SimpleFPS.Life;
 using UnityEngine;
 
-namespace SimpleFPS.Enemy.Mine
+namespace SimpleFPS.Enemy
 {
-    public class Mine : MonoBehaviour
+    public class ExploteOnDie : MonoBehaviour
     {
         #region Private Fields
 
