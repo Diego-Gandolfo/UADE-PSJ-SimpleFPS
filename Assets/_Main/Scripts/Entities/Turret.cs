@@ -1,6 +1,7 @@
 using SimpleFPS.Command;
 using SimpleFPS.Factory;
 using SimpleFPS.Life;
+using SimpleFPS.Managers;
 using SimpleFPS.Projectiles;
 using SimpleFPS.Sounds;
 using System.Collections.Generic;
@@ -57,6 +58,7 @@ namespace SimpleFPS.Enemy.Turret
         #region Private Fields
 
         // Components
+        private GameManager _gameManager;
         private Transform _characterTransform;
         private Health _healthComponent;
         private CommandManager _commandManager;
@@ -78,6 +80,7 @@ namespace SimpleFPS.Enemy.Turret
         {
             var levelManager = Managers.LevelManager.Instance;
             _characterTransform = levelManager.Character.transform;
+            _gameManager = GameManager.Instance;
 
             _commandManager = CommandManager.Instance;
 
@@ -94,28 +97,31 @@ namespace SimpleFPS.Enemy.Turret
 
         private void Update()
         {
-            SetDirection();
-
-            var lookRotation = Quaternion.LookRotation(_direction);
-
-            if (_canRotate)
+            if (!_gameManager.IsPaused) 
             {
-                RotateTo(lookRotation);
-            }
+                SetDirection();
 
-            if(_canShoot)
-            {
-                if (_shootingTimer <= 0f)
+                var lookRotation = Quaternion.LookRotation(_direction);
+
+                if (_canRotate)
                 {
-                    if (Quaternion.Angle(_gameObjectToRotate.rotation, lookRotation) <= 30)
-                    {
-                        Shoot();
-                        _shootingTimer = _shootingCooldown;
-                    }
+                    RotateTo(lookRotation);
                 }
-                else
+
+                if (_canShoot)
                 {
-                    _shootingTimer -= Time.deltaTime;
+                    if (_shootingTimer <= 0f)
+                    {
+                        if (Quaternion.Angle(_gameObjectToRotate.rotation, lookRotation) <= 30)
+                        {
+                            Shoot();
+                            _shootingTimer = _shootingCooldown;
+                        }
+                    }
+                    else
+                    {
+                        _shootingTimer -= Time.deltaTime;
+                    }
                 }
             }
         }

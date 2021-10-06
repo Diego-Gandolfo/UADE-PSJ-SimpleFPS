@@ -1,3 +1,4 @@
+using SimpleFPS.Managers;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,7 @@ namespace SimpleFPS.Command
 
         #region Private Fields
 
+        private GameManager _gameManager;
         private List<ICommand> _commandsToExecute = new List<ICommand>();
 
         #endregion
@@ -31,9 +33,17 @@ namespace SimpleFPS.Command
             }
         }
 
+        private void Start()
+        {
+            _gameManager = GameManager.Instance;
+        }
+
         private void Update()
         {
-            ExecuteCommands();
+            if (!_gameManager.IsPaused)
+            {
+                ExecuteCommands();
+            }
         }
 
         #endregion

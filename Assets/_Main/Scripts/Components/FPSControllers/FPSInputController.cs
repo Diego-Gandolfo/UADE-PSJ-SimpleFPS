@@ -1,4 +1,5 @@
 using SimpleFPS.FPS;
+using SimpleFPS.Managers;
 using SimpleFPS.Weapons;
 using UnityEngine;
 
@@ -47,6 +48,7 @@ namespace SimpleFPS.FPS
 
         // Components
         private FPSCharacterController _characterController;
+        private GameManager _gameManager;
 
         #endregion
 
@@ -54,16 +56,20 @@ namespace SimpleFPS.FPS
 
         private void Start()
         {
+            _gameManager = GameManager.Instance;
             GetRequiredComponent();
         }
 
         private void Update()
         {
-            CheckMovementInput();
-            CheckRotationInput();
-            CheckLookUpDown();
-            CheckJumpInput();
-            CheckWeaponInput();
+            if (!_gameManager.IsPaused)
+            {
+                CheckMovementInput();
+                CheckRotationInput();
+                CheckLookUpDown();
+                CheckJumpInput();
+                CheckWeaponInput();
+            }
         }
 
         #endregion

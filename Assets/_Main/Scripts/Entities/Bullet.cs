@@ -1,4 +1,5 @@
 using SimpleFPS.Life;
+using SimpleFPS.Managers;
 using UnityEngine;
 
 namespace SimpleFPS.Projectiles
@@ -12,6 +13,8 @@ namespace SimpleFPS.Projectiles
         #endregion
 
         #region Private Fields
+
+        private GameManager _gameManager;
 
         // Stats
         private BulletStats _bulletStats;
@@ -38,17 +41,25 @@ namespace SimpleFPS.Projectiles
             _canCount = true;
         }
 
+        private void Start()
+        {
+            _gameManager = GameManager.Instance;
+        }
+
         private void Update()
         {
-            if (_canCount)
+            if (!_gameManager.IsPaused)
             {
-                if (_timer <= 0f)
+                if (_canCount)
                 {
-                    Managers.LevelManager.Instance.BulletFactory.StoreBullet(this);
-                }
-                else
-                {
-                    _timer -= Time.deltaTime;
+                    if (_timer <= 0f)
+                    {
+                        Managers.LevelManager.Instance.BulletFactory.StoreBullet(this);
+                    }
+                    else
+                    {
+                        _timer -= Time.deltaTime;
+                    }
                 }
             }
         }

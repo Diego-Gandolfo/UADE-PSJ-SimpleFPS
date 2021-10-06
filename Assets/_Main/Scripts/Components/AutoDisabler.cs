@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using SimpleFPS.Managers;
+using UnityEngine;
 
 namespace SimpleFPS.Components
 {
@@ -12,6 +13,7 @@ namespace SimpleFPS.Components
 
         #region Private Fields
 
+        private GameManager _gameManager;
         private float _timeCounter;
 
         #endregion
@@ -26,6 +28,7 @@ namespace SimpleFPS.Components
 
         private void Start()
         {
+            _gameManager = GameManager.Instance;
             gameObject.SetActive(false);
         }
 
@@ -36,9 +39,12 @@ namespace SimpleFPS.Components
 
         private void Update()
         {
-            _timeCounter -= Time.deltaTime;
+            if (!_gameManager.IsPaused) 
+            {
+                _timeCounter -= Time.deltaTime;
 
-            if (_timeCounter <= 0f) gameObject.SetActive(false);
+                if (_timeCounter <= 0f) gameObject.SetActive(false);
+            }
         }
 
         #endregion

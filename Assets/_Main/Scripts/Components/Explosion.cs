@@ -1,4 +1,5 @@
 using SimpleFPS.Life;
+using SimpleFPS.Managers;
 using SimpleFPS.Sounds;
 using UnityEngine;
 
@@ -19,6 +20,7 @@ namespace SimpleFPS.Components
 
         #region Private Fields
 
+        private GameManager _gameManager;
         private float _timer;
 
         #endregion
@@ -30,13 +32,21 @@ namespace SimpleFPS.Components
             _timer = _timeToDespawn;
         }
 
+        private void Start()
+        {
+            _gameManager = GameManager.Instance;
+        }
+
         private void Update()
         {
-            _timer -= Time.deltaTime;
-
-            if (_timer <= 0f)
+            if (!_gameManager.IsPaused) 
             {
-                Managers.LevelManager.Instance.ExplosionFactory.StoreExplosion(this);
+                _timer -= Time.deltaTime;
+
+                if (_timer <= 0f)
+                {
+                    Managers.LevelManager.Instance.ExplosionFactory.StoreExplosion(this);
+                }
             }
         }
 

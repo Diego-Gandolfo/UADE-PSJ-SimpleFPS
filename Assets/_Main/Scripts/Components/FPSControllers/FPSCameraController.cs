@@ -1,4 +1,5 @@
 using SimpleFPS.FPS;
+using SimpleFPS.Managers;
 using SimpleFPS.Player;
 using UnityEngine;
 
@@ -25,22 +26,32 @@ namespace SimpleFPS.Cameras
 
         #region Private Fields
 
+        private GameManager _gameManager;
         private bool _isAiming;
 
         #endregion
 
         #region Unity Methods
 
+        private void Start()
+        {
+            _gameManager = GameManager.Instance;
+        }
+
         private void Update()
         {
-            if (_isAiming)
+            if (!_gameManager.IsPaused)
             {
-                _weaponCamera.fieldOfView = Mathf.Lerp(_weaponCamera.fieldOfView, _aimFOV, _speedFOV * Time.deltaTime);
+                if (_isAiming)
+                {
+                    _weaponCamera.fieldOfView = Mathf.Lerp(_weaponCamera.fieldOfView, _aimFOV, _speedFOV * Time.deltaTime);
+                }
+                else
+                {
+                    _weaponCamera.fieldOfView = Mathf.Lerp(_weaponCamera.fieldOfView, _defaultFOV, _speedFOV * Time.deltaTime);
+                }
             }
-            else
-            {
-                _weaponCamera.fieldOfView = Mathf.Lerp(_weaponCamera.fieldOfView, _defaultFOV, _speedFOV * Time.deltaTime);
-            }
+
         }
 
         #endregion

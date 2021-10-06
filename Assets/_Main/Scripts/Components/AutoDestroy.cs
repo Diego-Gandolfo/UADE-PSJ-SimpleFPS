@@ -1,3 +1,4 @@
+using SimpleFPS.Managers;
 using UnityEngine;
 
 namespace SimpleFPS.Components
@@ -12,6 +13,7 @@ namespace SimpleFPS.Components
 
         #region Private Fields
 
+        private GameManager _gameManager;
         private float _timeCounter;
 
         #endregion
@@ -20,14 +22,18 @@ namespace SimpleFPS.Components
 
         private void Start()
         {
+            _gameManager = GameManager.Instance;
             _timeCounter = _timeToDestroy;
         }
 
         private void Update()
         {
-            _timeCounter -= Time.deltaTime;
+            if (!_gameManager.IsPaused)
+            {
+                _timeCounter -= Time.deltaTime;
 
-            if (_timeCounter <= 0f) Destroy(gameObject);
+                if (_timeCounter <= 0f) Destroy(gameObject);
+            }
         }
 
         #endregion

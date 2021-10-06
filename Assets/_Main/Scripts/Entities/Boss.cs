@@ -1,5 +1,6 @@
 using SimpleFPS.Command;
 using SimpleFPS.Life;
+using SimpleFPS.Managers;
 using SimpleFPS.Patrol;
 using SimpleFPS.Projectiles;
 using SimpleFPS.Sounds;
@@ -50,6 +51,7 @@ namespace SimpleFPS.Enemy.Boss
         #region Private Fields
 
         // Componentes
+        private GameManager _gameManager;
         private FollowTarget _followTarget;
         private Health _healthComponent;
         private CommandManager _commandManager;
@@ -74,6 +76,7 @@ namespace SimpleFPS.Enemy.Boss
             _followTarget = GetComponent<FollowTarget>();
             _animator = GetComponent<Animator>();
             _rigidbody = GetComponent<Rigidbody>();
+            _gameManager = GameManager.Instance;
 
             _healthComponent = GetComponent<Health>();
             if (_healthComponent == null) Debug.LogError($"{this.gameObject.name} no tiene asignado un HealthComponent");
@@ -96,20 +99,23 @@ namespace SimpleFPS.Enemy.Boss
 
         private void Update()
         {
-            if (_canShoot)
+            if (!_gameManager.IsPaused)
             {
-                if (_shootingTimer <= 0f)
+                if (_canShoot)
                 {
-                    Shoot();
-                    _shootingTimer = _shootingCurrentCooldown;
-                }
-                else
-                {
-                    _shootingTimer -= Time.deltaTime;
-                }
+                    if (_shootingTimer <= 0f)
+                    {
+                        Shoot();
+                        _shootingTimer = _shootingCurrentCooldown;
+                    }
+                    else
+                    {
+                        _shootingTimer -= Time.deltaTime;
+                    }
 
-                var xzTargetPosition = new Vector3(_characterTransform.position.x, transform.position.y, _characterTransform.position.z);
-                transform.LookAt(xzTargetPosition);
+                    var xzTargetPosition = new Vector3(_characterTransform.position.x, transform.position.y, _characterTransform.position.z);
+                    transform.LookAt(xzTargetPosition);
+                }
             }
         }
 

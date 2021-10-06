@@ -1,3 +1,4 @@
+using SimpleFPS.Managers;
 using UnityEngine;
 
 
@@ -14,6 +15,7 @@ namespace SimpleFPS.Projectiles
 
         #region Private Fields
 
+        private GameManager _gameManager;
         private AudioSource _audioSource;
         private float _timer;
 
@@ -33,13 +35,21 @@ namespace SimpleFPS.Projectiles
             _audioSource.Play();
         }
 
+        private void Start()
+        {
+            _gameManager = GameManager.Instance;
+        }
+
         private void Update()
         {
-            _timer -= Time.deltaTime;
-
-            if (_timer <= 0f)
+            if (!_gameManager.IsPaused) 
             {
-                Managers.LevelManager.Instance.BulletImpactFactory.StoreBulletImpact(this);
+                _timer -= Time.deltaTime;
+
+                if (_timer <= 0f)
+                {
+                    Managers.LevelManager.Instance.BulletImpactFactory.StoreBulletImpact(this);
+                }
             }
         }
 

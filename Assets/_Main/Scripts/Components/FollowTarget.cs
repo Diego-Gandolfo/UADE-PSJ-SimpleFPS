@@ -1,5 +1,6 @@
 ﻿using SimpleFPS.Command;
 using SimpleFPS.Enemy;
+using SimpleFPS.Managers;
 using SimpleFPS.Movement;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace SimpleFPS.Patrol
 
         #region Private Fields
 
+        private GameManager _gameManager;
         private CommandManager _commandManager;
         private Vector3 _direction;
 
@@ -34,20 +36,24 @@ namespace SimpleFPS.Patrol
         {
             if (_target == null) Debug.LogError($"{this} en {this.gameObject} no tiene asignado el Target");
             _commandManager = CommandManager.Instance;
+            _gameManager = GameManager.Instance;
         }
 
         void Update()
         {
-            var xzTargetPosition = new Vector3(_target.position.x, transform.position.y, _target.position.z);
-
-            _direction = xzTargetPosition - transform.position;
-            _direction.Normalize();
-
-            transform.LookAt(xzTargetPosition);
-
-            if(Vector3.Distance(transform.position, _target.position) > _stopDistance)
+            if (!_gameManager.IsPaused) 
             {
-                _commandManager.AddCommand(new CmdMovement(gameObject, _direction, _moveSpeed));
+                var xzTargetPosition = new Vector3(_target.position.x, transform.position.y, _target.position.z);
+
+                _direction = xzTargetPosition - transform.position;
+                _direction.Normalize();
+
+                transform.LookAt(xzTargetPosition);
+
+                if (Vector3.Distance(transform.position, _target.position) > _stopDistance)
+                {
+                    _commandManager.AddCommand(new CmdMovement(gameObject, _direction, _moveSpeed));
+                }
             }
         }
 

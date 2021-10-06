@@ -1,4 +1,5 @@
 using SimpleFPS.Generics.Pool;
+using SimpleFPS.Managers;
 using SimpleFPS.Projectiles;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace SimpleFPS.Weapons
     {
         #region Private Fields
 
+        private GameManager _gameManager;
         private float _cooldownTimer;
 
         #endregion
@@ -20,15 +22,23 @@ namespace SimpleFPS.Weapons
             _canAttack = true;
         }
 
+        private void Start()
+        {
+            _gameManager = GameManager.Instance;
+        }
+
         private void Update()
         {
-            if (_cooldownTimer <= 0f)
+            if (!_gameManager.IsPaused)
             {
-                _canAttack = true;
-            }
-            else
-            {
-                _cooldownTimer -= Time.deltaTime;
+                if (_cooldownTimer <= 0f)
+                {
+                    _canAttack = true;
+                }
+                else
+                {
+                    _cooldownTimer -= Time.deltaTime;
+                }
             }
         }
 

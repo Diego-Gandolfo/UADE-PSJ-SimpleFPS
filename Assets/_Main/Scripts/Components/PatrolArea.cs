@@ -1,5 +1,6 @@
 ﻿using SimpleFPS.Command;
 using SimpleFPS.Enemy;
+using SimpleFPS.Managers;
 using UnityEngine;
 
 namespace SimpleFPS.Patrol
@@ -31,6 +32,7 @@ namespace SimpleFPS.Patrol
         #region Private Fields
 
         // Components
+        private GameManager _gameManager;
         private CommandManager _commandManager;
         private GameObject _patrolPosition = null;
 
@@ -68,6 +70,7 @@ namespace SimpleFPS.Patrol
         private void Start()
         {
             _commandManager = CommandManager.Instance;
+            _gameManager = GameManager.Instance;
 
             _patrolPosition = new GameObject("Patrol Position");
             _patrolPosition.transform.parent = gameObject.transform.parent;
@@ -87,47 +90,50 @@ namespace SimpleFPS.Patrol
 
         private void Update()
         {
-            if (_canCount)
+            if (!_gameManager.IsPaused)
             {
-                if (_waitTimeCounter <= 0)
+                if (_canCount)
                 {
-                    _canCount = false;
+                    if (_waitTimeCounter <= 0)
+                    {
+                        _canCount = false;
 
-                    _waitTimeCounter = Random.Range(_minWaitTime, _maxWaitTime);
-                    
-                    _canRotate = true;
+                        _waitTimeCounter = Random.Range(_minWaitTime, _maxWaitTime);
+
+                        _canRotate = true;
+                    }
+                    else
+                    {
+                        _waitTimeCounter -= Time.deltaTime;
+                    }
                 }
-                else
+
+                if (_canRotate)
                 {
-                    _waitTimeCounter -= Time.deltaTime;
+                    var lookRotation = Quaternion.LookRotation(_direction);
+                    _commandManager.AddCommand(new CmdRotation(transform, lookRotation, _rotationSpeed));
+
+
+                    if (Quaternion.Angle(transform.rotation, lookRotation) < .1f)
+                    {
+                        _canRotate = false;
+                        _canMove = true;
+                    }
                 }
-            }
 
-            if (_canRotate)
-            {
-                var lookRotation = Quaternion.LookRotation(_direction);
-                _commandManager.AddCommand(new CmdRotation(transform, lookRotation, _rotationSpeed));
-
-
-                if (Quaternion.Angle(transform.rotation, lookRotation) < .1f)
+                if (_canMove)
                 {
-                    _canRotate = false;
-                    _canMove = true;
-                }
-            }
+                    _currentSpeed = _patrolSpeed;
 
-            if (_canMove)
-            {
-                _currentSpeed = _patrolSpeed;
+                    if (Vector2.Distance(transform.position, _patrolPosition.transform.position) < 0.2f)
+                    {
+                        _canMove = false;
 
-                if (Vector2.Distance(transform.position, _patrolPosition.transform.position) < 0.2f)
-                {
-                    _canMove = false;
+                        _currentSpeed = 0f;
+                        RandomMovePatrolPosition();
 
-                    _currentSpeed = 0f;
-                    RandomMovePatrolPosition();
-
-                    _canCount = true;
+                        _canCount = true;
+                    }
                 }
             }
         }

@@ -1,5 +1,6 @@
 ﻿using SimpleFPS.Command;
 using SimpleFPS.Life;
+using SimpleFPS.Managers;
 using SimpleFPS.Patrol;
 using SimpleFPS.Sounds;
 using UnityEngine;
@@ -27,6 +28,7 @@ namespace SimpleFPS.Enemy.Scout
         #region Private Fields
 
         // Componentes
+        private GameManager _gameManager;
         private PatrolArea _patrolArea;
         private FollowTarget _followTarget;
         private Health _healthComponent;
@@ -39,7 +41,8 @@ namespace SimpleFPS.Enemy.Scout
         {
             _patrolArea = GetComponent<PatrolArea>();
             _followTarget = GetComponent<FollowTarget>();
-            
+            _gameManager = GameManager.Instance;
+
             _healthComponent = GetComponent<Health>();
             if (_healthComponent == null) Debug.LogError($"{this.gameObject.name} no tiene asignado un HealthComponent");
             else
@@ -58,11 +61,14 @@ namespace SimpleFPS.Enemy.Scout
 
         private void Update()
         {
-            if ((_patrolArea.enabled && _patrolArea.CurrentSpeed != 0) || _followTarget.enabled)
+            if (!_gameManager.IsPaused)
             {
-                if (!_mainAudioSource.isPlaying)
+                if ((_patrolArea.enabled && _patrolArea.CurrentSpeed != 0) || _followTarget.enabled)
                 {
-                    _mainAudioSource.PlayOneShot(_sounds.ScoutMoveSound);
+                    if (!_mainAudioSource.isPlaying)
+                    {
+                        _mainAudioSource.PlayOneShot(_sounds.ScoutMoveSound);
+                    }
                 }
             }
         }
