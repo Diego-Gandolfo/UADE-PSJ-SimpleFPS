@@ -21,6 +21,12 @@ namespace SimpleFPS.Managers.MainMenu
 
         #region Unity Methods
 
+        private void Awake()
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+
         private void Start()
         {
             _graphicRaycaster = GetComponent<GraphicRaycaster>();

@@ -61,6 +61,9 @@ namespace SimpleFPS.Managers
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
             }
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
 
         private void Start()
