@@ -42,7 +42,7 @@ namespace SimpleFPS.Weapons
 
             base.Attack();
 
-            _cooldownTimer = _baseGunStats.FireCooldown;
+            _cooldownTimer = FireCooldown;
         }
 
         public override void Reload()

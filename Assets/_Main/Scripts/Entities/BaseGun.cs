@@ -40,7 +40,6 @@ namespace SimpleFPS.Weapons
         #region Protected Fields
 
         // Components
-        protected BulletFactory _bulletFactory;
         protected CommandManager _commandManager;
 
         // Parameters
@@ -80,7 +79,6 @@ namespace SimpleFPS.Weapons
 
         private void Start()
         {
-            _bulletFactory = Managers.LevelManager.Instance.BulletFactory;
             _commandManager = CommandManager.Instance;
 
             _currentExtraAmmo = MaxExtraAmmo;
