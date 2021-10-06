@@ -22,8 +22,9 @@ namespace SimpleFPS.Weapons
             _canAttack = true;
         }
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             _gameManager = GameManager.Instance;
         }
 

@@ -77,7 +77,7 @@ namespace SimpleFPS.Weapons
             _weaponImage.sprite = _weaponIcon;
         }
 
-        private void Start()
+        protected virtual void Start()
         {
             _commandManager = CommandManager.Instance;
 
