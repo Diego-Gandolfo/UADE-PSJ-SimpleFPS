@@ -9806,6 +9806,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _target: {fileID: 0}
   _moveSpeed: 2
+  _stopDistance: 0
 --- !u!114 &869376498332485231
 MonoBehaviour:
   m_ObjectHideFlags: 0

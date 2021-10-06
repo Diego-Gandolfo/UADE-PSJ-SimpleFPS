@@ -72,12 +72,13 @@ namespace SimpleFPS.Patrol
             _patrolPosition = new GameObject("Patrol Position");
             _patrolPosition.transform.parent = gameObject.transform.parent;
             _patrolPosition.SetActive(false);
-            RandomMovePatrolPosition();
 
             _minX = (_areaSize.x / -2) + _patrolCenter.position.x;
             _maxX = (_areaSize.x / 2) + _patrolCenter.position.x;
             _minZ = (_areaSize.z / -2) + _patrolCenter.position.z;
             _maxZ = (_areaSize.z / 2) + _patrolCenter.position.z;
+
+            RandomMovePatrolPosition();
 
             _waitTimeCounter = Random.Range(_minWaitTime, _maxWaitTime);
 

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee41b4fc6c272a943916e0d4918b4286, type: 3}
   m_Name: AsaultRifle_BaseWeaponStats
   m_EditorClassIdentifier: 
-  _damage: 1
+  _damage: 2

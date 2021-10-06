@@ -62,6 +62,8 @@ namespace SimpleFPS.FPS
             _gameManager = GameManager.Instance;
 
             IsAlive = true;
+            transform.forward = Vector3.forward;
+            transform.rotation = Quaternion.identity;
         }
 
         private void Update()

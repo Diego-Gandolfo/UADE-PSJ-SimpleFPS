@@ -11,6 +11,7 @@ namespace SimpleFPS.Patrol
 
         [SerializeField] private Transform _target = null;
         [SerializeField] private float _moveSpeed = 10f;
+        [SerializeField] private float _stopDistance = 10f;
 
         #endregion
 
@@ -36,7 +37,11 @@ namespace SimpleFPS.Patrol
             direction.Normalize();
 
             transform.LookAt(xzTargetPosition);
-            _commandManager.AddCommand(new CmdMovement(gameObject, direction, _moveSpeed));
+
+            if(Vector3.Distance(transform.position, _target.position) > _stopDistance)
+            {
+                _commandManager.AddCommand(new CmdMovement(gameObject, direction, _moveSpeed));
+            }
         }
 
         #endregion

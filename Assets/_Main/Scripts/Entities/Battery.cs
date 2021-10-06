@@ -32,7 +32,6 @@ namespace SimpleFPS.Battery
             if (_audioSource == null) Debug.LogError($"{this.gameObject.name} no tiene un AudioSource");
             else
             {
-                print(_audioSource);
                 _audioSource.clip = _sounds.EnergySound;
                 _audioSource.loop = true;
                 _audioSource.Play();

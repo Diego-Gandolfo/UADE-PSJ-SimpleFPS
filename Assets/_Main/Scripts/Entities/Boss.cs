@@ -1,37 +1,28 @@
 using SimpleFPS.Command;
-using SimpleFPS.Factory;
 using SimpleFPS.Life;
+using SimpleFPS.Patrol;
 using SimpleFPS.Projectiles;
 using SimpleFPS.Sounds;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SimpleFPS.Enemy.Turret
+namespace SimpleFPS.Enemy.Boss
 {
-    public class Turret : MonoBehaviour
+    public class Boss : MonoBehaviour
     {
-        #region Serialized Fields
+        #region Serialize Fields
 
         [Header("Stats")]
         [SerializeField] private BulletStats _bulletStats;
-
-        [Header("Sounds")]
-        [SerializeField] private AudioSource _mainAudioSource;
-        [SerializeField] private AudioSource _shootAudioSource;
-        [SerializeField] private FXSounds _sounds;
 
         [Header("Overlaps Settings")]
         [SerializeField] private LayerMask _characterLayer;
         [SerializeField] private float _detectionRadius;
         [SerializeField] private float _shootingRadius;
 
-        [Header("Rotation")]
-        [SerializeField] private Transform _gameObjectToRotate;
-        [SerializeField] private float _rotationSpeed;
-
         [Header("Shooting")]
         [SerializeField] private Transform _bulletSpawnpoint;
-        [SerializeField] private float _shootingCooldown;
+        [SerializeField] private List<float> _shootingCooldowns = new List<float>();
         [SerializeField] private float _damage;
 
         [Header("Sparks")]
@@ -43,31 +34,34 @@ namespace SimpleFPS.Enemy.Turret
         [SerializeField] private ParticleSystem _muzzleFlashParticles;
         [SerializeField] private Light _muzzleFlashLight;
 
-        [Header("Destroy")]
-        [SerializeField] private GameObject _destroyOnDie;
-        [SerializeField] private List<Collider> _colliders;
+        [Header("Sounds")]
+        [SerializeField] private AudioSource _mainAudioSource;
+        [SerializeField] private AudioSource _shootAudioSource;
+        [SerializeField] private FXSounds _sounds;
 
-        [Header("Smoke")]
+        [Header("Health")]
         [SerializeField] private ParticleSystem _damageParticles1;
         [SerializeField] private ParticleSystem _damageParticles2;
         [SerializeField] private ParticleSystem _damageParticles3;
+        [SerializeField] private Light _ligthLife;
 
         #endregion
 
         #region Private Fields
 
-        // Components
-        private Transform _characterTransform;
+        // Componentes
+        private FollowTarget _followTarget;
         private Health _healthComponent;
         private CommandManager _commandManager;
+        private Transform _characterTransform;
+        private Animator _animator;
 
         // Flags
-        private bool _canRotate;
         private bool _canShoot;
 
         // Parameters
-        private Vector3 _direction;
         private float _shootingTimer;
+        private float _shootingCurrentCooldown;
         private const float BULLET_FORCE = 100f;
 
         #endregion
@@ -76,10 +70,8 @@ namespace SimpleFPS.Enemy.Turret
 
         private void Start()
         {
-            var levelManager = Managers.LevelManager.Instance;
-            _characterTransform = levelManager.Character.transform;
-
-            _commandManager = CommandManager.Instance;
+            _followTarget = GetComponent<FollowTarget>();
+            _animator = GetComponent<Animator>();
 
             _healthComponent = GetComponent<Health>();
             if (_healthComponent == null) Debug.LogError($"{this.gameObject.name} no tiene asignado un HealthComponent");
@@ -89,29 +81,25 @@ namespace SimpleFPS.Enemy.Turret
                 _healthComponent.OnRecieveDamage += OnRecieveDamageHandler;
             }
 
-            _shootingTimer = _shootingCooldown;
+            _followTarget.enabled = false;
+
+            var levelManager = Managers.LevelManager.Instance;
+            _characterTransform = levelManager.Character.transform;
+
+            _commandManager = CommandManager.Instance;
+
+            _shootingCurrentCooldown = _shootingCooldowns[0];
+            _ligthLife.color = Color.white;
         }
 
         private void Update()
         {
-            SetDirection();
-
-            var lookRotation = Quaternion.LookRotation(_direction);
-
-            if (_canRotate)
-            {
-                RotateTo(lookRotation);
-            }
-
-            if(_canShoot)
+            if (_canShoot)
             {
                 if (_shootingTimer <= 0f)
                 {
-                    if (Quaternion.Angle(_gameObjectToRotate.rotation, lookRotation) <= 30)
-                    {
-                        Shoot();
-                        _shootingTimer = _shootingCooldown;
-                    }
+                    Shoot();
+                    _shootingTimer = _shootingCurrentCooldown;
                 }
                 else
                 {
@@ -123,7 +111,7 @@ namespace SimpleFPS.Enemy.Turret
         private void FixedUpdate()
         {
             var characterDetected = Physics.OverlapSphere(transform.position, _detectionRadius, _characterLayer);
-            _canRotate = (characterDetected.Length > 0);
+            _followTarget.enabled = (characterDetected.Length > 0);
 
             var characterInRange = Physics.OverlapSphere(transform.position, _shootingRadius, _characterLayer);
             _canShoot = (characterInRange.Length > 0);
@@ -142,28 +130,13 @@ namespace SimpleFPS.Enemy.Turret
 
         #region Private Methods
 
-        private void SetDirection()
-        {
-            var xzCharacterPosition = new Vector3(_characterTransform.position.x, _gameObjectToRotate.position.y, _characterTransform.position.z);
-            _direction = xzCharacterPosition - _gameObjectToRotate.position;
-            _direction.Normalize();
-        }
-
-        private void RotateTo(Quaternion rotateTo)
-        {
-            _commandManager.AddCommand(new CmdRotation(_gameObjectToRotate, rotateTo, _rotationSpeed));
-
-            if (!_mainAudioSource.isPlaying && Quaternion.Angle(_gameObjectToRotate.rotation, rotateTo) >= 1)
-            {
-                _mainAudioSource.PlayOneShot(_sounds.TurretRotationRound);
-            }
-        }
-
         private void Shoot()
         {
             RaycastHit hit;
 
-            if (Physics.Raycast(_bulletSpawnpoint.position, _bulletSpawnpoint.forward, out hit, Mathf.Infinity, _bulletStats.TargetsLayers))
+            var direction = (_characterTransform.position - transform.position).normalized;
+
+            if (Physics.Raycast(transform.position, direction, out hit, Mathf.Infinity, _bulletStats.TargetsLayers))
             {
                 if (hit.collider.gameObject.layer == 3)
                 {
@@ -192,39 +165,38 @@ namespace SimpleFPS.Enemy.Turret
             _sparkParticles.Emit(Random.Range(_minSparks, _maxSparks));
         }
 
+        private void OnDieHandler()
+        {
+            _animator.SetTrigger("DoDie");
+            Invoke("Explote", 1f);
+        }
+
         private void OnRecieveDamageHandler()
         {
-            _mainAudioSource.PlayOneShot(_sounds.HitSound);
-
             if (!_damageParticles1.isPlaying && _healthComponent.CurrentLife <= ((_healthComponent.MaxLife / 2) + (_healthComponent.MaxLife / 4)))
             {
                 _damageParticles1.Play();
+                _shootingCurrentCooldown = _shootingCooldowns[1];
+                _ligthLife.color = Color.blue;
             }
             else if (!_damageParticles2.isPlaying && _healthComponent.CurrentLife <= (_healthComponent.MaxLife / 2))
             {
                 _damageParticles2.Play();
+                _shootingCurrentCooldown = _shootingCooldowns[2];
+                _ligthLife.color = Color.yellow;
             }
             else if (!_damageParticles3.isPlaying && _healthComponent.CurrentLife <= (_healthComponent.MaxLife / 4))
             {
                 _damageParticles3.Play();
+                _shootingCurrentCooldown = _shootingCooldowns[3];
+                _ligthLife.color = Color.red;
             }
         }
 
-        private void OnDieHandler()
+        private void Explote()
         {
-            _commandManager.AddCommand(new CmdExplosion(transform.position, transform.rotation));
-
-            foreach (var collider in _colliders)
-            {
-                collider.enabled = false;
-            }
-
-            Destroy(_destroyOnDie);
-
-            _healthComponent.OnRecieveDamage -= OnRecieveDamageHandler;
-            _healthComponent.OnDie -= OnDieHandler;
-
-            this.enabled = false;
+            CommandManager.Instance.AddCommand(new CmdExplosion(transform.position, transform.rotation));
+            Destroy(gameObject);
         }
 
         #endregion
