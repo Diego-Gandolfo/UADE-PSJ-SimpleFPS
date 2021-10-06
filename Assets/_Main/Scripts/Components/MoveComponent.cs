@@ -1,9 +1,9 @@
+using SimpleFPS.Command;
 using UnityEngine;
 
 namespace SimpleFPS.Movement
 {
-    [RequireComponent(typeof(Rigidbody))]
-    public class MoveComponent : MonoBehaviour, IMove // TODO: Hacer que el Move solo use una velocidad y que hayan otros Componentes que den la posibilidad de correr o Sneak
+    public class MoveComponent : MonoBehaviour, IMove
     {
         #region Serialize Fields
 
@@ -15,7 +15,7 @@ namespace SimpleFPS.Movement
 
         #region Private Fields
 
-        private Rigidbody _rigidbody;
+        private CommandManager _commandManager;
 
         #endregion
 
@@ -31,7 +31,7 @@ namespace SimpleFPS.Movement
 
         private void Start()
         {
-            _rigidbody = GetComponent<Rigidbody>();
+            _commandManager = CommandManager.Instance;
         }
 
         #endregion
@@ -40,8 +40,7 @@ namespace SimpleFPS.Movement
 
         public void DoMove(Vector3 direction, float speed)
         {
-            _rigidbody.velocity = new Vector3(0f, _rigidbody.velocity.y, 0f);
-            _rigidbody.AddForce(direction * speed, ForceMode.VelocityChange);
+            _commandManager.AddCommand(new CmdMovement(gameObject, direction, speed));
         }
 
         #endregion

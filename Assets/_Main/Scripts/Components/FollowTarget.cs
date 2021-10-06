@@ -16,7 +16,7 @@ namespace SimpleFPS.Patrol
 
         #region Private Fields
 
-        private EnemyManager _enemyManager;
+        private CommandManager _commandManager;
 
         #endregion
 
@@ -25,7 +25,7 @@ namespace SimpleFPS.Patrol
         void Start()
         {
             if (_target == null) Debug.LogError($"{this} en {this.gameObject} no tiene asignado el Target");
-            _enemyManager = EnemyManager.Instance;
+            _commandManager = CommandManager.Instance;
         }
 
         void Update()
@@ -36,7 +36,7 @@ namespace SimpleFPS.Patrol
             direction.Normalize();
 
             transform.LookAt(xzTargetPosition);
-            _enemyManager.AddCommand(new CmdMovement(gameObject, direction, _moveSpeed));
+            _commandManager.AddCommand(new CmdMovement(gameObject, direction, _moveSpeed));
         }
 
         #endregion

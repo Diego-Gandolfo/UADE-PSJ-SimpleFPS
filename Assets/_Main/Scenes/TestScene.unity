@@ -13057,7 +13057,7 @@ GameObject:
   - component: {fileID: 1064396593}
   - component: {fileID: 1064396592}
   m_Layer: 0
-  m_Name: EnemyManager
+  m_Name: CommandManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13072,7 +13072,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1064396591}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eb75f08f5f521d42bc3fb88325d3894, type: 3}
+  m_Script: {fileID: 11500000, guid: 58640f8a485537c479b2cab6a0d76e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1064396593

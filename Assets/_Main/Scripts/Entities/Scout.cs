@@ -91,7 +91,7 @@ namespace SimpleFPS.Enemy.Scout
 
         private void OnDieHandler()
         {
-            EnemyManager.Instance.AddCommand(new CmdExplosion(transform.position, transform.rotation));
+            CommandManager.Instance.AddCommand(new CmdExplosion(transform.position, transform.rotation));
             Destroy(gameObject);
         }
 

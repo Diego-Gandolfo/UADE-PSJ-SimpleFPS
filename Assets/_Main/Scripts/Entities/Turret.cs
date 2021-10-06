@@ -60,7 +60,7 @@ namespace SimpleFPS.Enemy.Turret
         private Transform _characterTransform;
         private Health _healthComponent;
         private BulletFactory _bulletFactory;
-        private EnemyManager _enemyManager;
+        private CommandManager _commandManager;
 
         // Flags
         private bool _canRotate;
@@ -81,7 +81,7 @@ namespace SimpleFPS.Enemy.Turret
             _characterTransform = levelManager.Character.transform;
             _bulletFactory = levelManager.BulletFactory;
 
-            _enemyManager = EnemyManager.Instance;
+            _commandManager = CommandManager.Instance;
 
             _healthComponent = GetComponent<Health>();
             if (_healthComponent == null) Debug.LogError($"{this.gameObject.name} no tiene asignado un HealthComponent");
@@ -153,7 +153,7 @@ namespace SimpleFPS.Enemy.Turret
 
         private void RotateTo(Quaternion rotateTo)
         {
-            _enemyManager.AddCommand(new CmdRotation(_gameObjectToRotate, rotateTo, _rotationSpeed));
+            _commandManager.AddCommand(new CmdRotation(_gameObjectToRotate, rotateTo, _rotationSpeed));
 
             if (!_mainAudioSource.isPlaying && Quaternion.Angle(_gameObjectToRotate.rotation, rotateTo) >= 1)
             {
@@ -164,7 +164,8 @@ namespace SimpleFPS.Enemy.Turret
         private void Shoot()
         {
             _shootAudioSource.PlayOneShot(_sounds.ShootSound);
-            _bulletFactory.GetBullet(_bulletStats, _bulletSpawnpoint.position, _bulletSpawnpoint.rotation, _damage, BULLET_FORCE);
+            //_bulletFactory.GetBullet(_bulletStats, _bulletSpawnpoint.position, _bulletSpawnpoint.rotation, _damage, BULLET_FORCE);
+            _commandManager.AddCommand(new CmdShoot(_bulletSpawnpoint, _bulletStats, _damage, BULLET_FORCE));
             _muzzleFlashLight.enabled = true;
             Invoke("TurnMuzzleFlashLightOff", 0.02f);
             PlayMuzzleFlashParticles();
@@ -206,7 +207,7 @@ namespace SimpleFPS.Enemy.Turret
 
         private void OnDieHandler()
         {
-            _enemyManager.AddCommand(new CmdExplosion(transform.position, transform.rotation));
+            _commandManager.AddCommand(new CmdExplosion(transform.position, transform.rotation));
 
             foreach (var collider in _colliders)
             {

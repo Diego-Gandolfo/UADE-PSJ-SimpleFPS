@@ -56,7 +56,7 @@ namespace SimpleFPS.Components
             _mainAudioSource.PlayOneShot(explosionSound);
 
             var hits = Physics.OverlapSphere(transform.position, _radius, _layerMask);
-            print($"Position: {transform.position} - Radio: {_radius} - Hits: {hits.Length}");
+
             if (hits.Length > 0)
             {
                 foreach (var hit in hits)
@@ -65,7 +65,6 @@ namespace SimpleFPS.Components
 
                     if (health != null)
                     {
-                        print(health.gameObject.name);
                         health.ReceiveDamage(_damage);
                     }
                 }

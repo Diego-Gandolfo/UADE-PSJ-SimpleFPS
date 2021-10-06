@@ -20,7 +20,7 @@ namespace SimpleFPS.Enemy
         {
             if ((_layerMask.value & (1 << collision.transform.gameObject.layer)) > 0)
             {
-                EnemyManager.Instance.AddCommand(new CmdExplosion(transform.position, transform.rotation));
+                CommandManager.Instance.AddCommand(new CmdExplosion(transform.position, transform.rotation));
                 Destroy(gameObject);
             }
         }

@@ -1,14 +1,13 @@
-using SimpleFPS.Command;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SimpleFPS.Enemy
+namespace SimpleFPS.Command
 {
-    public class EnemyManager : MonoBehaviour
+    public class CommandManager : MonoBehaviour
     {
         #region Static
 
-        public static EnemyManager Instance { get; private set; }
+        public static CommandManager Instance { get; private set; }
 
         #endregion
 

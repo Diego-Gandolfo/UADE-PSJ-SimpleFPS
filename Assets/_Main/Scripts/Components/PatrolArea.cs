@@ -31,7 +31,7 @@ namespace SimpleFPS.Patrol
         #region Private Fields
 
         // Components
-        private EnemyManager _enemyManager;
+        private CommandManager _commandManager;
         private GameObject _patrolPosition = null;
 
         // Area
@@ -67,7 +67,7 @@ namespace SimpleFPS.Patrol
 
         private void Start()
         {
-            _enemyManager = EnemyManager.Instance;
+            _commandManager = CommandManager.Instance;
 
             _patrolPosition = new GameObject("Patrol Position");
             _patrolPosition.transform.parent = gameObject.transform.parent;
@@ -105,7 +105,7 @@ namespace SimpleFPS.Patrol
             if (_canRotate)
             {
                 var lookRotation = Quaternion.LookRotation(_direction);
-                _enemyManager.AddCommand(new CmdRotation(transform, lookRotation, _rotationSpeed));
+                _commandManager.AddCommand(new CmdRotation(transform, lookRotation, _rotationSpeed));
 
 
                 if (Quaternion.Angle(transform.rotation, lookRotation) < .1f)
@@ -133,7 +133,7 @@ namespace SimpleFPS.Patrol
 
         private void FixedUpdate()
         {
-            _enemyManager.AddCommand(new CmdMovement(gameObject, _direction, _currentSpeed));
+            _commandManager.AddCommand(new CmdMovement(gameObject, _direction, _currentSpeed));
 
             var hits = Physics.OverlapSphere(transform.position, _collisionStopDistance, _collisionStopLayerMask);
 

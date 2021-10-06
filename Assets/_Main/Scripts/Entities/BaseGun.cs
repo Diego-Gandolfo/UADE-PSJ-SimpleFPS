@@ -1,3 +1,4 @@
+using SimpleFPS.Command;
 using SimpleFPS.Factory;
 using SimpleFPS.Generics.Pool;
 using SimpleFPS.Projectiles;
@@ -38,8 +39,9 @@ namespace SimpleFPS.Weapons
 
         #region Protected Fields
 
-        // Factorys
+        // Components
         protected BulletFactory _bulletFactory;
+        protected CommandManager _commandManager;
 
         // Parameters
         protected int _currentExtraAmmo;
@@ -79,6 +81,8 @@ namespace SimpleFPS.Weapons
         private void Start()
         {
             _bulletFactory = Managers.LevelManager.Instance.BulletFactory;
+            _commandManager = CommandManager.Instance;
+
             _currentExtraAmmo = MaxExtraAmmo;
             _currentMagazineAmmo = MaxMagazineAmmo;
             _extraAmmoText.text = _currentExtraAmmo.ToString();
@@ -110,7 +114,7 @@ namespace SimpleFPS.Weapons
 
         public override void Attack()
         {
-            _bulletFactory.GetBullet(_bulletStats, _bulletSpawnpoint.position, _bulletSpawnpoint.rotation, Damage, BULLET_FORCE);
+            _commandManager.AddCommand(new CmdShoot(_bulletSpawnpoint, _bulletStats, Damage, BULLET_FORCE));
 
             _currentMagazineAmmo--;
             _magazineAmmoText.text = _currentMagazineAmmo.ToString();
