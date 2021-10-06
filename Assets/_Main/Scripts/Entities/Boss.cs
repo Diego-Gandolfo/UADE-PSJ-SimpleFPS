@@ -55,6 +55,7 @@ namespace SimpleFPS.Enemy.Boss
         private CommandManager _commandManager;
         private Transform _characterTransform;
         private Animator _animator;
+        private Rigidbody _rigidbody;
 
         // Flags
         private bool _canShoot;
@@ -72,6 +73,7 @@ namespace SimpleFPS.Enemy.Boss
         {
             _followTarget = GetComponent<FollowTarget>();
             _animator = GetComponent<Animator>();
+            _rigidbody = GetComponent<Rigidbody>();
 
             _healthComponent = GetComponent<Health>();
             if (_healthComponent == null) Debug.LogError($"{this.gameObject.name} no tiene asignado un HealthComponent");
@@ -105,13 +107,27 @@ namespace SimpleFPS.Enemy.Boss
                 {
                     _shootingTimer -= Time.deltaTime;
                 }
+
+                var xzTargetPosition = new Vector3(_characterTransform.position.x, transform.position.y, _characterTransform.position.z);
+                transform.LookAt(xzTargetPosition);
             }
         }
 
         private void FixedUpdate()
         {
+            if (_followTarget.enabled)
+            {
+                _animator.SetFloat("VelocityX", _followTarget.Direction.x);
+                _animator.SetFloat("VelocityY", _followTarget.Direction.y);
+            }
+            else
+            {
+                _animator.SetFloat("VelocityX", 0f);
+                _animator.SetFloat("VelocityY", 0f);
+            }
+
             var characterDetected = Physics.OverlapSphere(transform.position, _detectionRadius, _characterLayer);
-            _followTarget.enabled = (characterDetected.Length > 0);
+            _followTarget.enabled = (characterDetected.Length > 0) /*&& !_canShoot*/;
 
             var characterInRange = Physics.OverlapSphere(transform.position, _shootingRadius, _characterLayer);
             _canShoot = (characterInRange.Length > 0);
@@ -140,6 +156,7 @@ namespace SimpleFPS.Enemy.Boss
             {
                 if (hit.collider.gameObject.layer == 3)
                 {
+                    _animator.SetTrigger("DoShoot");
                     _shootAudioSource.PlayOneShot(_sounds.ShootSound);
                     _commandManager.AddCommand(new CmdShoot(_bulletSpawnpoint, _bulletStats, _damage, BULLET_FORCE));
                     _muzzleFlashLight.enabled = true;
@@ -184,12 +201,14 @@ namespace SimpleFPS.Enemy.Boss
                 _damageParticles2.Play();
                 _shootingCurrentCooldown = _shootingCooldowns[2];
                 _ligthLife.color = Color.yellow;
+                _animator.SetFloat("Fase", 0.5f);
             }
             else if (!_damageParticles3.isPlaying && _healthComponent.CurrentLife <= (_healthComponent.MaxLife / 4))
             {
                 _damageParticles3.Play();
                 _shootingCurrentCooldown = _shootingCooldowns[3];
                 _ligthLife.color = Color.red;
+                _animator.SetFloat("Fase", 1f);
             }
         }
 

@@ -3,6 +3,8 @@ using UnityEngine;
 using SimpleFPS.Components;
 using SimpleFPS.FPS;
 using SimpleFPS.Factory;
+using SimpleFPS.Enemy.Boss;
+using SimpleFPS.Life;
 
 namespace SimpleFPS.Managers
 {
@@ -19,6 +21,9 @@ namespace SimpleFPS.Managers
         [Header("Character")]
         [SerializeField] private FPSCharacterController _character;
 
+        [Header("Boss")]
+        [SerializeField] private Boss _boss;
+
         [Header("Factory Prefabs")]
         [SerializeField] private Bullet _bulletPrefab;
         [SerializeField] private BulletImpact _bulletImpactPrefab;
@@ -31,6 +36,8 @@ namespace SimpleFPS.Managers
         private BulletFactory _bulletFactory;
         private BulletImpactFactory _bulletImpactFactory;
         private ExplosionFactory _explosionFactory;
+
+        private int _batteryDeadCounter;
 
         #endregion
 
@@ -67,6 +74,31 @@ namespace SimpleFPS.Managers
         private void Start()
         {
             GameManager.Instance.SetCharacter(_character);
+            var bossHealth = _boss.gameObject.GetComponent<Health>();
+            bossHealth.OnDie += OnDieBossHandler;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void OnDieBossHandler()
+        {
+            GameManager.Instance.Invoke("Victory", 1.5f);
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public void IncreaseBatteryDeadCounter()
+        {
+            _batteryDeadCounter++;
+
+            if (_batteryDeadCounter >= 5)
+            {
+                _boss.gameObject.SetActive(true);
+            }
         }
 
         #endregion

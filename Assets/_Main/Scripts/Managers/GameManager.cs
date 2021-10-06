@@ -15,7 +15,6 @@ namespace SimpleFPS.Managers
         #region Private Fields
 
         private FPSCharacterController _character;
-        private int _batteryDeadCounter;
 
         #endregion
 
@@ -78,16 +77,6 @@ namespace SimpleFPS.Managers
         {
             _character = character;
             _character.OnDie += OnDieHandler;
-        }
-
-        public void IncreaseBatteryDeadCounter()
-        {
-            _batteryDeadCounter++;
-
-            if (_batteryDeadCounter >= 5)
-            {
-                Invoke("Victory", 1.5f);
-            }
         }
 
         #endregion

@@ -18,6 +18,13 @@ namespace SimpleFPS.Patrol
         #region Private Fields
 
         private CommandManager _commandManager;
+        private Vector3 _direction;
+
+        #endregion
+
+        #region Propertys
+
+        public Vector3 Direction => _direction;
 
         #endregion
 
@@ -33,14 +40,14 @@ namespace SimpleFPS.Patrol
         {
             var xzTargetPosition = new Vector3(_target.position.x, transform.position.y, _target.position.z);
 
-            var direction = xzTargetPosition - transform.position;
-            direction.Normalize();
+            _direction = xzTargetPosition - transform.position;
+            _direction.Normalize();
 
             transform.LookAt(xzTargetPosition);
 
             if(Vector3.Distance(transform.position, _target.position) > _stopDistance)
             {
-                _commandManager.AddCommand(new CmdMovement(gameObject, direction, _moveSpeed));
+                _commandManager.AddCommand(new CmdMovement(gameObject, _direction, _moveSpeed));
             }
         }
 

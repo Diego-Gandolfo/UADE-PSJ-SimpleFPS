@@ -52,7 +52,7 @@ namespace SimpleFPS.Battery
 
         private void OnDieHandler()
         {
-            Managers.GameManager.Instance.IncreaseBatteryDeadCounter();
+            Managers.LevelManager.Instance.IncreaseBatteryDeadCounter();
         }
 
         private void OnRecieveDamageHandler()
